@@ -1,0 +1,31 @@
+# ? valgrind
+vgcore.*
+
+# ? obj
+*.o
+
+# ? lib
+*.a
+
+# ? executable
+*.out
+unit_tests
+
+# ? coverage
+*.gcda
+*.gcno
+*.gcov
+
+# ? tmp
+*~
+\#*#
+
+# ? vscode
+.vscode/
+
+# ? compilation database
+compile_commands.json
+
+EPITECH-MyFTP-Protocol-(RFC959-Extract).txt
+coding-style-reports.log
+myftp
