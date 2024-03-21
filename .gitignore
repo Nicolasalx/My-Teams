@@ -10,6 +10,8 @@ vgcore.*
 # ? executable
 *.out
 unit_tests
+myteams_cli
+myteams_server
 
 # ? coverage
 *.gcda

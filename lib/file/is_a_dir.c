@@ -18,7 +18,7 @@ bool is_a_dir(const char *path)
 
     if (stat(path, &st) != 0) {
         free_all_alloc();
-        fprintf(stderr, "%s\"%s\"\n", RED("Invalid file path: "), path);
+        printf("%s\"%s\"\n", RED("Invalid file path: "), path);
         my_exit(84);
     }
     return S_ISDIR(st.st_mode);

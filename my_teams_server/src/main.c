@@ -9,7 +9,8 @@
 
 int main(int argc, char const *argv[])
 {
-    /* code */
+    server_t server;
+
+    check_arg_validity(argc, argv, &server);
     return 0;
 }
-

@@ -9,6 +9,8 @@
 
 int main(int argc, char const *argv[])
 {
-    /* code */
+    client_t client;
+
+    check_arg_validity(argc, argv, &client);
     return 0;
 }
