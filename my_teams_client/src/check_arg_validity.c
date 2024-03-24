@@ -19,7 +19,7 @@ void check_arg_validity(int argc, const char **argv, client_t *client)
         "\tport is the port number on which the server socket listens.\n");
         my_exit(84);
     }
-    if (inet_aton(argv[1], &client->address.sin_addr) == 0) {
+    if (inet_aton(argv[1], &client->server_address.sin_addr) == 0) {
         printf("Invalid Ip: \e[91m%s\e[0m\n", argv[1]);
         my_exit(84);
     }

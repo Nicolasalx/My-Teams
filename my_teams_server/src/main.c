@@ -9,8 +9,11 @@
 
 int main(int argc, char const *argv[])
 {
-    server_t server;
+    server_t server = {0};
 
     check_arg_validity(argc, argv, &server);
+    create_server(&server);
+    lauch_server(&server);
+    delete_server(&server);
     return 0;
 }

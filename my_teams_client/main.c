@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "my_ftp.h"
+#include "myteams_server"
 
 int main(int argc, const char *argv[])
 {
