@@ -7,9 +7,9 @@
 
 #include "myteams_server.h"
 
-const server_t *get_server(const server_t *server)
+server_t *get_server(server_t *server)
 {
-    static const server_t *server_ptr = NULL;
+    static server_t *server_ptr = NULL;
 
     if (server != NULL) {
         server_ptr = server;

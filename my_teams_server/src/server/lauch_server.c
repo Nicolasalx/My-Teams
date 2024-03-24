@@ -31,10 +31,17 @@ void handle_active_client(server_t *server)
     }
 }
 
+void close_server(int)
+{
+    delete_server(get_server(NULL));
+    my_exit(0);
+}
+
 void lauch_server(server_t *server)
 {
     int max_fd = server->fd;
 
+    signal(SIGINT, close_server);
     while (true) {
         init_server_set(server, &max_fd);
         monitor_client(server, max_fd);

@@ -9,11 +9,11 @@
 
 void handle_new_message(client_t *client)
 {
-    char buff[4096 + 1] = {0}; // ! replace by macro
+    char buff[BUFFER_SIZE + 1] = {0}; // ! replace by macro
     ssize_t size = 0;
 
     if (FD_ISSET(client->fd, &client->set)) {
-        size = read(client->fd, buff, 4096); // ! replace by macro
+        size = read(client->fd, buff, BUFFER_SIZE); // ! replace by macro
         if (size == 0) {
             exit_client(0, "Server closed the connection.\n");
         } else if (size == -1) {

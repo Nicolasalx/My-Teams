@@ -22,8 +22,6 @@ void handle_new_connection(server_t *server)
         printf(CYAN("New client connected\n"));
         client.fd = new_client;
         client.cmd_buffer = my_calloc(sizeof(char) * (CLIENT_BUFFER_SIZE + 1));
-        send_message(&client, reply_code[C220_SERVICE_READY]);
         add_client(server, &client);
-        printf(CYAN("A client have received a message\n"));
     }
 }

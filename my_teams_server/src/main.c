@@ -15,5 +15,6 @@ int main(int argc, char const *argv[])
     create_server(&server);
     lauch_server(&server);
     delete_server(&server);
+    free_all_alloc();
     return 0;
 }
