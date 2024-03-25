@@ -37,4 +37,11 @@ typedef enum {
     INFO_CURRENT_THREAD_DETAILS
 } command_e;
 
+typedef struct {
+    command_e index;
+    char *name;
+} command_list_t;
+
+extern command_list_t command_list;
+
 #endif /* !COMMAND_LIST_H_ */
