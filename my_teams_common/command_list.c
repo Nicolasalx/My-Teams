@@ -7,7 +7,7 @@
 
 #include "command_list.h"
 
-command_list_t command_list = {
+command_list_t command_list[] = {
     {HELP, "/help", 0},
     {LOGIN, "/login", 1},
     {LOGOUT, "logout", 0},

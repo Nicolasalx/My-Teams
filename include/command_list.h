@@ -37,7 +37,7 @@ typedef struct {
     int nb_arg;
 } command_list_t;
 
-extern command_list_t command_list;
+extern command_list_t command_list[];
 
 typedef enum {
     NO_CONTEXT,

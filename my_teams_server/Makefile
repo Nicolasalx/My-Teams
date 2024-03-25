@@ -5,7 +5,8 @@
 ## Makefile
 ##
 
-SRC				:=	$(shell find src/ -name "*.c")
+SRC				:=	$(shell find src/ -name "*.c") \
+					$(shell find ../my_teams_common/ -name "*.c")
 
 CPPFLAGS		=	-Wall -Wextra \
 					-I../include/ -I../include/lib \
