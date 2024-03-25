@@ -6,13 +6,16 @@
 */
 
 #include "myteams_client.h"
+#include "command_list.h"
 
 void execute_command(client_t *client, char *command)
 {
+    cmd_data_t cmd_data = {0};
     /*
     TODO: format the command to send to the server
     */
-    if (send(client->fd, command, strlen(command), 0) == -1) {
+
+    if (send(client->fd, &cmd_data, sizeof(cmd_data_t), 0) == -1) {
         exit_client(84, RED("Fail to send message to server.\n"));
     }
 }
