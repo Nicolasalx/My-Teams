@@ -20,6 +20,7 @@
     #include <stdlib.h>
     #include "command_list.h"
     #include "../libs/myteams/logging_server.h"
+    #include "server_database.h"
 
     #define MAX_CLIENT FD_SETSIZE
     #define MAX_PORT_NB 65535
@@ -34,19 +35,13 @@ typedef struct {
 } client_t;
 
 typedef struct {
-    node_t *user_list;
-    node_t *team_list;
-} data_base_t;
-
-typedef struct {
     int fd;
     struct sockaddr_in address;
     fd_set set;
-    char *cwd;
     unsigned short port;
     client_t clients[MAX_CLIENT];
     context_e context;
-    data_base_t data_base;
+    database_t database;
 } server_t;
 
 extern void (*const cmd_handler[])(server_t *, client_t *, cmd_data_t *);
@@ -66,6 +61,11 @@ void get_client_input(server_t *server, client_t *client);
 void execute_client_input(server_t *server, client_t *client, cmd_data_t *cmd_data);
 
 void cmd_login(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_logout(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_users(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_user(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_send(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_messages(server_t *server, client_t *client, cmd_data_t *cmd_data);
 
 /*
     Commands:
@@ -106,25 +106,25 @@ void cmd_login(server_t *server, client_t *client, cmd_data_t *cmd_data);
     ? /unsubscribe "team_uuid"
     ! int server_event_user_unsubscribed(char const *team_uuid, char const *user_uuid);
 
-    * Must be called when a user didn't existed in save and was created
-    Commands:
-    ? /login "user_name"
-    ! int server_event_user_created(char const *user_uuid, char const *user_name);
+    // * Must be called when a user didn't existed in save and was created
+    // Commands:
+    // ? /login "user_name"
+    // ! int server_event_user_created(char const *user_uuid, char const *user_name);
 
-    * Must be called when a user was loaded from the save file
-    * Should be called at the start of the server once per user loaded
-    Commands:
-    ? None, should be used at server start
-    ! int server_event_user_loaded(char const *user_uuid, char const *user_name);
+    // * Must be called when a user was loaded from the save file
+    // * Should be called at the start of the server once per user loaded
+    // Commands:
+    // ? None, should be used at server start
+    // ! int server_event_user_loaded(char const *user_uuid, char const *user_name);
 
-    Commands:
-    ? /login
-    ! int server_event_user_logged_in(char const *user_uuid);
+    // Commands:
+    // ? /login
+    // ! int server_event_user_logged_in(char const *user_uuid);
 
-    Commands:
-    ? /logout
-    ? When a user lost connexion to the server
-    ! int server_event_user_logged_out(char const *user_uuid);
+    // Commands:
+    // ? /logout
+    // ? When a user lost connexion to the server
+    // ! int server_event_user_logged_out(char const *user_uuid);
 
     Commands:
     ? /send "user_uuid" "message_body"

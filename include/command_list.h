@@ -48,25 +48,25 @@ typedef enum {
 } context_e;
 
 typedef union {
-    char user_name[MAX_NAME_LENGTH];
-    char user_uuid[UUID_LENGTH];
-    char team_uuid[UUID_LENGTH];
-    char team_name[MAX_NAME_LENGTH];
-    char channel_name[MAX_NAME_LENGTH];
-    char thread_title[MAX_NAME_LENGTH];
-    char comment_body[MAX_BODY_LENGTH];
+    char user_name[MAX_NAME_LENGTH + 1];
+    char user_uuid[UUID_LENGTH + 1];
+    char team_uuid[UUID_LENGTH + 1];
+    char team_name[MAX_NAME_LENGTH + 1];
+    char channel_name[MAX_NAME_LENGTH + 1];
+    char thread_title[MAX_NAME_LENGTH + 1];
+    char comment_body[MAX_BODY_LENGTH + 1];
 } cmd_arg1_u;
 
 typedef union {
-    char message_body[MAX_BODY_LENGTH];
-    char channel_uuid[UUID_LENGTH];
-    char team_description[MAX_DESCRIPTION_LENGTH];
-    char channel_description[MAX_DESCRIPTION_LENGTH];
-    char thread_message[MAX_BODY_LENGTH];
+    char message_body[MAX_BODY_LENGTH + 1];
+    char channel_uuid[UUID_LENGTH + 1];
+    char team_description[MAX_DESCRIPTION_LENGTH + 1];
+    char channel_description[MAX_DESCRIPTION_LENGTH + 1];
+    char thread_message[MAX_BODY_LENGTH + 1];
 } cmd_arg2_u;
 
 typedef union {
-    char thread_uuid[UUID_LENGTH];
+    char thread_uuid[UUID_LENGTH + 1];
 } cmd_arg3_u;
 
 typedef struct {

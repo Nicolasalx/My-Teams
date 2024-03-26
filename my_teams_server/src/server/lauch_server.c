@@ -19,6 +19,7 @@ void handle_active_client(server_t *server)
 
 void close_server(int)
 {
+    save_database(&get_server(NULL)->database);
     delete_server(get_server(NULL));
     my_exit(0);
 }

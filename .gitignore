@@ -21,6 +21,7 @@ myteams_server
 # ? tmp
 *~
 \#*#
+myteams.save
 
 # ? vscode
 .vscode/
