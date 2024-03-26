@@ -28,7 +28,8 @@ typedef enum {
     USE,
     CREATE,
     LIST,
-    INFO
+    INFO,
+    NUMBER_CMD // Used to determine the number of command
 } command_e;
 
 typedef struct {
@@ -37,7 +38,7 @@ typedef struct {
     int nb_arg;
 } command_list_t;
 
-extern command_list_t command_list[];
+extern const command_list_t command_list[];
 
 typedef enum {
     NO_CONTEXT,

@@ -8,7 +8,12 @@
 #include "myteams_server.h"
 #include "command_list.h"
 
-void execute_client_input(client_t *client, cmd_data_t *cmd_data)
+void execute_client_input(server_t *server, client_t *client, cmd_data_t *cmd_data)
 {
     printf("Received: %s\n", command_list[cmd_data->type].name);
+    for (size_t i = 0; i < NUMBER_CMD; ++i) {
+        if (cmd_handler[i]) {
+            cmd_handler[i](server, client, cmd_data);
+        }
+    }
 }

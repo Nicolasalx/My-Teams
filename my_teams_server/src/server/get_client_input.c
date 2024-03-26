@@ -7,7 +7,7 @@
 
 #include "myteams_server.h"
 
-void get_client_input(client_t *client)
+void get_client_input(server_t *server, client_t *client)
 {
     cmd_data_t cmd_data = {0};
     ssize_t nb_byte = read(client->fd, &cmd_data, sizeof(cmd_data_t));
@@ -17,5 +17,5 @@ void get_client_input(client_t *client)
         remove_client(client);
         return;
     }
-    execute_client_input(client, &cmd_data);
+    execute_client_input(server, client, &cmd_data);
 }
