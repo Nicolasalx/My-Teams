@@ -54,7 +54,7 @@ typedef union {
     char channel_name[MAX_NAME_LENGTH];
     char thread_title[MAX_NAME_LENGTH];
     char comment_body[MAX_BODY_LENGTH];
-} arg1_u;
+} cmd_arg1_u;
 
 typedef union {
     char message_body[MAX_BODY_LENGTH];
@@ -62,17 +62,17 @@ typedef union {
     char team_description[MAX_DESCRIPTION_LENGTH];
     char channel_description[MAX_DESCRIPTION_LENGTH];
     char thread_message[MAX_BODY_LENGTH];
-} arg2_u;
+} cmd_arg2_u;
 
 typedef union {
     char thread_uuid[UUID_LENGTH];
-} arg3_u;
+} cmd_arg3_u;
 
 typedef struct {
     command_e type;
-    arg1_u arg1;
-    arg2_u arg2;
-    arg3_u arg3;
+    cmd_arg1_u arg1;
+    cmd_arg2_u arg2;
+    cmd_arg3_u arg3;
 } cmd_data_t;
 
 #endif /* !COMMAND_LIST_H_ */
