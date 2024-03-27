@@ -15,5 +15,5 @@ command_type_e init_logout(char **, int nb_arg, cmd_data_t *cmd_data, command_e 
         return COMMAND_FAILED;
     }
     cmd_data->type = LOGOUT;
-    return COMMAND_SUCCESSED;
+    return COMMAND_SUCCEED;
 }

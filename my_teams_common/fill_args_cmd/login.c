@@ -20,5 +20,5 @@ command_type_e init_login(char **array, int nb_arg, cmd_data_t *cmd_data, comman
     }
     strcpy(cmd_data->arg1.user_name, array[1]);
     cmd_data->type = LOGIN;
-    return COMMAND_SUCCESSED;
+    return COMMAND_SUCCEED;
 }

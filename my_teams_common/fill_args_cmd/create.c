@@ -21,7 +21,7 @@ static command_type_e create_new_team(char **array, int nb_arg, cmd_data_t *cmd_
     }
     strcpy(cmd_data->arg1.team_name, array[1]);
     strcpy(cmd_data->arg2.team_description, array[2]);
-    return COMMAND_SUCCESSED;
+    return COMMAND_SUCCEED;
 }
 
 static command_type_e create_new_channel(char **array, int nb_arg, cmd_data_t *cmd_data)
@@ -37,7 +37,7 @@ static command_type_e create_new_channel(char **array, int nb_arg, cmd_data_t *c
     }
     strcpy(cmd_data->arg1.channel_name, array[1]);
     strcpy(cmd_data->arg2.channel_description, array[2]);
-    return COMMAND_SUCCESSED;
+    return COMMAND_SUCCEED;
 }
 
 static command_type_e create_new_thread(char **array, int nb_arg, cmd_data_t *cmd_data)
@@ -53,7 +53,7 @@ static command_type_e create_new_thread(char **array, int nb_arg, cmd_data_t *cm
     }
     strcpy(cmd_data->arg1.thread_title, array[1]);
     strcpy(cmd_data->arg2.thread_message, array[2]);
-    return COMMAND_SUCCESSED;
+    return COMMAND_SUCCEED;
 }
 
 static command_type_e create_new_reply(char **array, int nb_arg, cmd_data_t *cmd_data)
@@ -67,7 +67,7 @@ static command_type_e create_new_reply(char **array, int nb_arg, cmd_data_t *cmd
         return COMMAND_FAILED;
     }
     strcpy(cmd_data->arg1.comment_body, array[1]);
-    return COMMAND_SUCCESSED;
+    return COMMAND_SUCCEED;
 }
 
 command_type_e init_create(char **array, int nb_arg,
@@ -92,5 +92,5 @@ command_type_e init_create(char **array, int nb_arg,
             break;
     }
     cmd_data->type = CREATE;
-    return COMMAND_SUCCESSED;
+    return COMMAND_SUCCEED;
 }

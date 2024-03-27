@@ -21,5 +21,5 @@ command_type_e init_send(char **array, int nb_arg, cmd_data_t *cmd_data, command
     strcpy(cmd_data->arg1.user_uuid, array[1]);
     strcpy(cmd_data->arg2.message_body, array[2]);
     cmd_data->type = SEND;
-    return COMMAND_SUCCESSED;
+    return COMMAND_SUCCEED;
 }

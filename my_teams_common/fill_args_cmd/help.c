@@ -19,5 +19,5 @@ command_type_e init_help(char **, int nb_arg, cmd_data_t *cmd_data, command_e co
         "HELP\n" \
         "The different commands are:\n";
     printf(message_help);
-    return COMMAND_SUCCESSED;
+    return COMMAND_SUCCEED;
 }

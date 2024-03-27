@@ -20,5 +20,5 @@ command_type_e init_user(char **array, int nb_arg, cmd_data_t *cmd_data, command
     }
     strcpy(cmd_data->arg1.user_uuid, array[1]);
     cmd_data->type = USER;
-    return COMMAND_SUCCESSED;
+    return COMMAND_SUCCEED;
 }

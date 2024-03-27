@@ -43,7 +43,7 @@ typedef enum {
 typedef enum {
     NO_COMMAND,
     COMMAND_FAILED,
-    COMMAND_SUCCESSED
+    COMMAND_SUCCEED
 } command_type_e;
 
 typedef union {

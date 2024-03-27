@@ -20,5 +20,5 @@ command_type_e init_messages(char **array, int nb_arg, cmd_data_t *cmd_data, com
     }
     strcpy(cmd_data->arg1.user_uuid, array[1]);
     cmd_data->type = MESSAGES;
-    return COMMAND_SUCCESSED;
+    return COMMAND_SUCCEED;
 }

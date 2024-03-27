@@ -15,5 +15,5 @@ command_type_e init_users(char **, int nb_arg, cmd_data_t *cmd_data, command_e c
         return COMMAND_FAILED;
     }
     cmd_data->type = USERS;
-    return COMMAND_SUCCESSED;
+    return COMMAND_SUCCEED;
 }
