@@ -27,7 +27,6 @@ typedef enum {
     REPLY_LIST_THREAD_CMD, // client_channel_print_threads -> cmd "/list" -> IN_CHANNEL     | client_error_unknown_channel
     REPLY_LIST_REPLY_CMD, // client_thread_print_replies -> cmd "/list" -> IN_THREAD        | client_error_unknown_thread
 
-// TODO:
     ERROR_UNKNOWN_TEAM, // !client_error_unknown_team
     ERROR_UNKNOWN_CHANNEL, // !client_error_unknown_channel
     ERROR_UNKNOWN_THREAD, // !client_error_unknown_thread
@@ -48,6 +47,7 @@ typedef enum {
 } reply_e;
 
 typedef union {
+    char sender_uuid[UUID_LENGTH + 1];
     char user_uuid[UUID_LENGTH + 1];
     char team_uuid[UUID_LENGTH + 1];
     char channel_uuid[UUID_LENGTH + 1];
@@ -55,6 +55,8 @@ typedef union {
 } reply_arg1_u;
 
 typedef union {
+    time_t message_timestamp;
+    char team_uuid[UUID_LENGTH + 1];
     char user_name[MAX_NAME_LENGTH + 1];
     char message_body[MAX_BODY_LENGTH + 1];
     char thread_uuid[UUID_LENGTH + 1];
@@ -64,6 +66,8 @@ typedef union {
 } reply_arg2_u;
 
 typedef union {
+    char message_body[MAX_BODY_LENGTH + 1];
+    time_t reply_timestamp;
     char user_uuid[UUID_LENGTH + 1];
     char team_description[MAX_DESCRIPTION_LENGTH + 1];
     char channel_description[MAX_DESCRIPTION_LENGTH + 1];
