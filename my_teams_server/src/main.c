@@ -13,7 +13,9 @@ int main(int argc, char const *argv[])
 
     check_arg_validity(argc, argv, &server);
     create_server(&server);
+    load_database(&server.database);
     lauch_server(&server);
+    save_database(&server.database);
     delete_server(&server);
     free_all_alloc();
     return 0;

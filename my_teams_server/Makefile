@@ -9,14 +9,16 @@ SRC				:=	$(shell find src/ -name "*.c") \
 					$(shell find ../my_teams_common/ -name "*.c")
 
 CPPFLAGS		=	-Wall -Wextra \
-					-I../include/ -I../include/lib \
+					-I../include/ -I../include/lib/ -I../libs/myteams/ \
+					-luuid \
 					$(ADDITIONAL_FLAGS)
 
 NAME			=	../myteams_server
 
 LIB_PATH		=	../lib/
 
-LIB_NAME		=	../lib/my_lib.a
+LIB_NAME		=	../lib/my_lib.a \
+					../libs/myteams/libmyteams.so
 
 SRC_TESTS		:=	$(shell find ../tests/ -name "*.c")
 

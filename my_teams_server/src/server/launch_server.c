@@ -12,13 +12,14 @@ void handle_active_client(server_t *server)
 {
     for (size_t i = 0; i < MAX_CLIENT; ++i) {
         if (FD_ISSET(server->clients[i].fd, &server->set)) {
-            get_client_input(&server->clients[i]);
+            get_client_input(server, &server->clients[i]);
         }
     }
 }
 
 void close_server(int)
 {
+    save_database(&get_server(NULL)->database);
     delete_server(get_server(NULL));
     my_exit(0);
 }
