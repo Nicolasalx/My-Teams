@@ -47,6 +47,7 @@ void execute_command(client_t *client, char *command)
     int nb_word = 0;
     char **array = NULL;
     bool is_a_command = false;
+    command_type_e command_type = NO_COMMAND;
 
     parse_line(&nb_word, &array, command);
     if (nb_word < 1 || nb_word > 4) {
@@ -54,11 +55,11 @@ void execute_command(client_t *client, char *command)
     }
     for (int i = 0; i < NUMBER_CMD; ++i) {
         if (strcmp(command_list[i].name, array[0]) == 0) {
-            command_list[i].cmd_function(array, nb_word, &cmd_data, command_list[i].type);
+            command_type = command_list[i].cmd_function(array, nb_word, &cmd_data, command_list[i].type);
             is_a_command = true;
         }
     }
-    if (is_a_command == false) {
+    if (is_a_command == false || command_type == COMMAND_FAILED) {
         printf("Command not recognized !\n");
         return;
     }
