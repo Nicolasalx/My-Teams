@@ -19,6 +19,7 @@
     #include <string.h>
     #include <stdlib.h>
     #include "command_list.h"
+    #include "reply_list.h"
 
     #define MAX_PORT_NB 65535
     #define BUFFER_SIZE 4096
@@ -32,6 +33,8 @@ typedef struct {
     char *cmd_buffer;
 } client_t;
 
+extern void (*const reply_handler[])(reply_data_t *);
+
 extern context_e context;
 
 void check_arg_validity(int argc, const char **argv, client_t *client);
@@ -43,6 +46,7 @@ void monitor_input(client_t *client, int max_fd);
 void execute_command(client_t *client, char *command);
 void handle_new_input(client_t *client);
 void handle_new_message(client_t *client);
+void handle_server_reply(reply_data_t *reply_data);
 
 command_type_e init_user(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
 command_type_e init_help(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
