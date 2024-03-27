@@ -39,7 +39,7 @@ command_type_e parse_line(int *nb_word, char ***array, char *command)
     *nb_word = count_nb_word(new_str, delimiter);
     int *size_word = count_size_word(new_str, delimiter, *nb_word);
     *array = my_str_to_word(new_str, delimiter, *nb_word, size_word);
-    if (*nb_word < 1 || nb_word > 4) {
+    if (*nb_word < 1 || *nb_word > 4) {
         return COMMAND_FAILED;
     }
     return COMMAND_SUCCEED;

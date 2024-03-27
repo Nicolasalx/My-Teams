@@ -63,6 +63,34 @@ command_type_e init_create(char **array, int nb_arg, cmd_data_t *cmd_data, comma
 command_type_e init_list(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
 command_type_e init_info(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
 
+void reply_error_already_exist(reply_data_t *reply_data);
+void reply_error_unknow_channel(reply_data_t *reply_data);
+void reply_error_unknow_team(reply_data_t *reply_data);
+void reply_error_unknow_thread(reply_data_t *reply_data);
+void reply_info_channel_cmd(reply_data_t *reply_data);
+void reply_info_team_cmd(reply_data_t *reply_data);
+void reply_info_thread_cmd(reply_data_t *reply_data);
+void reply_info_user_cmd(reply_data_t *reply_data);
+void reply_list_channel_cmd(reply_data_t *reply_data);
+void reply_list_reply_cmd(reply_data_t *reply_data);
+void reply_list_team_cmd(reply_data_t *reply_data);
+void reply_list_thread_cmd(reply_data_t *reply_data);
+void reply_login(reply_data_t *reply_data);
+void reply_logout(reply_data_t *reply_data);
+void reply_msg_cmd(reply_data_t *reply_data);
+void reply_thread_reply(reply_data_t *reply_data);
+void reply_new_channel_created(reply_data_t *reply_data);
+void reply_new_team_created(reply_data_t *reply_data);
+void reply_new_thread_created(reply_data_t *reply_data);
+void reply_subscribe_cmd(reply_data_t *reply_data);
+void reply_subscribed_team_cmd(reply_data_t *reply_data);
+void reply_subscribed_user_cmd(reply_data_t *reply_data);
+void reply_msg_received(reply_data_t *reply_data);
+void reply_unknow_user(reply_data_t *reply_data);
+void reply_unsubscribe_cmd(reply_data_t *reply_data);
+void reply_user_cmd(reply_data_t *reply_data);
+void reply_users_cmd(reply_data_t *reply_data);
+
 void lauch_client(client_t *client);
 void delete_client(client_t *client);
 void exit_client(int exit_value, const char *message);
