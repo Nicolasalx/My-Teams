@@ -69,11 +69,16 @@ typedef union {
     char thread_uuid[UUID_LENGTH + 1];
 } cmd_arg3_u;
 
+typedef union {
+    size_t nb_arg;
+} cmd_arg4_u;
+
 typedef struct {
     command_e type;
     cmd_arg1_u arg1;
     cmd_arg2_u arg2;
     cmd_arg3_u arg3;
+    cmd_arg4_u arg4;
 } cmd_data_t;
 
 #endif /* !COMMAND_LIST_H_ */
