@@ -16,7 +16,7 @@ void cmd_subscribe(server_t *server, client_t *client, cmd_data_t *cmd_data)
             db_user_t *sub_user = my_calloc(sizeof(db_user_t));
             memcpy(sub_user->user_name, client->user_name, MAX_NAME_LENGTH);
             memcpy(sub_user->uuid, client->uuid, UUID_LENGTH);
-            append_node(team_to_sub->subscribed_user_list, create_node(&sub_user));
+            append_node(&team_to_sub->subscribed_user_list, create_node(&sub_user));
         }
         server_event_user_subscribed(cmd_data->arg1.team_uuid, client->uuid);
         // TODO: send reply

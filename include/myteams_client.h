@@ -18,6 +18,8 @@
     #include <sys/select.h>
     #include <string.h>
     #include <stdlib.h>
+    #include "command_list.h"
+    #include "reply_list.h"
 
     #define MAX_PORT_NB 65535
     #define BUFFER_SIZE 4096
@@ -33,6 +35,8 @@ typedef struct {
 
 extern void (*const reply_handler[])(reply_data_t *);
 
+extern context_e context;
+
 void check_arg_validity(int argc, const char **argv, client_t *client);
 void create_client(client_t *client);
 client_t *get_client(client_t *client);
@@ -43,6 +47,21 @@ void execute_command(client_t *client, char *command);
 void handle_new_input(client_t *client);
 void handle_new_message(client_t *client);
 void handle_server_reply(reply_data_t *reply_data);
+
+void init_user(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+void init_help(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+void init_login(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+void init_logout(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+void init_users(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+void init_send(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+void init_messages(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+void init_subscribe(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+void init_subscribed(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+void init_unsubscribe(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+void init_use(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+void init_create(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+void init_list(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+void init_info(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
 
 void lauch_client(client_t *client);
 void delete_client(client_t *client);

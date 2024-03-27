@@ -33,14 +33,6 @@ typedef enum {
     NUMBER_CMD // Used to determine the number of command
 } command_e;
 
-typedef struct {
-    command_e type;
-    char *name;
-    int nb_arg;
-} command_list_t;
-
-extern const command_list_t command_list[];
-
 typedef enum {
     NO_CONTEXT,
     IN_TEAM,
@@ -81,5 +73,16 @@ typedef struct {
     cmd_arg3_u arg3;
     cmd_arg4_u arg4;
 } cmd_data_t;
+
+typedef void (*command_function_ptr)(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+
+typedef struct {
+    command_e type;
+    char *name;
+    int nb_arg;
+    command_function_ptr cmd_function;
+} command_list_t;
+
+extern const command_list_t command_list[];
 
 #endif /* !COMMAND_LIST_H_ */
