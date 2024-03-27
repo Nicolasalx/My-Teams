@@ -23,13 +23,43 @@ typedef struct {
 } db_private_msg_t;
 
 typedef struct {
+    char uuid[UUID_LENGTH + 1]; // ! maybe unused
+    char body[MAX_BODY_LENGTH + 1];
+} db_reply_t;
+
+typedef struct {
+    char uuid[UUID_LENGTH + 1];
+    char name[MAX_NAME_LENGTH + 1];
+    char body[MAX_BODY_LENGTH + 1];
+    node_t *reply_list;
+} db_thread_t;
+
+typedef struct {
+    char uuid[UUID_LENGTH + 1];
+    char name[MAX_NAME_LENGTH + 1];
+    char description[MAX_DESCRIPTION_LENGTH + 1];
+    node_t *thread_list;
+} db_channel_t;
+
+typedef struct {
+    char uuid[UUID_LENGTH + 1];
+    char name[MAX_NAME_LENGTH + 1];
+    char description[MAX_DESCRIPTION_LENGTH + 1];
+    node_t *subscribed_user_list;
+    node_t *channel_list;
+} db_team_t;
+
+typedef struct {
     node_t *user_list;
     node_t *private_msg_list;
+    node_t *team_list;
 } database_t;
 
 void save_database(database_t *database);
 void load_database(database_t *database);
 
 db_user_t *db_contain_user(database_t *database, const char *name);
+db_team_t *db_contain_team(database_t *database, const char *team_uuid);
+db_user_t *db_contain_team_sub(db_team_t *team, const char *user_uuid);
 
 #endif /* !SERVER_DATABASE_H_ */

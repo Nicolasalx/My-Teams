@@ -12,8 +12,8 @@
     #include "command_list.h"
 
 typedef enum {
-    LOGIN, // client_event_logged_in
-    LOGGED_OUT, // client_event_logged_out
+    REPLY_LOGIN, // client_event_logged_in
+    REPLY_LOGGED_OUT, // client_event_logged_out
     PRIVATE_MSG_RECEIVED, // client_event_private_message_received
     THREAD_REPLY, // client_event_thread_reply_received
     NEW_TEAM_CREATED, // client_event_team_created
@@ -21,7 +21,30 @@ typedef enum {
     NEW_THREAD_CREATED, // client_event_thread_created
     REPLY_USERS_CMD, // client_print_users -> cmd "/users"
     REPLY_USER_CMD, // client_print_user -> cmd "/user"
-    REPLY_MESSAGES_CMD // client_private_message_print_messages -> cmd "/messages"
+    REPLY_MESSAGES_CMD, // client_private_message_print_messages -> cmd "/messages"
+    REPLY_LIST_TEAM_CMD, // client_print_teams -> cmd "/list" -> NO_CONTEXT
+    REPLY_LIST_CHANNEL_CMD, // client_team_print_channels -> cmd "/list" -> IN_TEAM         | client_error_unknown_team
+    REPLY_LIST_THREAD_CMD, // client_channel_print_threads -> cmd "/list" -> IN_CHANNEL     | client_error_unknown_channel
+    REPLY_LIST_REPLY_CMD, // client_thread_print_replies -> cmd "/list" -> IN_THREAD        | client_error_unknown_thread
+
+// TODO:
+    ERROR_UNKNOWN_TEAM, // !client_error_unknown_team
+    ERROR_UNKNOWN_CHANNEL, // !client_error_unknown_channel
+    ERROR_UNKNOWN_THREAD, // !client_error_unknown_thread
+    ERROR_UNKNOWN_USER, // !client_error_unknown_user
+    ERROR_ALREADY_EXIST, // !client_error_already_exist
+
+    REPLY_SUBSCRIBE_CMD, // client_print_subscribed
+    REPLY_SUBSCRIBED_TEAM_CMD, // client_print_teams
+    REPLY_SUBSCRIBED_USER_CMD, // client_print_users
+    REPLY_UNSUBSCRIBE_CMD, // client_print_unsubscribed
+
+    REPLY_INFO_USER_CMD, // client_print_user
+    REPLY_INFO_TEAM_CMD, // client_print_team
+    REPLY_INFO_CHANNEL_CMD, // client_print_channel
+    REPLY_INFO_THREAD_CMD, // client_print_thread
+
+    NUMBER_REPLY
 } reply_e;
 
 typedef union {

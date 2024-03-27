@@ -31,6 +31,8 @@ typedef struct {
     char *cmd_buffer;
 } client_t;
 
+extern void (*const reply_handler[])(reply_data_t *);
+
 void check_arg_validity(int argc, const char **argv, client_t *client);
 void create_client(client_t *client);
 client_t *get_client(client_t *client);
@@ -40,6 +42,7 @@ void monitor_input(client_t *client, int max_fd);
 void execute_command(client_t *client, char *command);
 void handle_new_input(client_t *client);
 void handle_new_message(client_t *client);
+void handle_server_reply(reply_data_t *reply_data);
 
 void lauch_client(client_t *client);
 void delete_client(client_t *client);

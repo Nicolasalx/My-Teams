@@ -8,6 +8,8 @@
 #ifndef COMMAND_LIST_H_
     #define COMMAND_LIST_H_
 
+    #include <unistd.h>
+
     #define MAX_NAME_LENGTH 32
     #define MAX_DESCRIPTION_LENGTH 255
     #define MAX_BODY_LENGTH 512
@@ -23,7 +25,6 @@ typedef enum {
     MESSAGES,
     SUBSCRIBE,
     SUBSCRIBED,
-    SUBSCRIBED_TEAM_UUID,
     UNSUBSCRIBE,
     USE,
     CREATE,

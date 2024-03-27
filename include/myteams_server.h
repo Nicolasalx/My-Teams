@@ -74,6 +74,12 @@ void cmd_user(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_send(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_messages(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_use(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_list(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_info(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_create(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_subscribe(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_subscribed(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_unsubscribe(server_t *server, client_t *client, cmd_data_t *cmd_data);
 
 /*
     Commands:
@@ -106,13 +112,13 @@ void cmd_use(server_t *server, client_t *client, cmd_data_t *cmd_data);
         char const *user_uuid,
         char const *reply_body);
 
-    Commands:
-    ? /subscribe "team_uuid"
-    ! int server_event_user_subscribed(char const *team_uuid, char const *user_uuid);
+    // Commands:
+    // ? /subscribe "team_uuid"
+    // ! int server_event_user_subscribed(char const *team_uuid, char const *user_uuid);
 
-    Commands:
-    ? /unsubscribe "team_uuid"
-    ! int server_event_user_unsubscribed(char const *team_uuid, char const *user_uuid);
+    // Commands:
+    // ? /unsubscribe "team_uuid"
+    // ! int server_event_user_unsubscribed(char const *team_uuid, char const *user_uuid);
 
     // * Must be called when a user didn't existed in save and was created
     // Commands:
