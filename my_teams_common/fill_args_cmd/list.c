@@ -8,11 +8,12 @@
 #include "myteams_client.h"
 #include "command_list.h"
 
-void init_list(char **, int nb_arg, cmd_data_t *cmd_data, command_e command)
+command_type_e init_list(char **, int nb_arg, cmd_data_t *cmd_data, command_e command)
 {
     if (nb_arg - 1 != command_list[command].nb_arg) {
         printf("Invalid arg in the list\n");
-        return;
+        return COMMAND_FAILED;
     }
     cmd_data->type = LIST;
+    return COMMAND_SUCCESSED;
 }

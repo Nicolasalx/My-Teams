@@ -47,6 +47,7 @@ void execute_command(client_t *client, char *command)
     int nb_word = 0;
     char **array = NULL;
     bool is_a_command = false;
+    command_type_e command_type = NO_COMMAND;
 
     parse_line(&nb_word, &array, command);
     if (nb_word < 1 || nb_word > 4) {
@@ -54,14 +55,38 @@ void execute_command(client_t *client, char *command)
     }
     for (int i = 0; i < NUMBER_CMD; ++i) {
         if (strcmp(command_list[i].name, array[0]) == 0) {
-            command_list[i].cmd_function(array, nb_word, &cmd_data, command_list[i].type);
+            command_type = command_list[i].cmd_function(array, nb_word, &cmd_data, command_list[i].type);
             is_a_command = true;
         }
     }
-    if (is_a_command == false) {
+    if (is_a_command == false || command_type == COMMAND_FAILED) {
         printf("Command not recognized !\n");
         return;
     }
+
+    printf("\n\nIN ARG 1:\n");
+    printf("CHANNEL NAME: %s\n", cmd_data.arg1.channel_name);
+    printf("COMMENT BODY: %s\n", cmd_data.arg1.comment_body);
+    printf("TEAM NAME: %s\n", cmd_data.arg1.team_name);
+    printf("TEAM UUID: %s\n", cmd_data.arg1.team_uuid);
+    printf("THREAD TITLE: %s\n", cmd_data.arg1.thread_title);
+    printf("USER NAME: %s\n", cmd_data.arg1.user_name);
+    printf("USER UUID: %s\n", cmd_data.arg1.user_uuid);
+
+    printf("\nIN ARG 2:\n");
+    printf("CHANNEL DESRIPTION: %s\n", cmd_data.arg2.channel_description);
+    printf("CHANNEL UUID: %s\n", cmd_data.arg2.channel_uuid);
+    printf("MESSAGE BODY: %s\n", cmd_data.arg2.message_body);
+    printf("TEAM DESCRIPTION; %s\n", cmd_data.arg2.team_description);
+    printf("THREAD MESSAGE: %s\n", cmd_data.arg2.thread_message);
+
+    printf("\nIN ARG 3:\n");
+    printf("THREAD UUID: %s\n", cmd_data.arg3.thread_uuid);
+
+    printf("\nONLY IN USE AND SUBSCRIBED\n");
+    printf("NB ARG: %ld\n", cmd_data.arg4.nb_arg);
+
+
     if (send(client->fd, &cmd_data, sizeof(cmd_data_t), 0) == -1) {
         exit_client(84, RED("Fail to send message to server.\n"));
     }

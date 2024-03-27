@@ -8,6 +8,8 @@
 #ifndef COMMAND_LIST_H_
     #define COMMAND_LIST_H_
 
+    #include <stddef.h>
+
     #define MAX_NAME_LENGTH 32
     #define MAX_DESCRIPTION_LENGTH 255
     #define MAX_BODY_LENGTH 512
@@ -37,6 +39,12 @@ typedef enum {
     IN_CHANNEL,
     IN_THREAD
 } context_e;
+
+typedef enum {
+    NO_COMMAND,
+    COMMAND_FAILED,
+    COMMAND_SUCCESSED
+} command_type_e;
 
 typedef union {
     char user_name[MAX_NAME_LENGTH + 1];
@@ -72,7 +80,7 @@ typedef struct {
     cmd_arg4_u arg4;
 } cmd_data_t;
 
-typedef void (*command_function_ptr)(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+typedef command_type_e (*command_function_ptr)(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
 
 typedef struct {
     command_e type;
