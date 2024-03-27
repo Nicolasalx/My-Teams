@@ -29,9 +29,17 @@
     #define CWD_SIZE 4096
 
 typedef struct {
+    context_e type;
+    char team_uuid[UUID_LENGTH + 1];
+    char channel_uuid[UUID_LENGTH + 1];
+    char thread_uuid[UUID_LENGTH + 1];
+} context_t;
+
+typedef struct {
     int fd;
     char uuid[UUID_LENGTH + 1];
     char user_name[MAX_NAME_LENGTH + 1];
+    context_t context;
 } client_t;
 
 typedef struct {
@@ -40,7 +48,6 @@ typedef struct {
     fd_set set;
     unsigned short port;
     client_t clients[MAX_CLIENT];
-    context_e context;
     database_t database;
 } server_t;
 
@@ -66,6 +73,7 @@ void cmd_users(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_user(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_send(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_messages(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_use(server_t *server, client_t *client, cmd_data_t *cmd_data);
 
 /*
     Commands:
@@ -126,12 +134,12 @@ void cmd_messages(server_t *server, client_t *client, cmd_data_t *cmd_data);
     // ? When a user lost connexion to the server
     // ! int server_event_user_logged_out(char const *user_uuid);
 
-    Commands:
-    ? /send "user_uuid" "message_body"
-    ! int server_event_private_message_sended(
-        char const *sender_uuid,
-        char const *receiver_uuid,
-        char const *message_body);
+    // Commands:
+    // ? /send "user_uuid" "message_body"
+    // ! int server_event_private_message_sended(
+    //     char const *sender_uuid,
+    //     char const *receiver_uuid,
+    //     char const *message_body);
 */
 
 #endif /* !MYTEAMS_SERVER_H_ */
