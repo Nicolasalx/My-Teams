@@ -27,7 +27,6 @@ typedef enum {
     REPLY_LIST_THREAD_CMD, // client_channel_print_threads -> cmd "/list" -> IN_CHANNEL     | client_error_unknown_channel
     REPLY_LIST_REPLY_CMD, // client_thread_print_replies -> cmd "/list" -> IN_THREAD        | client_error_unknown_thread
 
-// TODO:
     ERROR_UNKNOWN_TEAM, // !client_error_unknown_team
     ERROR_UNKNOWN_CHANNEL, // !client_error_unknown_channel
     ERROR_UNKNOWN_THREAD, // !client_error_unknown_thread
