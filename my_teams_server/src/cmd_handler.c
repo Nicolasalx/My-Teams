@@ -17,7 +17,6 @@ void (*const cmd_handler[])(server_t *, client_t *, cmd_data_t *) = {
     [MESSAGES] = NULL,
     [SUBSCRIBE] = NULL,
     [SUBSCRIBED] = NULL,
-    [SUBSCRIBED_TEAM_UUID] = NULL,
     [UNSUBSCRIBE] = NULL,
     [USE] = NULL,
     [CREATE] = NULL,

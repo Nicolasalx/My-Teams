@@ -8,7 +8,7 @@
 SRC				:=	$(shell find src/ -name "*.c") \
 					$(shell find ../my_teams_common/ -name "*.c")
 
-CPPFLAGS		=	-Wall -Wextra \
+CFLAGS		=	-Wall -Wextra \
 					-I../include/ -I../include/lib/ -I../libs/myteams/ \
 					-luuid \
 					$(ADDITIONAL_FLAGS)
@@ -29,18 +29,18 @@ NAME_TESTS		=	unit_tests
 OBJ				=	$(SRC:.c=.o)
 
 %.o: %.c
-	@gcc $(CPPFLAGS) -c $< -o $@ && \
-	printf "[\e[92mOK\e[0m] gcc $(CPPFLAGS) -c $< -o $@\n" || \
-	printf "[\e[1;91mKO\e[0m] gcc $(CPPFLAGS) -c $< -o $@\n"
+	@gcc $(CFLAGS) -c $< -o $@ && \
+	printf "[\e[92mOK\e[0m] gcc $(CFLAGS) -c $< -o $@\n" || \
+	printf "[\e[1;91mKO\e[0m] gcc $(CFLAGS) -c $< -o $@\n"
 
 $(NAME): $(OBJ)
 	@cd $(LIB_PATH) && $(MAKE) ADDITIONAL_FLAGS="$(ADDITIONAL_FLAGS)"
-	@if gcc -o $(NAME) $(OBJ) $(LIB_NAME) $(CPPFLAGS); then \
+	@if gcc -o $(NAME) $(OBJ) $(LIB_NAME) $(CFLAGS); then \
 		printf "[\e[92mCOMPILATION OK\e[0m] "; \
-		printf "gcc -o $(NAME) $(OBJ) $(LIB_NAME) $(CPPFLAGS)\n"; \
+		printf "gcc -o $(NAME) $(OBJ) $(LIB_NAME) $(CFLAGS)\n"; \
 	else \
 		printf "[\e[1;91mCOMPILATION KO\e[0m] "; \
-		printf "gcc -o $(NAME) $(OBJ) $(LIB_NAME) $(CPPFLAGS)\n"; \
+		printf "gcc -o $(NAME) $(OBJ) $(LIB_NAME) $(CFLAGS)\n"; \
 		exit 1; \
 	fi
 
@@ -63,14 +63,14 @@ unit_tests: SRC := $(patsubst src/main.c%,%,$(SRC))
 unit_tests: clean
 	@cd $(LIB_PATH) && $(MAKE)
 	@if gcc -o $(NAME_TESTS) $(SRC_TESTS) $(SRC) \
-		$(LIB_NAME) $(CPPFLAGS) $(RUN_TEST); then \
+		$(LIB_NAME) $(CFLAGS) $(RUN_TEST); then \
 		printf "[\e[92mCOMPILATION OK\e[0m] "; \
 		printf "gcc -o -o $(NAME_TESTS) $(SRC_TESTS) $(SRC)"; \
-		printf "$(LIB_NAME) $(CPPFLAGS) $(RUN_TEST)\n"; \
+		printf "$(LIB_NAME) $(CFLAGS) $(RUN_TEST)\n"; \
 	else \
 		printf "[\e[1;91mCOMPILATION KO\e[0m] "; \
 		printf "gcc -o -o $(NAME_TESTS) $(SRC_TESTS) $(SRC)"; \
-		printf "$(LIB_NAME) $(CPPFLAGS) $(RUN_TEST)\n"; \
+		printf "$(LIB_NAME) $(CFLAGS) $(RUN_TEST)\n"; \
 		exit 1; \
 	fi
 
@@ -81,11 +81,11 @@ gcovr:
 	@gcovr --sort-percentage --exclude tests/
 	@gcovr --sort-percentage --exclude tests/ --branches
 
-debug: CPPFLAGS += -g3
+debug: CFLAGS += -g3
 debug: clean all
 	gdb -ex "run $(arg)" -ex "bt full" -ex "detach" -ex "quit" $(NAME)
 
-profiling: CPPFLAGS += -pg
+profiling: CFLAGS += -pg
 profiling: clean all
 	@printf "\e[0m------------------------------\e[0m\n"
 	./$(NAME) $(arg)

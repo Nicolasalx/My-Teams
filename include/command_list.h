@@ -23,7 +23,6 @@ typedef enum {
     MESSAGES,
     SUBSCRIBE,
     SUBSCRIBED,
-    SUBSCRIBED_TEAM_UUID,
     UNSUBSCRIBE,
     USE,
     CREATE,
@@ -31,15 +30,6 @@ typedef enum {
     INFO,
     NUMBER_CMD // Used to determine the number of command
 } command_e;
-
-typedef struct {
-    command_e type;
-    char *name;
-    int nb_arg;
-} command_list_t;
-
-extern const const command_list_t command_list[];
-extern const int size_cmd_list;
 
 typedef enum {
     NO_CONTEXT,
@@ -76,5 +66,16 @@ typedef struct {
     cmd_arg2_u arg2;
     cmd_arg3_u arg3;
 } cmd_data_t;
+
+typedef void (*command_function_ptr)(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+
+typedef struct {
+    command_e type;
+    char *name;
+    int nb_arg;
+    command_function_ptr cmd_function;
+} command_list_t;
+
+extern const command_list_t command_list[];
 
 #endif /* !COMMAND_LIST_H_ */

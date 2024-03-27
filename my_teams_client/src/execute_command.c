@@ -32,49 +32,36 @@ char *remove_space_out_quotes(const char *string)
     return result;
 }
 
-void assign_elem_command(cmd_data_t *cmd_data, int nb_word, char **array, command_list_t command_list)
+void parse_line(int *nb_word, char ***array, char *command)
 {
-    if (nb_word != command_list.nb_arg) {
-        // Error the nb of arguments expected are not the arguments got
-        return;
-    }
-
-    cmd_data->type = command_list.name;
-    cmd_data->arg1. = array[1];
+    const char *new_str = remove_space_out_quotes(command);
+    const char *delimiter = "\"\n";
+    *nb_word = count_nb_word(new_str, delimiter);
+    int *size_word = count_size_word(new_str, delimiter, *nb_word);
+    *array = my_str_to_word(new_str, delimiter, *nb_word, size_word);
 }
-
-void init_help()
-{
-    
-}
-
-void init_login()
-{
-
-}
-
-void init_
 
 void execute_command(client_t *client, char *command)
 {
     cmd_data_t cmd_data = {0};
-    const char *new_str = remove_space_out_quotes(command);
-    const char *delimiter = "\"\n";
-    int nb_word = count_nb_word(new_str, delimiter);
-    int *size_word = count_size_word(new_str, delimiter, nb_word);
-    char **array = my_str_to_word(new_str, delimiter, nb_word, size_word);
+    int nb_word = 0;
+    char **array = NULL;
+    bool is_a_command = false;
 
+    parse_line(&nb_word, &array, command);
     if (nb_word < 1 || nb_word > 4) {
-        // Error command
         return;
     }
-
-    for (int i = 0; i < size_cmd_list; ++i) {
+    for (int i = 0; i < NUMBER_CMD; ++i) {
         if (strcmp(command_list[i].name, array[0]) == 0) {
-            assign_elem_command(&cmd_data, nb_word, command_list[i]);
+            command_list[i].cmd_function(array, nb_word, &cmd_data, command_list[i].type);
+            is_a_command = true;
         }
     }
-
+    if (is_a_command == false) {
+        printf("Command not recognized !\n");
+        return;
+    }
     if (send(client->fd, &cmd_data, sizeof(cmd_data_t), 0) == -1) {
         exit_client(84, RED("Fail to send message to server.\n"));
     }
