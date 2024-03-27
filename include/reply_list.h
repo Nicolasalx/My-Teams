@@ -47,6 +47,7 @@ typedef enum {
 } reply_e;
 
 typedef union {
+    char sender_uuid[UUID_LENGTH + 1];
     char user_uuid[UUID_LENGTH + 1];
     char team_uuid[UUID_LENGTH + 1];
     char channel_uuid[UUID_LENGTH + 1];
@@ -54,6 +55,8 @@ typedef union {
 } reply_arg1_u;
 
 typedef union {
+    time_t message_timestamp;
+    char team_uuid[UUID_LENGTH + 1];
     char user_name[MAX_NAME_LENGTH + 1];
     char message_body[MAX_BODY_LENGTH + 1];
     char thread_uuid[UUID_LENGTH + 1];
@@ -63,6 +66,8 @@ typedef union {
 } reply_arg2_u;
 
 typedef union {
+    char message_body[MAX_BODY_LENGTH + 1];
+    time_t reply_timestamp;
     char user_uuid[UUID_LENGTH + 1];
     char team_description[MAX_DESCRIPTION_LENGTH + 1];
     char channel_description[MAX_DESCRIPTION_LENGTH + 1];
