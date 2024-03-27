@@ -59,8 +59,11 @@ void execute_command(client_t *client, char *command)
             is_a_command = true;
         }
     }
-    if (is_a_command == false || command_type == COMMAND_FAILED) {
+    if (is_a_command == false) {
         printf("Command not recognized !\n");
+        return;
+    }
+    if (command_type == COMMAND_FAILED) {
         return;
     }
     if (send(client->fd, &cmd_data, sizeof(cmd_data_t), 0) == -1) {

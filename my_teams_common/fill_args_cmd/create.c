@@ -14,8 +14,8 @@ static command_type_e create_new_team(char **array, int nb_arg, cmd_data_t *cmd_
         printf("Invalid number of arguments create (new team)\n");
         return COMMAND_FAILED;
     }
-    if (strlen(array[1]) != MAX_NAME_LENGTH ||
-        strlen(array[2]) != MAX_DESCRIPTION_LENGTH) {
+    if (strlen(array[1]) > MAX_NAME_LENGTH ||
+        strlen(array[2]) > MAX_DESCRIPTION_LENGTH) {
         printf("Invalid number of character in the team name or desc\n");
         return COMMAND_FAILED;
     }
@@ -30,8 +30,8 @@ static command_type_e create_new_channel(char **array, int nb_arg, cmd_data_t *c
         printf("Invalid number of arguments create (new team)\n");
         return COMMAND_FAILED;
     }
-    if (strlen(array[1]) != MAX_NAME_LENGTH ||
-        strlen(array[2]) != MAX_DESCRIPTION_LENGTH) {
+    if (strlen(array[1]) > MAX_NAME_LENGTH ||
+        strlen(array[2]) > MAX_DESCRIPTION_LENGTH) {
         printf("Invalid number of character in the channel name or desc\n");
         return COMMAND_FAILED;
     }
@@ -46,8 +46,8 @@ static command_type_e create_new_thread(char **array, int nb_arg, cmd_data_t *cm
         printf("Invalid number of arguments create (new team)\n");
         return COMMAND_FAILED;
     }
-    if (strlen(array[1]) != MAX_NAME_LENGTH ||
-        strlen(array[2]) != MAX_BODY_LENGTH) {
+    if (strlen(array[1]) > MAX_NAME_LENGTH ||
+        strlen(array[2]) > MAX_BODY_LENGTH) {
         printf("Invalid number of character in the thread title or message\n");
         return COMMAND_FAILED;
     }
@@ -62,7 +62,7 @@ static command_type_e create_new_reply(char **array, int nb_arg, cmd_data_t *cmd
         printf("Invalid number of arguments create (new team)\n");
         return COMMAND_FAILED;
     }
-    if (strlen(array[1]) != MAX_BODY_LENGTH) {
+    if (strlen(array[1]) > MAX_BODY_LENGTH) {
         printf("Invalid number of character in the thread title or message\n");
         return COMMAND_FAILED;
     }
