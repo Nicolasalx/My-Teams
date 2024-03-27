@@ -18,6 +18,7 @@
     #include <sys/select.h>
     #include <string.h>
     #include <stdlib.h>
+    #include "command_list.h"
 
     #define MAX_CLIENT FD_SETSIZE
     #define MAX_PORT_NB 65535
@@ -54,6 +55,7 @@ server_t *get_server(server_t *server);
 
 void add_client(server_t *server, client_t *client);
 void remove_client(client_t *client);
-void init_client_cwd(client_t *client);
+void get_client_input(client_t *client);
+void execute_client_input(client_t *client, cmd_data_t *cmd_data);
 
 #endif /* !MYTEAMS_SERVER_H_ */

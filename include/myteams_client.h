@@ -23,10 +23,6 @@
     #define BUFFER_SIZE 4096
     #define CMD_BUFFER_SIZE 4096
 
-    #define MAX_NAME_LENGTH 32
-    #define MAX_DESCRIPTION_LENGTH 255
-    #define MAX_BODY_LENGTH 512
-
 typedef struct {
     int fd;
     fd_set set;

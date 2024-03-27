@@ -8,20 +8,6 @@
 #include "myteams_server.h"
 #include <signal.h>
 
-static void get_client_input(client_t *client)
-{
-    char command[BUFFER_SIZE + 1] = {0};
-    ssize_t nb_byte = read(client->fd, command, BUFFER_SIZE);
-
-    if (nb_byte == 0) {
-        printf(YELLOW("A client as left")"\n");
-        remove_client(client);
-        return;
-    }
-    printf(MAGENTA("New client message(%zu): ") "\"%s\"\n", nb_byte, command);
-    write(client->fd, "Hello\r\n", 7);
-}
-
 void handle_active_client(server_t *server)
 {
     for (size_t i = 0; i < MAX_CLIENT; ++i) {
