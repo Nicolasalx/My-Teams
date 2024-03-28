@@ -8,10 +8,10 @@
 SRC				:=	$(shell find src/ -name "*.c") \
 					$(shell find ../my_teams_common/ -name "*.c")
 
-CFLAGS		=	-Wall -Wextra \
+CFLAGS		=		-Wall -Wextra \
 					-I../include/ -I../include/lib/ -I../libs/myteams/ \
 					-luuid \
-					$(ADDITIONAL_FLAGS)
+					$(ADDITIONAL_FLAGS) \
 
 NAME			=	../myteams_server
 

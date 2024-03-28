@@ -10,6 +10,9 @@
 
 command_type_e init_subscribed(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command)
 {
+    if (user_is_login() == NOT_LOGGED) {
+        return COMMAND_FAILED;
+    }
     if (nb_arg - 1 != command_list[command].nb_arg && nb_arg != 1) {
         printf("Invalid arg in the subscribed\n");
         return COMMAND_FAILED;

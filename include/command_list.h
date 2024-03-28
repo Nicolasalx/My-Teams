@@ -41,6 +41,11 @@ typedef enum {
 } context_e;
 
 typedef enum {
+    NOT_LOGGED,
+    LOGGED_IN
+} is_login_e;
+
+typedef enum {
     NO_COMMAND,
     COMMAND_FAILED,
     COMMAND_SUCCEED
