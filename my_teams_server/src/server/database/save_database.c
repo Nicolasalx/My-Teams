@@ -20,6 +20,46 @@ static void save_linked_list(int fd, node_t *list, size_t size_data)
     }
 }
 
+static void save_thread(int fd, node_t *thread_list)
+{
+    size_t nb_thread = my_listlen(thread_list);
+    node_t *current = thread_list;
+
+    write(fd, &nb_thread, sizeof(size_t));
+    for (size_t i = 0; i < nb_thread; ++i) {
+        write(fd, current, sizeof(db_thread_t));
+        save_linked_list(fd, GET_DATA(current, db_thread_t)->reply_list, sizeof(db_reply_t));
+        current = current->next;
+    }
+}
+
+static void save_channel(int fd, node_t *channel_list)
+{
+    size_t nb_channel = my_listlen(channel_list);
+    node_t *current = channel_list;
+
+    write(fd, &nb_channel, sizeof(size_t));
+    for (size_t i = 0; i < nb_channel; ++i) {
+        write(fd, current, sizeof(db_channel_t));
+        save_thread(fd, GET_DATA(current, db_channel_t)->thread_list);
+        current = current->next;
+    }
+}
+
+static void save_team(int fd, node_t *team_list)
+{
+    size_t nb_team = my_listlen(team_list);
+    node_t *current = team_list;
+
+    write(fd, &nb_team, sizeof(size_t));
+    for (size_t i = 0; i < nb_team; ++i) {
+        write(fd, current, sizeof(db_team_t));
+        save_linked_list(fd, GET_DATA(current, db_team_t)->subscribed_user_list, sizeof(db_user_t));
+        save_channel(fd, GET_DATA(current, db_team_t)->channel_list);
+        current = current->next;
+    }
+}
+
 void save_database(database_t *database)
 {
     int fd = open("myteams.save", O_TRUNC | O_CREAT | O_WRONLY, 0644);
@@ -30,5 +70,6 @@ void save_database(database_t *database)
     }
     save_linked_list(fd, database->user_list, sizeof(db_user_t));
     save_linked_list(fd, database->private_msg_list, sizeof(db_private_msg_t));
+    save_team(fd, database->team_list);
     close(fd);
 }
