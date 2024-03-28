@@ -15,7 +15,7 @@ static void save_linked_list(int fd, node_t *list, size_t size_data)
 
     write(fd, &nb_elem, sizeof(size_t));
     for (size_t i = 0; i < nb_elem; ++i) {
-        write(fd, current, size_data);
+        write(fd, current->data, size_data);
         current = current->next;
     }
 }
@@ -27,7 +27,7 @@ static void save_thread(int fd, node_t *thread_list)
 
     write(fd, &nb_thread, sizeof(size_t));
     for (size_t i = 0; i < nb_thread; ++i) {
-        write(fd, current, sizeof(db_thread_t));
+        write(fd, current->data, sizeof(db_thread_t));
         save_linked_list(fd, GET_DATA(current, db_thread_t)->reply_list, sizeof(db_reply_t));
         current = current->next;
     }
@@ -40,7 +40,7 @@ static void save_channel(int fd, node_t *channel_list)
 
     write(fd, &nb_channel, sizeof(size_t));
     for (size_t i = 0; i < nb_channel; ++i) {
-        write(fd, current, sizeof(db_channel_t));
+        write(fd, current->data, sizeof(db_channel_t));
         save_thread(fd, GET_DATA(current, db_channel_t)->thread_list);
         current = current->next;
     }
@@ -53,7 +53,7 @@ static void save_team(int fd, node_t *team_list)
 
     write(fd, &nb_team, sizeof(size_t));
     for (size_t i = 0; i < nb_team; ++i) {
-        write(fd, current, sizeof(db_team_t));
+        write(fd, current->data, sizeof(db_team_t));
         save_linked_list(fd, GET_DATA(current, db_team_t)->subscribed_user_list, sizeof(db_user_t));
         save_channel(fd, GET_DATA(current, db_team_t)->channel_list);
         current = current->next;
