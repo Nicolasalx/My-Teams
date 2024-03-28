@@ -88,10 +88,10 @@ typedef struct {
 typedef command_type_e (*command_function_ptr)(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
 
 typedef struct {
-    command_e type;
     char *name;
-    int nb_arg;
     command_function_ptr cmd_function;
+    command_e type;
+    int nb_arg;
 } command_list_t;
 
 extern const command_list_t command_list[];
