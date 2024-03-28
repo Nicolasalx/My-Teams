@@ -18,7 +18,7 @@ NAME			=	../myteams_server
 LIB_PATH		=	../lib/
 
 LIB_NAME		=	../lib/my_lib.a \
-					../libs/myteams/libmyteams.so
+					$(realpath ../libs/myteams/libmyteams.so)
 
 SRC_TESTS		:=	$(shell find ../tests/ -name "*.c")
 
