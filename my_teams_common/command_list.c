@@ -9,20 +9,77 @@
 #include "myteams_client.h"
 
 const command_list_t command_list[] = {
-    {HELP, "/help", 0, init_help},
-    {LOGIN, "/login", 1, init_login},
-    {LOGOUT, "/logout", 0, init_logout},
-    {USERS, "/users", 0, init_users},
-    {USER, "/user", 1, init_user},
-    {SEND, "/send", 2, init_send},
-    {MESSAGES, "/messages", 1, init_messages},
-    {SUBSCRIBE, "/subscribe", 1, init_subscribe},
-    {SUBSCRIBED, "/subscribed", 1, init_subscribed},
-    {UNSUBSCRIBE, "/unsubscribe", 0, init_unsubscribe},
-    {USE, "/use", -1, init_use}, // can be: 0, 1, 2 or 3 arg
-    {CREATE, "/create", -1, init_create}, // can be: 1 if context are IN_THREAD or 2 otherwise;
-    {LIST, "/list", 0, init_list},
-    {INFO, "/info", 0, init_info},
+    {
+        .type = HELP,
+        .name = "/help",
+        .nb_arg = 0,
+        .cmd_function = init_help
+    }, {
+        .type = LOGIN,
+        .name = "/login",
+        .nb_arg = 1,
+        .cmd_function = init_login
+    }, {
+        .type = LOGOUT,
+        .name = "/logout",
+        .nb_arg = 0,
+        .cmd_function = init_logout
+    }, {
+        .type = USERS,
+        .name = "/users",
+        .nb_arg = 0,
+        .cmd_function = init_users
+    }, {
+        .type = USER,
+        .name = "/user",
+        .nb_arg = 1,
+        .cmd_function = init_user
+    }, {
+        .type = SEND,
+        .name = "/send",
+        .nb_arg = 2,
+        .cmd_function = init_send
+    }, {
+        .type = MESSAGES,
+        .name = "/messages",
+        .nb_arg = 1,
+        .cmd_function = init_messages
+    }, {
+        .type = SUBSCRIBE,
+        .name = "/subscribe",
+        .nb_arg = 1,
+        .cmd_function = init_subscribe
+    }, {
+        .type = SUBSCRIBED,
+        .name = "/subscribed",
+        .nb_arg = 1,
+        .cmd_function = init_subscribed
+    }, {
+        .type = UNSUBSCRIBE,
+        .name = "/unsubscribe",
+        .nb_arg = 0,
+        .cmd_function = init_unsubscribe
+    }, {
+        .type = USE,
+        .name = "/use",
+        .nb_arg = -1, // can be: 0, 1, 2 or 3 arg
+        .cmd_function = init_use
+    }, {
+        .type = CREATE,
+        .name = "/create",
+        .nb_arg = -1, // can be: 1 if context are IN_THREAD or 2 otherwise;
+        .cmd_function = init_create
+    }, {
+        .type = LIST,
+        .name = "/list",
+        .nb_arg = 0,
+        .cmd_function = init_list
+    }, {
+        .type = INFO,
+        .name = "/info",
+        .nb_arg = 0,
+        .cmd_function = init_info
+    },
 };
 
 context_e context;

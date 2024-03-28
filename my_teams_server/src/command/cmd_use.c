@@ -27,7 +27,7 @@ static node_t *move_to_channel_context(client_t *client, node_t *current_team)
 {
     node_t *current = NULL;
 
-    if (current_team || GET_DATA(current_team, db_team_t)->channel_list == NULL) {
+    if (!current_team || GET_DATA(current_team, db_team_t)->channel_list == NULL) {
         return NULL;
     }
     current = GET_DATA(current_team, db_team_t)->channel_list;
@@ -44,7 +44,7 @@ static node_t *move_to_thread_context(client_t *client, node_t *current_channel)
 {
     node_t *current = NULL;
 
-    if (current_channel || GET_DATA(current_channel, db_channel_t)->thread_list == NULL) {
+    if (!current_channel || GET_DATA(current_channel, db_channel_t)->thread_list == NULL) {
         return NULL;
     }
     current = GET_DATA(current_channel, db_channel_t)->thread_list;
