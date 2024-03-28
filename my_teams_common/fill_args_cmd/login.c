@@ -14,7 +14,7 @@ command_type_e init_login(char **array, int nb_arg, cmd_data_t *cmd_data, comman
         printf("Bad number of arguments in login\n");
         return COMMAND_FAILED;
     }
-    if (strlen(array[1]) != MAX_NAME_LENGTH) {
+    if (strlen(array[1]) > MAX_NAME_LENGTH) {
         printf("Bad length of the uuid\n");
         return COMMAND_FAILED;
     }

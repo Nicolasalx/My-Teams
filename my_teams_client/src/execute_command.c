@@ -32,13 +32,17 @@ char *remove_space_out_quotes(const char *string)
     return result;
 }
 
-void parse_line(int *nb_word, char ***array, char *command)
+command_type_e parse_line(int *nb_word, char ***array, char *command)
 {
     const char *new_str = remove_space_out_quotes(command);
     const char *delimiter = "\"\n";
     *nb_word = count_nb_word(new_str, delimiter);
     int *size_word = count_size_word(new_str, delimiter, *nb_word);
     *array = my_str_to_word(new_str, delimiter, *nb_word, size_word);
+    if (*nb_word < 1 || *nb_word > 4) {
+        return COMMAND_FAILED;
+    }
+    return COMMAND_SUCCEED;
 }
 
 void execute_command(client_t *client, char *command)
@@ -49,8 +53,7 @@ void execute_command(client_t *client, char *command)
     bool is_a_command = false;
     command_type_e command_type = NO_COMMAND;
 
-    parse_line(&nb_word, &array, command);
-    if (nb_word < 1 || nb_word > 4) {
+    if (parse_line(&nb_word, &array, command) == COMMAND_FAILED) {
         return;
     }
     for (int i = 0; i < NUMBER_CMD; ++i) {
@@ -59,8 +62,11 @@ void execute_command(client_t *client, char *command)
             is_a_command = true;
         }
     }
-    if (is_a_command == false || command_type == COMMAND_FAILED) {
+    if (is_a_command == false) {
         printf("Command not recognized !\n");
+        return;
+    }
+    if (command_type == COMMAND_FAILED) {
         return;
     }
     if (send(client->fd, &cmd_data, sizeof(cmd_data_t), 0) == -1) {
