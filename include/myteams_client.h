@@ -36,6 +36,7 @@ typedef struct {
 extern void (*const reply_handler[])(reply_data_t *);
 
 extern context_e context;
+extern is_login_e isLogin;
 
 void check_arg_validity(int argc, const char **argv, client_t *client);
 void create_client(client_t *client);
@@ -62,6 +63,8 @@ command_type_e init_use(char **array, int nb_arg, cmd_data_t *cmd_data, command_
 command_type_e init_create(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
 command_type_e init_list(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
 command_type_e init_info(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+
+is_login_e user_is_login(void);
 
 void reply_error_already_exist(reply_data_t *reply_data);
 void reply_error_unknow_channel(reply_data_t *reply_data);
@@ -90,6 +93,7 @@ void reply_unknow_user(reply_data_t *reply_data);
 void reply_unsubscribe_cmd(reply_data_t *reply_data);
 void reply_user_cmd(reply_data_t *reply_data);
 void reply_users_cmd(reply_data_t *reply_data);
+
 
 void lauch_client(client_t *client);
 void delete_client(client_t *client);

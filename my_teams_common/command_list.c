@@ -26,3 +26,4 @@ const command_list_t command_list[] = {
 };
 
 context_e context;
+is_login_e isLogin = NOT_LOGGED;
