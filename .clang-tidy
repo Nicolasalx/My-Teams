@@ -20,6 +20,8 @@ Checks:
   -readability-identifier-naming,
   -readability-implicit-bool-conversion,
   -readability-named-parameter
+  -clang-analyzer-security.insecureAPI.strcpy
+  -clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling
 
 CheckOptions:
   - key: readability-function-size.StatementThreshold
