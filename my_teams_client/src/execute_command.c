@@ -8,6 +8,16 @@
 #include "myteams_client.h"
 #include "command_list.h"
 
+void remove_space_opt(char c, bool *is_in_quote, char *result, size_t *index)
+{
+    if (!*is_in_quote && c == ' ') {
+        return;
+    } else {
+        result[*index] = c;
+        ++*index;
+    }
+}
+
 char *remove_space_out_quotes(const char *string)
 {
     bool is_in_quote = false;
@@ -24,12 +34,7 @@ char *remove_space_out_quotes(const char *string)
             is_in_quote = !is_in_quote;
             ++nb_quotes;
         }
-        if (!is_in_quote && string[i] == ' ') {
-            continue;
-        } else {
-            result[index] = string[i];
-            ++index;
-        }
+        remove_space_opt(string[i], &is_in_quote, result, &index);
     }
     if (nb_quotes % 2 != 0) {
         return NULL;
@@ -40,14 +45,18 @@ char *remove_space_out_quotes(const char *string)
 command_type_e parse_line(int *nb_word, char ***array, char *command)
 {
     const char *new_str = remove_space_out_quotes(command);
+    const char *delimiter = "\"\n";
+    int *size_word = NULL;
+
     if (new_str == NULL) {
+        printf("Command not recognized !\n");
         return COMMAND_FAILED;
     }
-    const char *delimiter = "\"\n";
     *nb_word = count_nb_word(new_str, delimiter);
-    int *size_word = count_size_word(new_str, delimiter, *nb_word);
+    size_word = count_size_word(new_str, delimiter, *nb_word);
     *array = my_str_to_word(new_str, delimiter, *nb_word, size_word);
     if (*nb_word < 1 || *nb_word > 4) {
+        printf("Command not recognized !\n");
         return COMMAND_FAILED;
     }
     return COMMAND_SUCCEED;
@@ -62,7 +71,6 @@ void execute_command(client_t *client, char *command)
     command_type_e command_type = NO_COMMAND;
 
     if (parse_line(&nb_word, &array, command) == COMMAND_FAILED) {
-        printf("Command not recognized !\n");
         return;
     }
     for (int i = 0; i < NUMBER_CMD; ++i) {
