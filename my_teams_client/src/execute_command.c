@@ -8,7 +8,7 @@
 #include "myteams_client.h"
 #include "command_list.h"
 
-static void remove_space_opt(char c, bool *is_in_quote, char *result, size_t *index)
+static void remove_space_opt(char c, bool is_in_quote, char *result, size_t *index)
 {
     if (!is_in_quote && c == ' ') {
         return;
