@@ -22,3 +22,19 @@ db_team_t *db_contain_team(database_t *database, const char *team_uuid)
     } while (current != database->team_list);
     return NULL;
 }
+
+db_team_t *db_contain_team_name(database_t *database, const char *team_name)
+{
+    node_t *current = database->team_list;
+
+    if (database->team_list == NULL) {
+        return NULL;
+    }
+    do {
+        if (memcmp(GET_DATA(current, db_team_t)->name, team_name, MAX_NAME_LENGTH) == 0) {
+            return current->data;
+        }
+        current = current->next;
+    } while (current != database->team_list);
+    return NULL;
+}

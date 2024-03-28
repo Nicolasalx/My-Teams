@@ -7,20 +7,30 @@
 
 #include "myteams_server.h"
 
+static void send_subscribe_reply(int fd, const char *user_uuid, const char *team_uuid)
+{
+    reply_data_t reply_data = {0};
+
+    reply_data.type = PRIVATE_MSG_RECEIVED;
+    memcpy(reply_data.arg1.user_uuid, user_uuid, UUID_LENGTH);
+    memcpy(reply_data.arg2.team_uuid, team_uuid, UUID_LENGTH);
+    send(fd, &reply_data, sizeof(reply_data_t), 0);
+}
+
 void cmd_subscribe(server_t *server, client_t *client, cmd_data_t *cmd_data)
 {
     db_team_t *team_to_sub = db_contain_team(&server->database, cmd_data->arg1.team_uuid);
 
     if (team_to_sub) {
-        if (db_contain_team_sub(team_to_sub, client->uuid)) {
+        if (!db_contain_team_sub(team_to_sub, client->uuid)) { // ! maybe error
             db_user_t *sub_user = my_calloc(sizeof(db_user_t));
             memcpy(sub_user->user_name, client->user_name, MAX_NAME_LENGTH);
             memcpy(sub_user->uuid, client->uuid, UUID_LENGTH);
             append_node(&team_to_sub->subscribed_user_list, create_node(&sub_user));
         }
         server_event_user_subscribed(cmd_data->arg1.team_uuid, client->uuid);
-        // TODO: send reply
+        send_subscribe_reply(client->fd, client->uuid, cmd_data->arg1.team_uuid);
     } else {
-        // TODO: send error reply unknow team
+        send_error_unknown_team(client->fd, cmd_data->arg1.team_uuid);
     }
 }

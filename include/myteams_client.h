@@ -90,6 +90,10 @@ void reply_unknow_user(reply_data_t *reply_data);
 void reply_unsubscribe_cmd(reply_data_t *reply_data);
 void reply_user_cmd(reply_data_t *reply_data);
 void reply_users_cmd(reply_data_t *reply_data);
+void reply_create_team_cmd(reply_data_t *reply_data);
+void reply_create_channel_cmd(reply_data_t *reply_data);
+void reply_create_thread_cmd(reply_data_t *reply_data);
+void reply_create_reply_cmd(reply_data_t *reply_data);
 
 void lauch_client(client_t *client);
 void delete_client(client_t *client);

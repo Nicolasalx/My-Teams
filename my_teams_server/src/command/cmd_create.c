@@ -6,22 +6,22 @@
 */
 
 #include "myteams_server.h"
+#include <uuid/uuid.h>
 
 void cmd_create(server_t *server, client_t *client, cmd_data_t *cmd_data)
 {
-    // TODO: send request & error
     switch (client->context.type) {
     case NO_CONTEXT:
-        /* code */
+        create_new_team(server, client, cmd_data);
         break;
     case IN_TEAM:
-        /* code */
+        create_new_channel(server, client, cmd_data);
         break;
     case IN_CHANNEL:
-        /* code */
+        create_new_thread(server, client, cmd_data);
         break;
     case IN_THREAD:
-        /* code */
+        create_new_reply(server, client, cmd_data);
         break;
     }
 }

@@ -21,6 +21,7 @@
     #include "command_list.h"
     #include "../libs/myteams/logging_server.h"
     #include "server_database.h"
+    #include "reply_list.h"
 
     #define MAX_CLIENT FD_SETSIZE
     #define MAX_PORT_NB 65535
@@ -33,6 +34,9 @@ typedef struct {
     char team_uuid[UUID_LENGTH + 1];
     char channel_uuid[UUID_LENGTH + 1];
     char thread_uuid[UUID_LENGTH + 1];
+    node_t *team_ptr;
+    node_t *channel_ptr;
+    node_t *thread_ptr;
 } context_t;
 
 typedef struct {
@@ -66,6 +70,8 @@ void add_client(server_t *server, client_t *client);
 void remove_client(client_t *client);
 void get_client_input(server_t *server, client_t *client);
 void execute_client_input(server_t *server, client_t *client, cmd_data_t *cmd_data);
+bool is_user_connected(server_t *server, const char *user_uuid);
+client_t *get_client_by_uuid(server_t *server, const char *uuid);
 
 void cmd_login(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_logout(server_t *server, client_t *client, cmd_data_t *cmd_data);
@@ -80,6 +86,17 @@ void cmd_create(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_subscribe(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_subscribed(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_unsubscribe(server_t *server, client_t *client, cmd_data_t *cmd_data);
+
+void create_new_team(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void create_new_channel(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void create_new_thread(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void create_new_reply(server_t *server, client_t *client, cmd_data_t *cmd_data);
+
+void send_error_already_exist(int fd);
+void send_error_unknown_channel(int fd, const char *channel_uuid);
+void send_error_unknown_team(int fd, const char *team_uuid);
+void send_error_unknown_thread(int fd, const char *thread_uuid);
+void send_error_unknown_user(int fd, const char *user_uuid);
 
 /*
     Commands:

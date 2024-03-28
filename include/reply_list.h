@@ -15,13 +15,14 @@ typedef enum {
     REPLY_LOGIN, // client_event_logged_in
     REPLY_LOGGED_OUT, // client_event_logged_out
     PRIVATE_MSG_RECEIVED, // client_event_private_message_received
-    THREAD_REPLY, // client_event_thread_reply_received
+    NEW_THREAD_REPLY, // client_event_thread_reply_received
     NEW_TEAM_CREATED, // client_event_team_created
     NEW_CHANNEL_CREATED, // client_event_channel_created
     NEW_THREAD_CREATED, // client_event_thread_created
     REPLY_USERS_CMD, // client_print_users -> cmd "/users"
     REPLY_USER_CMD, // client_print_user -> cmd "/user"
     REPLY_MESSAGES_CMD, // client_private_message_print_messages -> cmd "/messages"
+
     REPLY_LIST_TEAM_CMD, // client_print_teams -> cmd "/list" -> NO_CONTEXT
     REPLY_LIST_CHANNEL_CMD, // client_team_print_channels -> cmd "/list" -> IN_TEAM         | client_error_unknown_team
     REPLY_LIST_THREAD_CMD, // client_channel_print_threads -> cmd "/list" -> IN_CHANNEL     | client_error_unknown_channel
@@ -42,6 +43,11 @@ typedef enum {
     REPLY_INFO_TEAM_CMD, // client_print_team
     REPLY_INFO_CHANNEL_CMD, // client_print_channel
     REPLY_INFO_THREAD_CMD, // client_print_thread
+
+    REPLY_CREATE_TEAM_CMD, // client_print_team_created
+    REPLY_CREATE_CHANNEL_CMD, // client_print_channel_created
+    REPLY_CREATE_THREAD_CMD, // client_print_thread_created
+    REPLY_CREATE_REPLY_CMD, // client_print_reply_created
 
     NUMBER_REPLY
 } reply_e;
