@@ -19,7 +19,7 @@ void handle_new_connection(server_t *server)
             delete_server(server);
             my_exit(84);
         }
-        printf(CYAN("New client connected\n"));
+        printf(CYAN("New client connected")"\n");
         client.fd = new_client;
         add_client(server, &client);
     }

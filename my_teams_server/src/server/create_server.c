@@ -11,7 +11,7 @@ static void create_server_socket(server_t *server)
 {
     server->fd = socket(AF_INET, SOCK_STREAM, 0);
     if(server->fd == -1){
-        printf(RED("Fail to create the server socket\n"));
+        printf(RED("Fail to create the server socket")"\n");
         my_exit(84);
     }
 }
@@ -22,7 +22,7 @@ static void change_server_option(server_t *server)
 
     if (setsockopt(server->fd, SOL_SOCKET,
             SO_REUSEADDR, &opt, sizeof(int)) == -1) {
-        printf(RED("Fail to change server socket option\n"));
+        printf(RED("Fail to change server socket option")"\n");
         delete_server(server);
         my_exit(84);
     }
@@ -36,7 +36,7 @@ static void bind_server_address(server_t *server)
 
     if(bind(server->fd, (struct sockaddr *) &server->address,
             sizeof(server->address)) == -1) {
-        printf(RED("Fail to bind an address to the server\n"));
+        printf(RED("Fail to bind an address to the server")"\n");
         delete_server(server);
         my_exit(84);
     }
@@ -58,5 +58,5 @@ void create_server(server_t *server)
     change_server_option(server);
     bind_server_address(server);
     listen_for_connection(server);
-    printf(GREEN("Server successfuly created.\n"));
+    printf(GREEN("Server successfuly created.")"\n");
 }
