@@ -76,6 +76,7 @@ command_type_e init_create(char **array, int nb_arg,
     if (user_is_login() == NOT_LOGGED || !(nb_arg >= 1 && nb_arg <= 4)) {
         return COMMAND_FAILED;
     }
+    cmd_data->type = CREATE;
     switch (context) {
         case NO_CONTEXT:
             return create_new_team(array, nb_arg, cmd_data);
@@ -90,6 +91,5 @@ command_type_e init_create(char **array, int nb_arg,
             return create_new_reply(array, nb_arg, cmd_data);
             break;
     }
-    cmd_data->type = CREATE;
     return COMMAND_SUCCEED;
 }

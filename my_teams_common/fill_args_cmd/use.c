@@ -33,7 +33,7 @@ command_type_e init_use(char **array, int nb_arg, cmd_data_t *cmd_data, command_
                 break;
         }
     }
-    cmd_data->arg4.nb_arg = nb_arg - 1;
     cmd_data->type = USE;
+    cmd_data->arg4.nb_arg = nb_arg - 1;
     return COMMAND_SUCCEED;
 }

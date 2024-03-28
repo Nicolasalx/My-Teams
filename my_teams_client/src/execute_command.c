@@ -25,10 +25,7 @@ char *remove_space_out_quotes(const char *string)
     char *result = NULL;
     size_t nb_quotes = 0;
 
-    result = malloc(sizeof(char) * (strlen(string)) + 1);
-    if (result == NULL) {
-        return NULL;
-    }
+    result = my_calloc(sizeof(char) * (strlen(string)) + 1);
     for (int i = 0; string[i] != '\0'; ++i) {
         if (string[i] == '\"') {
             is_in_quote = !is_in_quote;

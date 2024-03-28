@@ -24,7 +24,7 @@ command_type_e init_subscribed(char **array, int nb_arg, cmd_data_t *cmd_data, c
         }
         strcpy(cmd_data->arg1.team_uuid, array[1]);
     }
-    cmd_data->arg4.nb_arg = nb_arg - 1;
     cmd_data->type = SUBSCRIBED;
+    cmd_data->arg4.nb_arg = nb_arg - 1;
     return COMMAND_SUCCEED;
 }

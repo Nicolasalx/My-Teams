@@ -21,7 +21,7 @@ command_type_e init_unsubscribe(char **array, int nb_arg, cmd_data_t *cmd_data, 
         printf("Bad length of the uuid\n");
         return COMMAND_FAILED;
     }
-    strcpy(cmd_data->arg1.team_uuid, array[1]);
     cmd_data->type = UNSUBSCRIBE;
+    strcpy(cmd_data->arg1.team_uuid, array[1]);
     return COMMAND_SUCCEED;
 }
