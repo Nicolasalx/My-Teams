@@ -46,7 +46,7 @@ jobs:
       run: |
           ./myteams_server 7777 &
           server_pid=$!
-          ./myteams_client 127.0.0.1 7777 &
+          ./myteams_cli 127.0.0.1 7777 &
           cli_pid=$!
           sleep 3
           kill $cli_pid
