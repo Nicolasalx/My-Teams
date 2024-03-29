@@ -35,6 +35,23 @@ jobs:
             fi
           }
 
+    - name: check lauch server
+      run: |
+          ./myteams_server 7777 &
+          server_pid=$!
+          sleep 3
+          kill $server_pid
+
+    - name: check lauch client
+      run: |
+          ./myteams_server 7777 &
+          server_pid=$!
+          ./myteams_client 127.0.0.1 7777 &
+          cli_pid=$!
+          sleep 3
+          kill $cli_pid
+          kill $server_pid
+
 ##    - name: check functionnal_test
 ##      run: |
 ##          ./myftp 4242 . &
