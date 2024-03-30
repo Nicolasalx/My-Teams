@@ -12,7 +12,7 @@ static void send_messages_reply(int fd, const char *sender_uuid,
 {
     reply_data_t reply_data = {0};
 
-    reply_data.type = PRIVATE_MSG_RECEIVED;
+    reply_data.type = REPLY_MESSAGES_CMD;
     memcpy(reply_data.arg1.sender_uuid, sender_uuid, UUID_LENGTH);
     memcpy(&reply_data.arg2.message_timestamp, &message_timestamp, sizeof(time_t));
     memcpy(reply_data.arg3.message_body, message_body, MAX_BODY_LENGTH);
