@@ -10,7 +10,7 @@
 is_login_e user_is_login(void)
 {
     if (isLogin == NOT_LOGGED) {
-        printf("User is not logged in\n");
+        CLIENT_ERROR_UNAUTHORIZED();
     }
     return isLogin;
 }
