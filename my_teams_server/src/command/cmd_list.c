@@ -77,7 +77,6 @@ static void list_thread(client_t *client)
     } while (current != GET_DATA(client->context.channel_ptr, db_channel_t)->thread_list);
 }
 
-
 static void list_reply(client_t *client)
 {
     node_t *current = NULL;
@@ -107,7 +106,7 @@ static void list_reply(client_t *client)
         memcpy(reply_data.arg4.reply_body, GET_DATA(current, db_reply_t)->body, MAX_BODY_LENGTH);
         send(client->fd, &reply_data, sizeof(reply_data_t), 0);
         current = current->next;
-    } while (current != GET_DATA(client->context.channel_ptr, db_thread_t)->reply_list);
+    } while (current != GET_DATA(client->context.thread_ptr, db_thread_t)->reply_list);
 }
 
 void cmd_list(server_t *server, client_t *client, cmd_data_t *)
