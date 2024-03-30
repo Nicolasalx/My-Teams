@@ -20,7 +20,9 @@ void init_logging_func(client_t *client)
         cli_logging_func[i].method = dlsym(client->handle, cli_logging_func[i].name);
         if (!cli_logging_func[i].method) {
             printf(RED("%s")"\n", dlerror());
-            dlclose(client->handle);
+            if (client->handle) {
+                dlclose(client->handle);
+            }
             my_exit(84);
         }
     }

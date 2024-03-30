@@ -7,7 +7,7 @@
 
 SRC				:=	$(shell find src/ -name "*.c")
 
-CFLAGS			=	-Wall -Wextra -fno-gnu-unique \
+CFLAGS			=	-Wall -Wextra \
 					-I../include/ -I../include/lib/ -I../libs/myteams/ \
 					-luuid -ldl \
 					$(ADDITIONAL_FLAGS) \

@@ -20,7 +20,9 @@ void init_logging_func(server_t *server)
         server_logging_func[i].method = dlsym(server->handle, server_logging_func[i].name);
         if (!server_logging_func[i].method) {
             printf(RED("%s")"\n", dlerror());
-            dlclose(server->handle);
+            if (server->handle) {
+                dlclose(server->handle);
+            }
             my_exit(84);
         }
     }
