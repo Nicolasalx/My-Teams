@@ -20,6 +20,10 @@ void handle_new_message(client_t *client)
         } else if (size == -1) {
             exit_client(84, RED("Fail to read message.\n"));
         }
+        if (size != sizeof(reply_data_t)) {
+            printf(RED("Incompatible reply from the server.\n"));
+            return;
+        }
         handle_server_reply(&reply_data);
     }
 }

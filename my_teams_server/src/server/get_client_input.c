@@ -12,8 +12,16 @@ void get_client_input(server_t *server, client_t *client)
     cmd_data_t cmd_data = {0};
     ssize_t nb_byte = read(client->fd, &cmd_data, sizeof(cmd_data_t));
 
+    if (nb_byte == -1) {
+        return;
+    }
     if (nb_byte == 0) {
         printf(YELLOW("A client as left")"\n");
+        remove_client(client);
+        return;
+    }
+    if (nb_byte != sizeof(cmd_data_t)) {
+        printf(RED("Client input is incompatible with the server.")"\n");
         remove_client(client);
         return;
     }
