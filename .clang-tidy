@@ -7,21 +7,21 @@ Checks:
   cppcoreguidelines-init-variables,
   cppcoreguidelines-avoid-goto,
   cppcoreguidelines-prefer-member-initializer,
-  -performance-enum-size,
-  -performance-move-constructor-init,
-  -performance-no-int-to-ptr,
-  -modernize-use-trailing-return-type,
-  -modernize-redundant-void-arg,
-  -modernize-macro-to-enum,
-  -readability-identifier-length,
-  -readability-magic-numbers,
-  -readability-else-after-return,
-  -readability-uppercase-literal-suffix,
-  -readability-identifier-naming,
-  -readability-implicit-bool-conversion,
-  -readability-named-parameter
-  -clang-analyzer-security.insecureAPI.strcpy
-  -clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling
+  ## -performance-enum-size,
+  ## -performance-move-constructor-init,
+  ## -performance-no-int-to-ptr,
+  ## -modernize-use-trailing-return-type,
+  ## -modernize-redundant-void-arg,
+  ## -modernize-macro-to-enum,
+  ## -readability-identifier-length,
+  ## -readability-magic-numbers,
+  ## -readability-else-after-return,
+  ## -readability-uppercase-literal-suffix,
+  ## -readability-identifier-naming,
+  ## -readability-implicit-bool-conversion,
+  ## -readability-named-parameter
+  ## -clang-analyzer-security.insecureAPI.strcpy
+  ## -clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling
 
 CheckOptions:
   - key: readability-function-size.StatementThreshold

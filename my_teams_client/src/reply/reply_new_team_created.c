@@ -9,7 +9,7 @@
 
 void reply_new_team_created(reply_data_t *reply_data)
 {
-    client_event_team_created(
+    CLIENT_EVENT_TEAM_CREATED(
         reply_data->arg1.team_uuid,
         reply_data->arg2.team_name,
         reply_data->arg3.team_description

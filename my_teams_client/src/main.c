@@ -12,6 +12,7 @@ int main(int argc, char const *argv[])
     client_t client = {0};
 
     check_arg_validity(argc, argv, &client);
+    init_logging_func(&client);
     create_client(&client);
     lauch_client(&client);
     delete_client(&client);

@@ -9,5 +9,5 @@
 
 void reply_error_unknow_team(reply_data_t *reply_data)
 {
-    client_error_unknown_team(reply_data->arg1.team_uuid);
+    CLIENT_ERROR_UNKNOWN_TEAM(reply_data->arg1.team_uuid);
 }

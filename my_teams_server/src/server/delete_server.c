@@ -15,5 +15,7 @@ void delete_server(server_t *server)
         remove_client(&server->clients[i]);
     }
     close(server->fd);
-    dlclose(server->handle);
+    if (server->handle) {
+        dlclose(server->handle);
+    }
 }

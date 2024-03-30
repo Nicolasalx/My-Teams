@@ -9,7 +9,7 @@
 
 void reply_new_channel_created(reply_data_t *reply_data)
 {
-    client_event_channel_created(
+    CLIENT_EVENT_CHANNEL_CREATED(
         reply_data->arg1.channel_uuid,
         reply_data->arg2.channel_name,
         reply_data->arg3.channel_description

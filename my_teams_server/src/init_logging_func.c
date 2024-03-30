@@ -16,7 +16,7 @@ void init_logging_func(server_t *server)
         my_exit(84);
     }
 
-    for (size_t i = 0; i < _nb_func; ++i) {
+    for (size_t i = 0; i < _nb_func_server; ++i) {
         server_logging_func[i].method = dlsym(server->handle, server_logging_func[i].name);
         if (!server_logging_func[i].method) {
             printf(RED("%s")"\n", dlerror());

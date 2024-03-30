@@ -9,5 +9,5 @@
 
 void reply_unknow_user(reply_data_t *reply_data)
 {
-    client_error_unknown_user(reply_data->arg1.user_uuid);
+    CLIENT_ERROR_UNKNOWN_USER(reply_data->arg1.user_uuid);
 }

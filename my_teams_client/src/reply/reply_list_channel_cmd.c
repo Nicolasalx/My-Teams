@@ -9,7 +9,7 @@
 
 void reply_list_channel_cmd(reply_data_t *reply_data)
 {
-    client_team_print_channels(
+    CLIENT_TEAM_PRINT_CHANNELS(
         reply_data->arg1.channel_uuid,
         reply_data->arg2.channel_name,
         reply_data->arg3.channel_description

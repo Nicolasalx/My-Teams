@@ -9,7 +9,7 @@
 
 void reply_thread_reply(reply_data_t *reply_data)
 {
-    client_event_thread_reply_received(
+    CLIENT_EVENT_THREAD_REPLY_RECEIVED(
         reply_data->arg1.team_uuid,
         reply_data->arg2.thread_uuid,
         reply_data->arg3.user_uuid,

@@ -31,6 +31,7 @@ typedef struct {
     unsigned short port;
     struct sockaddr_in server_address;
     char *cmd_buffer;
+    void *handle;
 } client_t;
 
 extern void (*const reply_handler[])(reply_data_t *);
@@ -39,6 +40,7 @@ extern context_e context;
 extern is_login_e isLogin;
 
 void check_arg_validity(int argc, const char **argv, client_t *client);
+void init_logging_func(client_t *client);
 void create_client(client_t *client);
 client_t *get_client(client_t *client);
 void init_client_set(client_t *client, int *max_fd);
@@ -98,9 +100,78 @@ void reply_create_channel_cmd(reply_data_t *reply_data);
 void reply_create_thread_cmd(reply_data_t *reply_data);
 void reply_create_reply_cmd(reply_data_t *reply_data);
 
-
 void lauch_client(client_t *client);
 void delete_client(client_t *client);
 void exit_client(int exit_value, const char *message);
+
+typedef struct {
+    char *name;
+    void *method;
+} cli_logging_t;
+
+enum cli_logging_e {
+    _client_event_logged_in,
+    _client_event_logged_out,
+    _client_event_private_message_received,
+    _client_event_thread_reply_received,
+    _client_event_team_created,
+    _client_event_channel_created,
+    _client_event_thread_created,
+    _client_print_users,
+    _client_print_teams,
+    _client_team_print_channels,
+    _client_channel_print_threads,
+    _client_thread_print_replies,
+    _client_private_message_print_messages,
+    _client_error_unknown_team,
+    _client_error_unknown_channel,
+    _client_error_unknown_thread,
+    _client_error_unknown_user,
+    _client_error_unauthorized,
+    _client_error_already_exist,
+    _client_print_user,
+    _client_print_team,
+    _client_print_channel,
+    _client_print_thread,
+    _client_print_team_created,
+    _client_print_channel_created,
+    _client_print_thread_created,
+    _client_print_reply_created,
+    _client_print_subscribed,
+    _client_print_unsubscribed,
+    _nb_func_cli
+};
+
+extern cli_logging_t cli_logging_func[];
+
+int CLIENT_EVENT_LOGGED_IN(const char *user_uuid, const char *user_name);
+int CLIENT_EVENT_LOGGED_OUT(const char *user_uuid, const char *user_name);
+int CLIENT_EVENT_PRIVATE_MESSAGE_RECEIVED(const char *user_uuid, const char *message_body);
+int CLIENT_EVENT_THREAD_REPLY_RECEIVED(const char *team_uuid, const char *thread_uuid, const char *user_uuid, const char *reply_body);
+int CLIENT_EVENT_TEAM_CREATED(const char *team_uuid, const char *team_name, const char *team_description);
+int CLIENT_EVENT_CHANNEL_CREATED(const char *channel_uuid, const char *channel_name, const char *channel_description);
+int CLIENT_EVENT_THREAD_CREATED(const char *thread_uuid, const char *user_uuid, time_t thread_timestamp, const char *thread_title, const char *thread_body);
+int CLIENT_PRINT_USERS(const char *user_uuid, const char *user_name, int user_status);
+int CLIENT_PRINT_TEAMS(const char *team_uuid, const char *team_name, const char *team_description);
+int CLIENT_TEAM_PRINT_CHANNELS(const char *channel_uuid, const char *channel_name, const char *channel_description);
+int CLIENT_CHANNEL_PRINT_THREADS(const char *thread_uuid, const char *user_uuid, time_t thread_timestamp, const char *thread_title, const char *thread_body);
+int CLIENT_THREAD_PRINT_REPLIES(const char *thread_uuid, const char *user_uuid, time_t reply_timestamp, const char *reply_body);
+int CLIENT_PRIVATE_MESSAGE_PRINT_MESSAGES(const char *sender_uuid, time_t message_timestamp, const char *message_body);
+int CLIENT_ERROR_UNKNOWN_TEAM(const char *team_uuid);
+int CLIENT_ERROR_UNKNOWN_CHANNEL(const char *channel_uuid);
+int CLIENT_ERROR_UNKNOWN_THREAD(const char *thread_uuid);
+int CLIENT_ERROR_UNKNOWN_USER(const char *user_uuid);
+int CLIENT_ERROR_UNAUTHORIZED(void);
+int CLIENT_ERROR_ALREADY_EXIST(void);
+int CLIENT_PRINT_USER(const char *user_uuid, const char *user_name, int user_status);
+int CLIENT_PRINT_TEAM(const char *team_uuid, const char *team_name, const char *team_description);
+int CLIENT_PRINT_CHANNEL(const char *channel_uuid, const char *channel_name, const char *channel_description);
+int CLIENT_PRINT_THREAD(const char *thread_uuid, const char *user_uuid, time_t thread_timestamp, const char *thread_title, const char *thread_body);
+int CLIENT_PRINT_TEAM_CREATED(const char *team_uuid, const char *team_name, const char *team_description);
+int CLIENT_PRINT_CHANNEL_CREATED(const char *channel_uuid, const char *channel_name, const char *channel_description);
+int CLIENT_PRINT_THREAD_CREATED(const char *thread_uuid, const char *user_uuid, time_t thread_timestamp, const char *thread_title, const char *thread_body);
+int CLIENT_PRINT_REPLY_CREATED(const char *thread_uuid, const char *user_uuid, time_t reply_timestamp, const char *reply_body);
+int CLIENT_PRINT_SUBSCRIBED(const char *user_uuid, const char *team_uuid);
+int CLIENT_PRINT_UNSUBSCRIBED(const char *user_uuid, const char *team_uuid);
 
 #endif /* !MYTEAMS_CLIENT_H_ */

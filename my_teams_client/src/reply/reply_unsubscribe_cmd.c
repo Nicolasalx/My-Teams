@@ -9,7 +9,7 @@
 
 void reply_unsubscribe_cmd(reply_data_t *reply_data)
 {
-    client_print_unsubscribed(
+    CLIENT_PRINT_UNSUBSCRIBED(
         reply_data->arg1.user_uuid,
         reply_data->arg2.team_uuid
     );

@@ -116,7 +116,7 @@ enum server_logging_e {
     _server_event_user_logged_in,
     _server_event_user_logged_out,
     _server_event_private_message_sended,
-    _nb_func
+    _nb_func_server
 };
 
 extern server_logging_t server_logging_func[];
