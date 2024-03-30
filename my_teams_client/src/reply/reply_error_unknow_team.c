@@ -6,7 +6,6 @@
 */
 
 #include "myteams_client.h"
-#include "logging_client.h"
 
 void reply_error_unknow_team(reply_data_t *reply_data)
 {

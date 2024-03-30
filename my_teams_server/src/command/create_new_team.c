@@ -39,7 +39,7 @@ void create_new_team(server_t *server, client_t *client, cmd_data_t *cmd_data)
         uuid_generate_random(team_uuid);
         uuid_unparse(team_uuid, new_team->uuid);
         append_node(&server->database.team_list, create_node(new_team));
-        server_event_team_created(new_team->uuid, new_team->name, client->uuid);
+        SERVER_EVENT_TEAM_CREATED(new_team->uuid, new_team->name, client->uuid);
         send_new_team_created(client->fd, server, new_team);
     }
 }

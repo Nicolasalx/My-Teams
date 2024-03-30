@@ -6,7 +6,6 @@
 */
 
 #include "myteams_client.h"
-#include "logging_client.h"
 
 void reply_info_user_cmd(reply_data_t *reply_data)
 {

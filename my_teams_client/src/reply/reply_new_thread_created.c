@@ -6,7 +6,6 @@
 */
 
 #include "myteams_client.h"
-#include "logging_client.h"
 
 void reply_new_thread_created(reply_data_t *reply_data)
 {

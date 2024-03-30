@@ -58,7 +58,7 @@ void create_new_reply(server_t *server, client_t *client, cmd_data_t *cmd_data)
     new_reply->timestamp = time(NULL);
     append_node(&GET_DATA(client->context.thread_ptr, db_thread_t)->reply_list, create_node(new_reply));
 
-    server_event_reply_created(
+    SERVER_EVENT_REPLY_CREATED(
         client->context.thread_uuid, client->uuid, new_reply->body);
     send_new_reply_created(client, server, GET_DATA(client->context.team_ptr, db_team_t), new_reply);
 }

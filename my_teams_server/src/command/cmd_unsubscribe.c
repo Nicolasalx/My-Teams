@@ -42,7 +42,7 @@ void cmd_unsubscribe(server_t *server, client_t *client, cmd_data_t *cmd_data)
         send_error_unknown_team(client->fd, cmd_data->arg1.team_uuid);
         return;
     }
-    server_event_user_unsubscribed(team_to_unsub->uuid, client->uuid);
+    SERVER_EVENT_USER_UNSUBSCRIBED(team_to_unsub->uuid, client->uuid);
     send_unsubscribe_reply(client->fd, client->uuid, cmd_data->arg1.team_uuid);
     remove_subed_user(client, team_to_unsub);
 }

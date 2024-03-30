@@ -29,7 +29,7 @@ void cmd_send(server_t *server, client_t *client, cmd_data_t *cmd_data)
         memcpy(private_msg->msg, cmd_data->arg2.message_body, MAX_BODY_LENGTH);
         private_msg->timestamp = time(NULL);
         append_node(&server->database.private_msg_list, create_node(private_msg));
-        server_event_private_message_sended(client->uuid, cmd_data->arg1.user_uuid, cmd_data->arg2.message_body);
+        SERVER_EVENT_PRIVATE_MESSAGE_SENDED(client->uuid, cmd_data->arg1.user_uuid, cmd_data->arg2.message_body);
         dest_client = get_client_by_uuid(server, private_msg->sender_uuid);
         if (dest_client) {
             send_send_reply(dest_client->fd, private_msg->sender_uuid, private_msg->msg);

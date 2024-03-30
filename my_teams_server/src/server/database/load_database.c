@@ -22,7 +22,7 @@ static bool load_user_list(int fd, node_t **user_list)
             return true;
         }
         append_node(user_list, create_node(db_user));
-        server_event_user_loaded(db_user->uuid, db_user->user_name);
+        SERVER_EVENT_USER_LOADED(db_user->uuid, db_user->user_name);
     }
     return false;
 }

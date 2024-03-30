@@ -19,7 +19,6 @@
     #include <string.h>
     #include <stdlib.h>
     #include "command_list.h"
-    #include "../libs/myteams/logging_server.h"
     #include "server_database.h"
     #include "reply_list.h"
 
@@ -53,11 +52,13 @@ typedef struct {
     unsigned short port;
     client_t clients[MAX_CLIENT];
     database_t database;
+    void *handle;
 } server_t;
 
 extern void (*const cmd_handler[])(server_t *, client_t *, cmd_data_t *);
 
 void check_arg_validity(int argc, const char **argv, server_t *server);
+void init_logging_func(server_t *server);
 void create_server(server_t *server);
 void init_server_set(server_t *server, int *max_fd);
 void monitor_client(server_t *server, int max_fd);
@@ -98,71 +99,39 @@ void send_error_unknown_team(int fd, const char *team_uuid);
 void send_error_unknown_thread(int fd, const char *thread_uuid);
 void send_error_unknown_user(int fd, const char *user_uuid);
 
-/*
-    Commands:
-    ? /create "team_name" "team_description"
-    ! int server_event_team_created(
-        char const *team_uuid,
-        char const *team_name,
-        char const *user_uuid);
+typedef struct {
+    char *name;
+    void *method;
+} server_logging_t;
 
-    Commands:
-    ? /create "channel_name" "channel_description"
-    ! int server_event_channel_created(
-        char const *team_uuid,
-        char const *channel_uuid,
-        char const *channel_name);
+enum server_logging_e {
+    _server_event_team_created,
+    _server_event_channel_created,
+    _server_event_thread_created,
+    _server_event_reply_created,
+    _server_event_user_subscribed,
+    _server_event_user_unsubscribed,
+    _server_event_user_created,
+    _server_event_user_loaded,
+    _server_event_user_logged_in,
+    _server_event_user_logged_out,
+    _server_event_private_message_sended,
+    _nb_func
+};
 
-    Commands:
-    ? /create "thread_title" "thread_body"
-    ! int server_event_thread_created(
-        char const *channel_uuid,
-        char const *thread_uuid,
-        char const *user_uuid,
-        char const *thread_title,
-        char const *thread_body);
+extern server_logging_t server_logging_func[];
 
-    Commands:
-    ? /create "reply_body"
-    ! int server_event_reply_created(
-        char const *thread_uuid,
-        char const *user_uuid,
-        char const *reply_body);
-
-    // Commands:
-    // ? /subscribe "team_uuid"
-    // ! int server_event_user_subscribed(char const *team_uuid, char const *user_uuid);
-
-    // Commands:
-    // ? /unsubscribe "team_uuid"
-    // ! int server_event_user_unsubscribed(char const *team_uuid, char const *user_uuid);
-
-    // * Must be called when a user didn't existed in save and was created
-    // Commands:
-    // ? /login "user_name"
-    // ! int server_event_user_created(char const *user_uuid, char const *user_name);
-
-    // * Must be called when a user was loaded from the save file
-    // * Should be called at the start of the server once per user loaded
-    // Commands:
-    // ? None, should be used at server start
-    // ! int server_event_user_loaded(char const *user_uuid, char const *user_name);
-
-    // Commands:
-    // ? /login
-    // ! int server_event_user_logged_in(char const *user_uuid);
-
-    // Commands:
-    // ? /logout
-    // ? When a user lost connexion to the server
-    // ! int server_event_user_logged_out(char const *user_uuid);
-
-    // Commands:
-    // ? /send "user_uuid" "message_body"
-    // ! int server_event_private_message_sended(
-    //     char const *sender_uuid,
-    //     char const *receiver_uuid,
-    //     char const *message_body);
-*/
+int SERVER_EVENT_TEAM_CREATED(const char *team_uuid, const char *team_name, const char *user_uuid);
+int SERVER_EVENT_CHANNEL_CREATED(const char *team_uuid, const char *channel_uuid, const char *channel_name);
+int SERVER_EVENT_THREAD_CREATED(const char *channel_uuid, const char *thread_uuid,
+    const char *user_uuid, const char *thread_title, const char *thread_body);
+int SERVER_EVENT_REPLY_CREATED(const char *thread_uuid, const char *user_uuid, const char *reply_body);
+int SERVER_EVENT_USER_SUBSCRIBED(const char *team_uuid, const char *user_uuid);
+int SERVER_EVENT_USER_UNSUBSCRIBED(const char *team_uuid, const char *user_uuid);
+int SERVER_EVENT_USER_CREATED(const char *user_uuid, const char *user_name);
+int SERVER_EVENT_USER_LOADED(const char *user_uuid, const char *user_name);
+int SERVER_EVENT_USER_LOGGED_IN(const char *user_uuid);
+int SERVER_EVENT_USER_LOGGED_OUT(const char *user_uuid);
+int SERVER_EVENT_PRIVATE_MESSAGE_SENDED(const char *sender_uuid, const char *receiver_uuid, const char *message_body);
 
 #endif /* !MYTEAMS_SERVER_H_ */

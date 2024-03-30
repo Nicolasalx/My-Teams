@@ -44,7 +44,7 @@ void create_new_channel(server_t *server, client_t *client, cmd_data_t *cmd_data
         uuid_unparse(channel_uuid, new_channel->uuid);
         append_node(&GET_DATA(client->context.team_ptr, db_team_t)->channel_list, create_node(new_channel));
 
-        server_event_channel_created(client->context.team_uuid, new_channel->uuid, new_channel->name);
+        SERVER_EVENT_CHANNEL_CREATED(client->context.team_uuid, new_channel->uuid, new_channel->name);
         send_new_channel_created(client->fd, server, GET_DATA(client->context.team_ptr, db_team_t), new_channel);
     }
 }

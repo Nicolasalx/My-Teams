@@ -19,7 +19,7 @@ static void send_logout_reply(int fd, const char *user_uuid, const char *user_na
 
 void cmd_logout(server_t *, client_t *client, cmd_data_t *)
 {
-    server_event_user_logged_out(client->uuid);
+    SERVER_EVENT_USER_LOGGED_OUT(client->uuid);
     send_logout_reply(client->fd, client->uuid, client->user_name);
     remove_client(client);
 }

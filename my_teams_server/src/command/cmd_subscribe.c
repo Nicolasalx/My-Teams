@@ -28,7 +28,7 @@ void cmd_subscribe(server_t *server, client_t *client, cmd_data_t *cmd_data)
             memcpy(sub_user->uuid, client->uuid, UUID_LENGTH);
             append_node(&team_to_sub->subscribed_user_list, create_node(&sub_user));
         }
-        server_event_user_subscribed(cmd_data->arg1.team_uuid, client->uuid);
+        SERVER_EVENT_USER_SUBSCRIBED(cmd_data->arg1.team_uuid, client->uuid);
         send_subscribe_reply(client->fd, client->uuid, cmd_data->arg1.team_uuid);
     } else {
         send_error_unknown_team(client->fd, cmd_data->arg1.team_uuid);

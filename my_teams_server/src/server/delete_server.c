@@ -6,6 +6,7 @@
 */
 
 #include "myteams_server.h"
+#include <dlfcn.h>
 
 void delete_server(server_t *server)
 {
@@ -14,4 +15,5 @@ void delete_server(server_t *server)
         remove_client(&server->clients[i]);
     }
     close(server->fd);
+    dlclose(server->handle);
 }

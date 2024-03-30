@@ -10,15 +10,14 @@ SRC				:=	$(shell find src/ -name "*.c") \
 
 CFLAGS		=		-Wall -Wextra \
 					-I../include/ -I../include/lib/ -I../libs/myteams/ \
-					-luuid \
+					-luuid -ldl \
 					$(ADDITIONAL_FLAGS) \
 
 NAME			=	../myteams_server
 
 LIB_PATH		=	../lib/
 
-LIB_NAME		=	../lib/my_lib.a \
-					$(realpath ../libs/myteams/libmyteams.so)
+LIB_NAME		=	../lib/my_lib.a
 
 SRC_TESTS		:=	$(shell find ../tests/ -name "*.c")
 
