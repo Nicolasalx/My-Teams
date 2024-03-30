@@ -97,6 +97,7 @@ static bool load_team(int fd, node_t **team_list)
             return true;
         }
         append_node(team_list, create_node(db_team));
+        GET_DATA((*team_list)->prev, db_team_t)->subscribed_user_list = NULL;
         load_linked_list(fd, &GET_DATA((*team_list)->prev, db_team_t)->subscribed_user_list, sizeof(db_user_t));
         load_channel(fd, &(*team_list)->prev);
     }

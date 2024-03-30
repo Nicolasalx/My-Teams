@@ -18,7 +18,6 @@
     #include <sys/select.h>
     #include <string.h>
     #include <stdlib.h>
-    #include "command_list.h"
     #include "server_database.h"
     #include "reply_list.h"
 

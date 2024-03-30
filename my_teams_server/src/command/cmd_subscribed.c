@@ -80,7 +80,5 @@ void cmd_subscribed(server_t *server, client_t *client, cmd_data_t *cmd_data)
             server,
             db_contain_team(&server->database, cmd_data->arg1.team_uuid),
             cmd_data->arg1.team_uuid, client);
-        // TODO send REPLY_SUBSCRIBED_USER_CMD
-        // TODO send error ERROR_UNKNOWN_TEAM
     }
 }

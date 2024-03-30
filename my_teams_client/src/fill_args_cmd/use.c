@@ -19,7 +19,7 @@ command_type_e init_use(char **array, int nb_arg, cmd_data_t *cmd_data, command_
         cmd_data->arg4.nb_arg = 0;
         return COMMAND_SUCCEED;
     }
-    for (int i = 1; i <= nb_arg; i++) {
+    for (int i = 1; i < nb_arg; ++i) {
         if (strlen(array[i]) != UUID_LENGTH) {
             printf("Bad length of the uuid for argument %d\n", i);
             return COMMAND_FAILED;

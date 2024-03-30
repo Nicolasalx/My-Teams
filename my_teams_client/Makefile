@@ -5,10 +5,9 @@
 ## Makefile
 ##
 
-SRC				:=	$(shell find src/ -name "*.c") \
-					$(shell find ../my_teams_common/ -name "*.c")
+SRC				:=	$(shell find src/ -name "*.c")
 
-CFLAGS		=	-Wall -Wextra \
+CFLAGS			=	-Wall -Wextra -fno-gnu-unique \
 					-I../include/ -I../include/lib -I../libs/myteams/ \
 					$(ADDITIONAL_FLAGS)
 

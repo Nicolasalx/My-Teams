@@ -9,7 +9,6 @@
     #define REPLY_LIST_H_
 
     #include <time.h>
-    #include "command_list.h"
 
 typedef enum {
     REPLY_LOGIN, // client_event_logged_in

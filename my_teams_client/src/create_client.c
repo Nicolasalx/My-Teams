@@ -9,6 +9,7 @@
 
 void create_client(client_t *client)
 {
+    get_client(client);
     client->fd = socket(AF_INET, SOCK_STREAM, 0);
     if (client->fd == -1) {
         exit_client(84, RED("Fail to create the client socket\n"));
@@ -21,5 +22,4 @@ void create_client(client_t *client)
         exit_client(84, RED("Connection to the server failed.\n"));
     }
     client->cmd_buffer = my_calloc(sizeof(char) * (CMD_BUFFER_SIZE + 1));
-    get_client(client);
 }

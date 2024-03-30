@@ -6,7 +6,6 @@
 */
 
 #include "myteams_server.h"
-#include "command_list.h"
 
 void execute_client_input(server_t *server, client_t *client, cmd_data_t *cmd_data)
 {
