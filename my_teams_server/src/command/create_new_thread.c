@@ -41,6 +41,10 @@ void create_new_thread(server_t *server, client_t *client, cmd_data_t *cmd_data)
         send_error_unknown_channel(client->fd, client->context.channel_uuid);
         return;
     }
+    if (!db_contain_team_sub(GET_DATA(client->context.team_ptr, db_team_t), client->uuid)) {
+        send_error_unauthorized(client->fd);
+        return;
+    }
     if (db_contain_thread_name(GET_DATA(client->context.channel_ptr, db_channel_t), cmd_data->arg1.thread_title)) {
         send_error_already_exist(client->fd);
     } else {

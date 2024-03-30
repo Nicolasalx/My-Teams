@@ -50,6 +50,10 @@ void create_new_reply(server_t *server, client_t *client, cmd_data_t *cmd_data)
         send_error_unknown_thread(client->fd, client->context.thread_uuid);
         return;
     }
+    if (!db_contain_team_sub(GET_DATA(client->context.team_ptr, db_team_t), client->uuid)) {
+        send_error_unauthorized(client->fd);
+        return;
+    }
     new_reply = my_calloc(sizeof(db_reply_t));
 
     memcpy(new_reply->body, cmd_data->arg1.comment_body, MAX_BODY_LENGTH);

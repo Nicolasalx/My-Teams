@@ -32,6 +32,7 @@ typedef enum {
     ERROR_UNKNOWN_THREAD, // !client_error_unknown_thread
     ERROR_UNKNOWN_USER, // !client_error_unknown_user
     ERROR_ALREADY_EXIST, // !client_error_already_exist
+    ERROR_UNAUTHORIZED, // !client_error_unauthorized
 
     REPLY_SUBSCRIBE_CMD, // client_print_subscribed
     REPLY_SUBSCRIBED_TEAM_CMD, // client_print_teams

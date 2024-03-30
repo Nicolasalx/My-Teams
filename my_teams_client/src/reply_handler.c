@@ -31,6 +31,7 @@ void (*const reply_handler[])(reply_data_t *) = {
     [ERROR_UNKNOWN_THREAD] = reply_error_unknow_thread,
     [ERROR_UNKNOWN_USER] = reply_unknow_user,
     [ERROR_ALREADY_EXIST] = reply_error_already_exist,
+    [ERROR_UNAUTHORIZED] = reply_error_unauthorized,
 
     [REPLY_SUBSCRIBE_CMD] = reply_subscribe_cmd,
     [REPLY_SUBSCRIBED_TEAM_CMD] = reply_subscribed_team_cmd,

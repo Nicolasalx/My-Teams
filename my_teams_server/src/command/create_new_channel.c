@@ -35,6 +35,10 @@ void create_new_channel(server_t *server, client_t *client, cmd_data_t *cmd_data
         send_error_unknown_team(client->fd, client->context.team_uuid);
         return;
     }
+    if (!db_contain_team_sub(GET_DATA(client->context.team_ptr, db_team_t), client->uuid)) {
+        send_error_unauthorized(client->fd);
+        return;
+    }
     if (db_contain_channel_name(GET_DATA(client->context.team_ptr, db_team_t), cmd_data->arg1.channel_name)) {
         send_error_already_exist(client->fd);
     } else {

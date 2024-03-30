@@ -68,6 +68,7 @@ command_type_e init_info(char **array, int nb_arg, cmd_data_t *cmd_data, command
 
 is_login_e user_is_login(void);
 
+void reply_error_unauthorized(reply_data_t *reply_data);
 void reply_error_already_exist(reply_data_t *reply_data);
 void reply_error_unknow_channel(reply_data_t *reply_data);
 void reply_error_unknow_team(reply_data_t *reply_data);

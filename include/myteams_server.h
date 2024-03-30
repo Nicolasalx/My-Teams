@@ -93,6 +93,7 @@ void create_new_channel(server_t *server, client_t *client, cmd_data_t *cmd_data
 void create_new_thread(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void create_new_reply(server_t *server, client_t *client, cmd_data_t *cmd_data);
 
+void send_error_unauthorized(int fd);
 void send_error_already_exist(int fd);
 void send_error_unknown_channel(int fd, const char *channel_uuid);
 void send_error_unknown_team(int fd, const char *team_uuid);
