@@ -13,6 +13,14 @@ static void send_new_reply_created(client_t *client, server_t *server, db_team_t
 {
     reply_data_t reply_data = {0};
 
+    reply_data.type = REPLY_CREATE_REPLY_CMD;
+    memcpy(reply_data.arg1.thread_uuid, client->context.thread_uuid, UUID_LENGTH);
+    memcpy(reply_data.arg2.user_uuid, client->uuid, UUID_LENGTH);
+    memcpy(&reply_data.arg3.reply_timestamp, &new_reply->timestamp, sizeof(time_t));
+    memcpy(reply_data.arg4.reply_body, new_reply->body, MAX_BODY_LENGTH);
+    send(client->fd, &reply_data, sizeof(reply_data_t), 0);
+
+    memset(&reply_data, 0, sizeof(reply_data));
     reply_data.type = NEW_THREAD_REPLY;
     memcpy(reply_data.arg1.team_uuid, team->uuid, UUID_LENGTH);
     memcpy(reply_data.arg2.thread_uuid, client->context.thread_uuid, UUID_LENGTH);
@@ -23,13 +31,6 @@ static void send_new_reply_created(client_t *client, server_t *server, db_team_t
             send(server->clients[i].fd, &reply_data, sizeof(reply_data_t), 0);
         }
     }
-    memset(&reply_data, 0, sizeof(reply_data));
-    reply_data.type = REPLY_CREATE_REPLY_CMD;
-    memcpy(reply_data.arg1.thread_uuid, client->context.thread_uuid, UUID_LENGTH);
-    memcpy(reply_data.arg2.user_uuid, client->uuid, UUID_LENGTH);
-    memcpy(&reply_data.arg3.reply_timestamp, &new_reply->timestamp, sizeof(time_t));
-    memcpy(reply_data.arg4.reply_body, new_reply->body, MAX_BODY_LENGTH);
-    send(client->fd, &reply_data, sizeof(reply_data_t), 0);
 }
 
 void create_new_reply(server_t *server, client_t *client, cmd_data_t *cmd_data)

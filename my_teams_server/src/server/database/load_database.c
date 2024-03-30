@@ -59,6 +59,7 @@ static bool load_thread(int fd, node_t **thread_list)
             return true;
         }
         append_node(thread_list, create_node(db_thread));
+        GET_DATA((*thread_list)->prev, db_thread_t)->reply_list = NULL;
         load_linked_list(fd, &(*thread_list)->prev, sizeof(db_reply_t));
     }
     return false;
@@ -78,6 +79,7 @@ static bool load_channel(int fd, node_t **channel_list)
             return true;
         }
         append_node(channel_list, create_node(db_channel));
+        GET_DATA((*channel_list)->prev, db_channel_t)->thread_list = NULL;
         load_thread(fd, &(*channel_list)->prev);
     }
     return false;
@@ -99,6 +101,7 @@ static bool load_team(int fd, node_t **team_list)
         append_node(team_list, create_node(db_team));
         GET_DATA((*team_list)->prev, db_team_t)->subscribed_user_list = NULL;
         load_linked_list(fd, &GET_DATA((*team_list)->prev, db_team_t)->subscribed_user_list, sizeof(db_user_t));
+        GET_DATA((*team_list)->prev, db_team_t)->channel_list = NULL;
         load_channel(fd, &(*team_list)->prev);
     }
     return false;

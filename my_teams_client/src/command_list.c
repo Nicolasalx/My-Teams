@@ -57,7 +57,7 @@ const command_list_t command_list[] = {
     }, {
         .type = UNSUBSCRIBE,
         .name = "/unsubscribe",
-        .nb_arg = 0,
+        .nb_arg = 1,
         .cmd_function = init_unsubscribe
     }, {
         .type = USE,

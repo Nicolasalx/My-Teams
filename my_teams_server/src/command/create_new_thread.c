@@ -12,19 +12,20 @@ static void send_new_thread_created(client_t *client, server_t *server, db_team_
 {
     reply_data_t reply_data = {0};
 
-    reply_data.type = NEW_THREAD_CREATED;
     memcpy(reply_data.arg1.thread_uuid, new_thread->uuid, UUID_LENGTH);
     memcpy(reply_data.arg2.user_uuid, client->uuid, UUID_LENGTH);
     memcpy(&reply_data.arg3.thread_timestamp, &new_thread->timestamp, sizeof(time_t));
     memcpy(reply_data.arg4.thread_title, new_thread->name, MAX_NAME_LENGTH);
     memcpy(reply_data.arg5.thread_body, new_thread->body, MAX_BODY_LENGTH);
+    reply_data.type = REPLY_CREATE_THREAD_CMD;
+    send(client->fd, &reply_data, sizeof(reply_data_t), 0);
+
+    reply_data.type = NEW_THREAD_CREATED;
     for (size_t i = 0; i < MAX_CLIENT; ++i) {
         if (server->clients[i].fd > 0 && db_contain_team_sub(team, server->clients[i].uuid)) {
             send(server->clients[i].fd, &reply_data, sizeof(reply_data_t), 0);
         }
     }
-    reply_data.type = REPLY_CREATE_THREAD_CMD;
-    send(client->fd, &reply_data, sizeof(reply_data_t), 0);
 }
 
 void create_new_thread(server_t *server, client_t *client, cmd_data_t *cmd_data)
