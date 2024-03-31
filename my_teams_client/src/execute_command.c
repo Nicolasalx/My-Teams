@@ -18,30 +18,58 @@ static void remove_space_opt(char c, bool is_in_quote, char *result, size_t *ind
     }
 }
 
-static char *remove_space_out_quotes(const char *string)
+static bool is_a_delim(const char *delimiter, char c)
+{
+    for (int i = 0; delimiter[i] != '\0'; ++i) {
+        if (delimiter[i] == c) {
+            return true;
+        }
+    }
+    return false;
+}
+
+static char *remove_space_out_quotes(const char *string, size_t *nb_quotes)
 {
     bool is_in_quote = false;
     size_t index = 0;
     char *result = NULL;
-    size_t nb_quotes = 0;
 
     result = my_calloc(sizeof(char) * (strlen(string)) + 1);
     for (int i = 0; string[i] != '\0'; ++i) {
         if (string[i] == '\"') {
             is_in_quote = !is_in_quote;
-            ++nb_quotes;
+            ++*nb_quotes;
+        } else if (*nb_quotes > 0 && is_in_quote == false && !is_a_delim("\"\n \t", string[i])) {
+            return NULL;
         }
         remove_space_opt(string[i], is_in_quote, result, &index);
     }
-    if (nb_quotes % 2 != 0) {
+    if (*nb_quotes % 2 != 0) {
         return NULL;
     }
     return result;
 }
 
+static command_type_e check_nb_arg(int *nb_word, size_t nb_quotes)
+{
+    if (*nb_word < 1 || *nb_word > 4) {
+        printf("Command not recognized !\n");
+        return COMMAND_FAILED;
+    }
+
+    if (*nb_word == 1 && nb_quotes == 0) {
+        return COMMAND_SUCCEED;
+    } else if (*nb_word > 1 && nb_quotes == (size_t)(*nb_word - 1) * 2) {
+        return COMMAND_SUCCEED;
+    }
+    printf("Command not recognized !\n");
+    return COMMAND_FAILED;
+}
+
 static command_type_e parse_line(int *nb_word, char ***array, char *command)
 {
-    const char *new_str = remove_space_out_quotes(command);
+    size_t nb_quotes = 0;
+    const char *new_str = remove_space_out_quotes(command, &nb_quotes);
     const char *delimiter = "\"\n";
     int *size_word = NULL;
 
@@ -52,11 +80,7 @@ static command_type_e parse_line(int *nb_word, char ***array, char *command)
     *nb_word = count_nb_word(new_str, delimiter);
     size_word = count_size_word(new_str, delimiter, *nb_word);
     *array = my_str_to_word(new_str, delimiter, *nb_word, size_word);
-    if (*nb_word < 1 || *nb_word > 4) {
-        printf("Command not recognized !\n");
-        return COMMAND_FAILED;
-    }
-    return COMMAND_SUCCEED;
+    return check_nb_arg(nb_word, nb_quotes);
 }
 
 static command_type_e check_error_cmd(bool is_a_command, command_type_e command_type)

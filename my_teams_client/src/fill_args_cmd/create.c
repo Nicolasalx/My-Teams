@@ -73,7 +73,8 @@ static command_type_e create_new_reply(char **array, int nb_arg, cmd_data_t *cmd
 command_type_e init_create(char **array, int nb_arg,
     cmd_data_t *cmd_data, command_e)
 {
-    if (user_is_login() == NOT_LOGGED || !(nb_arg >= 1 && nb_arg <= 4)) {
+    if (user_is_login() == NOT_LOGGED || !(nb_arg >= 1 && nb_arg <= 3)) {
+        printf("Invalid number of arguments in the command\n");
         return COMMAND_FAILED;
     }
     cmd_data->type = CREATE;
