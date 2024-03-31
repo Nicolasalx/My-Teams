@@ -23,8 +23,7 @@ static void info_current_team(client_t *client)
 {
     reply_data_t reply_data = {0};
 
-    if (!client->context.team_ptr) {
-        send_error_unknown_team(client->fd, client->context.team_uuid);
+    if (!is_valid_context(client)) {
         return;
     }
     reply_data.type = REPLY_INFO_TEAM_CMD;
@@ -38,12 +37,7 @@ static void info_current_channel(client_t *client)
 {
     reply_data_t reply_data = {0};
 
-    if (!client->context.team_ptr) {
-        send_error_unknown_team(client->fd, client->context.team_uuid);
-        return;
-    }
-    if (!client->context.channel_ptr) {
-        send_error_unknown_channel(client->fd, client->context.channel_uuid);
+    if (!is_valid_context(client)) {
         return;
     }
     reply_data.type = REPLY_INFO_CHANNEL_CMD;
@@ -57,16 +51,7 @@ static void info_current_thread(client_t *client)
 {
     reply_data_t reply_data = {0};
 
-    if (!client->context.team_ptr) {
-        send_error_unknown_team(client->fd, client->context.team_uuid);
-        return;
-    }
-    if (!client->context.channel_ptr) {
-        send_error_unknown_channel(client->fd, client->context.channel_uuid);
-        return;
-    }
-    if (!client->context.thread_ptr) {
-        send_error_unknown_thread(client->fd, client->context.thread_uuid);
+    if (!is_valid_context(client)) {
         return;
     }
     reply_data.type = REPLY_INFO_THREAD_CMD;

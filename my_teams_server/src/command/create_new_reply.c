@@ -38,16 +38,7 @@ void create_new_reply(server_t *server, client_t *client, cmd_data_t *cmd_data)
     db_reply_t *new_reply = NULL;
     uuid_t reply_uuid = {0};
 
-    if (!client->context.team_ptr) {
-        send_error_unknown_team(client->fd, client->context.team_uuid);
-        return;
-    }
-    if (!client->context.channel_ptr) {
-        send_error_unknown_channel(client->fd, client->context.channel_uuid);
-        return;
-    }
-    if (!client->context.thread_ptr) {
-        send_error_unknown_thread(client->fd, client->context.thread_uuid);
+    if (!is_valid_context(client)) {
         return;
     }
     if (!db_contain_team_sub(GET_DATA(client->context.team_ptr, db_team_t), client->uuid)) {

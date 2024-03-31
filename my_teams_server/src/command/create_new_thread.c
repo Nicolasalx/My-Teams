@@ -33,12 +33,7 @@ void create_new_thread(server_t *server, client_t *client, cmd_data_t *cmd_data)
     db_thread_t *new_thread = NULL;
     uuid_t thread_uuid = {0};
 
-    if (!client->context.team_ptr) {
-        send_error_unknown_team(client->fd, client->context.team_uuid);
-        return;
-    }
-    if (!client->context.channel_ptr) {
-        send_error_unknown_channel(client->fd, client->context.channel_uuid);
+    if (!is_valid_context(client)) {
         return;
     }
     if (!db_contain_team_sub(GET_DATA(client->context.team_ptr, db_team_t), client->uuid)) {

@@ -8,6 +8,18 @@
 #include "myteams_client.h"
 #include <dlfcn.h>
 
+static void get_symbol(client_t *client, size_t i)
+{
+    cli_logging_func[i].method = dlsym(client->handle, cli_logging_func[i].name);
+    if (!cli_logging_func[i].method) {
+        printf(RED("%s")"\n", dlerror());
+        if (client->handle) {
+            dlclose(client->handle);
+        }
+        my_exit(84);
+    }
+}
+
 void init_logging_func(client_t *client)
 {
     client->handle = dlopen("./libs/myteams/libmyteams.so", RTLD_LAZY);
@@ -17,13 +29,6 @@ void init_logging_func(client_t *client)
     }
 
     for (size_t i = 0; i < _nb_func_cli; ++i) {
-        cli_logging_func[i].method = dlsym(client->handle, cli_logging_func[i].name);
-        if (!cli_logging_func[i].method) {
-            printf(RED("%s")"\n", dlerror());
-            if (client->handle) {
-                dlclose(client->handle);
-            }
-            my_exit(84);
-        }
+        get_symbol(client, i);
     }
 }

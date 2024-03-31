@@ -73,6 +73,7 @@ void execute_client_input(server_t *server, client_t *client, cmd_data_t *cmd_da
 bool is_user_connected(server_t *server, const char *user_uuid);
 client_t *get_client_by_uuid(server_t *server, const char *uuid);
 void send_to_logged_user(client_t *clients, reply_data_t *reply_data);
+bool is_valid_context(client_t *client);
 
 void cmd_login(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_logout(server_t *server, client_t *client, cmd_data_t *cmd_data);
@@ -92,6 +93,8 @@ void create_new_team(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void create_new_channel(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void create_new_thread(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void create_new_reply(server_t *server, client_t *client, cmd_data_t *cmd_data);
+
+void list_reply(client_t *client);
 
 void send_error_unauthorized(int fd);
 void send_error_already_exist(int fd);
