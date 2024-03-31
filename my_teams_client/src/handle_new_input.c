@@ -25,22 +25,28 @@ static void buffering_input(client_t *client, char *command, ssize_t nb_byte)
     strncat(client->cmd_buffer, start_cmd, nb_byte);
 }
 
+static void handle_ctrl_d(client_t *client, ssize_t nb_byte)
+{
+    cmd_data_t cmd_data = {0};
+
+    if (nb_byte == 0) {
+        if (isLogin == LOGGED_IN) {
+            cmd_data.type = LOGOUT;
+            send(client->fd, &cmd_data, sizeof(cmd_data_t), 0);
+        } else {
+            exit_client(0, NULL);
+        }
+    }
+}
+
 void handle_new_input(client_t *client)
 {
     char command[BUFFER_SIZE + 1] = {0};
     ssize_t nb_byte = 0;
-    cmd_data_t cmd_data = {0};
 
     if (FD_ISSET(STDIN_FILENO, &client->set)) {
         nb_byte = read(STDIN_FILENO, command, BUFFER_SIZE);
-        if (nb_byte == 0) {
-            if (isLogin == LOGGED_IN) {
-                cmd_data.type = LOGOUT;
-                send(client->fd, &cmd_data, sizeof(cmd_data_t), 0);
-            } else {
-                exit_client(0, NULL);
-            }
-        }
+        handle_ctrl_d(client, nb_byte);
         buffering_input(client, command, nb_byte);
     }
 }

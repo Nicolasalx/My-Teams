@@ -31,8 +31,7 @@ void create_new_channel(server_t *server, client_t *client, cmd_data_t *cmd_data
     db_channel_t *new_channel = NULL;
     uuid_t channel_uuid = {0};
 
-    if (!client->context.team_ptr) {
-        send_error_unknown_team(client->fd, client->context.team_uuid);
+    if (!is_valid_context(client)) {
         return;
     }
     if (!db_contain_team_sub(GET_DATA(client->context.team_ptr, db_team_t), client->uuid)) {
