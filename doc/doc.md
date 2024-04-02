@@ -44,10 +44,7 @@ Tout au long du projet nous utilisons des uuid pour identifier les équipes, les
 - ![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/c784c68d-3e27-4631-95f5-fb119f7467de)
 
 
-
-
 ## Architecture
-
 
 
 **Voici le diagramme UML de l'architecture :**
@@ -112,7 +109,6 @@ Gérer la **base de données** qui est composée de la liste des équipes, la li
 La base de données est disposé comme cela:
 
 ![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/03cc2444-25d4-4d82-a169-bfe04859938e)
-
 
 ## Logger
 
