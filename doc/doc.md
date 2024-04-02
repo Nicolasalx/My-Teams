@@ -24,11 +24,11 @@ Voici un tableau excel représentant la taille de chaque variable pour chaque co
 
 ### Pour les différentes commandes :
 
-![Alt text](image-4.png)
+![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/370b2190-376a-41d7-a6be-a61050c8c2f1)
 
 ### Pour les différentes fonctions de log:
 
-![Alt text](image-5.png)
+![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/32b06268-9987-4d96-afcc-3ea562f937d9)
 
 [Lien du excel](https://docs.google.com/spreadsheets/d/1H2t4_oshqHsgGL587w_E4KzidiC7-bOBTvqxcqb8ihA/edit?usp=sharing)
 
@@ -41,7 +41,7 @@ Tout au long du projet nous utilisons des uuid pour identifier les équipes, les
 
 - Dans sa représentation textuelle canonique, les 16 octets d'un UUID sont représentés comme 32 chiffres hexadécimaux en minuscules séparés par 4 tirets sous la forme suivante:
 
-- ![Alt text](image-1.png)
+- ![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/c784c68d-3e27-4631-95f5-fb119f7467de)
 
 
 
@@ -52,7 +52,7 @@ Tout au long du projet nous utilisons des uuid pour identifier les équipes, les
 
 **Voici le diagramme UML de l'architecture :**
 
-![Alt text](image.png)
+![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/b40db3d1-e5c2-4bf2-b08a-b39605dcfe40)
 
 
 [Lien du diagramme UML](https://lucid.app/lucidchart/a8e29117-268b-4242-990c-ea4ac505bb69/edit?viewport_loc=328%2C-140%2C2132%2C1061%2CL.BeP2~polPs&invitationId=inv_ba9770aa-35eb-4e9d-8abd-1a3ca333fedd)
@@ -82,7 +82,7 @@ tous les événements d'une équipe)
 
 **Le client se connecte de cette manière au serveur:**
 
-![Alt text](image-2.png)
+![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/980f7648-9dce-4e26-824c-e96df78740f9)
 
 
 ### Fonctionnement du client
@@ -101,7 +101,7 @@ Lorsque le serveur démarre, il vérifie si le fichier de sauvegarde existe et l
 
 **Le serveur est initialiser de cette manière:**
 
-![Alt text](image-3.png)
+![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/79f46fdd-1519-42ac-8d38-b46185c6eea4)
 
 ### Fonctionnement du serveur
 
@@ -111,7 +111,7 @@ Gérer la **base de données** qui est composée de la liste des équipes, la li
 
 La base de données est disposé comme cela:
 
-![Alt text](image-6.png)
+![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/03cc2444-25d4-4d82-a169-bfe04859938e)
 
 
 ## Logger
