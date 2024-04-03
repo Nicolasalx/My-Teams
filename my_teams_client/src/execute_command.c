@@ -8,11 +8,23 @@
 #include "myteams_client.h"
 #include "command_list.h"
 
-static command_type_e check_nb_arg(int *nb_word)
+static command_type_e check_nb_arg(int *nb_word, const char *command)
 {
+    bool is_in_quotes = false;
+    bool has_found_frst_elem = false;
+
     if (*nb_word < 1 || *nb_word > 4) {
         printf("Command not recognized !\n");
         return COMMAND_FAILED;
+    }
+    for (size_t i = 0; command[i] != '\0'; ++i) {
+        if (command[i] == '\"') {
+            is_in_quotes = !is_in_quotes;
+            has_found_frst_elem = true;
+        } else if (!is_in_quotes && has_found_frst_elem && !is_in_str(command[i], "\" \t\n")) {
+            printf("Command not recognized !\n");
+            return COMMAND_FAILED;
+        }
     }
     return COMMAND_SUCCEED;
 }
@@ -130,7 +142,7 @@ static command_type_e parse_line(int *nb_word, char ***array, char *command)
     }
     board[*nb_word] = NULL;
     *array = board;
-    return check_nb_arg(nb_word);
+    return check_nb_arg(nb_word, command);
 }
 
 static command_type_e check_error_cmd(bool is_a_command, command_type_e command_type)
