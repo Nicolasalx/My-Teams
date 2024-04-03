@@ -1,15 +1,15 @@
 ## RFC Document MyTeams
 
-## Architecture pour envoyer une commande
+## Architecture for sending a command
 
-Une commande simple est composée de cette suite:
+A simple command is composed of this sequence:
 
 ```c++
 cmd_data_t -> 1080 bytes
 
 command_e type -> 4 bytes
 
-byte de padding -> 4;
+padding byte -> 4;
 
 cmd_arg1_u arg1 -> 513 bytes
 
@@ -17,217 +17,217 @@ cmd_arg2_u arg2 -> 513 bytes
 
 cmd_arg3_u arg3 -> 37 bytes
 
-byte de padding -> 1;
+padding byte -> 1;
 
 cmd_arg4_u arg4 -> 8 bytes
 ```
 
 ### HELP
 
-    - 4 bytes ayant pour valeur 0 (représente le numéro de la commande)
-    - 1076 bytes de padding
+    - 4 bytes with value 0 (represents command number)
+    - 1076 bytes padding
 
 ### LOGIN
 
-    - 4 bytes ayant pour valeur 1 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 132 bytes (pour le max name length) qui correspond au nom de l'utilisateur
-    - 1040 bytes de padding
+    - 4 bytes with value 1 (represents the order number)
+    - 4 bytes padding
+    - 132 bytes (for max name length) corresponding to user name
+    - 1040 bytes padding
 
 ### LOGOUT
 
-    - 4 bytes ayant pour valeur 2 (représente le numéro de la commande)
-    - 1076 bytes de padding
+    - 4 bytes with value 2 (represents the command number)
+    - 1076 bytes padding
 
 ### USERS
 
-    - 4 bytes ayant pour valeur 3 (représente le numéro de la commande)
-    - 1076 bytes de padding
+    - 4 bytes with value 3 (represents order number)
+    - 1076 bytes padding
 
 ### USER
 
-    - 4 bytes ayant pour valeur 4 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 1036 bytes de padding
+    - 4 bytes with value 4 (represents order number)
+    - 4 bytes padding
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 1036 bytes padding
 
 #### SEND
 
-    - 4 bytes ayant pour valeur 5 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 512 bytes (pour la taille maximum du body) qui correspond au body du message envoyé
-    - 524 bytes de padding
+    - 4 bytes with value 5 (represents command number)
+    - 4 bytes padding
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 512 bytes (for maximum body size) corresponding to the body of the message sent
+    - 524 bytes padding
 
 ### MESSAGES
 
-    - 4 bytes ayant pour valeur 6 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 1036 bytes de padding
+    - 4 bytes with value 6 (represents the command number)
+    - 4 bytes padding
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 1036 bytes padding
 
 ### SUBSCRIBE
 
-    - 4 bytes ayant pour valeur 7 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 1036 bytes de padding
+    - 4 bytes with value 7 (represents command number)
+    - 4 bytes padding
+    - 36 bytes (for UUID size) corresponding to the team uuid
+    - 1036 bytes padding
 
 ### SUBSCRIBED
 
 **First method**
 
-    - 4 bytes ayant pour valeur 8 (représente le numéro de la commande)
-    - 1072 bytes de padding
-    - 8 bytes qui définit la taille qui stocke le nombre d'arguments
+    - 4 bytes with value 8 (represents the order number)
+    - 1072 bytes padding
+    - 8 bytes defines the size that stores the number of arguments
 
 **Second method**
 
-    - 4 bytes ayant pour valeur 8 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 1028 bytes de padding
-    - 8 bytes qui définit la taille qui stocke le nombre d'arguments
+    - 4 bytes with value 8 (represents the command number)
+    - 4 bytes padding
+    - 36 bytes (for UUID size) corresponding to the team uuid
+    - 1028 bytes padding
+    - 8 bytes which defines the size that stores the number of arguments
 
 
 ### UNSUBSCRIBE
-    - 4 bytes ayant pour valeur 9 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 1036 bytes de padding
+    - 4 bytes with value 9 (represents the command number)
+    - 4 bytes padding
+    - 36 bytes (for the UUID size) corresponding to the team uuid
+    - 1036 bytes padding
 
 ### USE
 
 **Set context to NO_CONTEXT**
 
-    - 4 bytes ayant pour valeur 10 (représente le numéro de la commande)
-    - 1072 bytes de padding
-    - 8 bytes qui définit la taille qui stocke le nombre d'arguments
+    - 4 bytes with value 10 (represents command number)
+    - 1072 bytes of padding
+    - 8 bytes which defines the size that stores the number of arguments
 
 **Set context to IN_TEAM**
 
-    - 4 bytes ayant pour valeur 10 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 1028 bytes de padding
-    - 8 bytes qui définit la taille qui stocke le nombre d'arguments
+    - 4 bytes with value 10 (represents the command number)
+    - 4 bytes padding
+    - 36 bytes (for UUID size) corresponding to the team uuid
+    - 1028 bytes padding
+    - 8 bytes which defines the size that stores the number of arguments
 
 **Set context to IN_CHANNEL**
 
-    - 4 bytes ayant pour valeur 10 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du channel
-    - 992 bytes de padding
-    - 8 bytes qui définit la taille qui stocke le nombre d'arguments
+    - 4 bytes with value 10 (represents the command number)
+    - 4 bytes padding
+    - 36 bytes (for UUID size) corresponding to the team uuid
+    - 36 bytes (for UUID size) corresponding to channel uuid
+    - 992 bytes padding
+    - 8 bytes which defines the size that stores the number of arguments
 
 **Set context to IN_THREAD**
 
-    - 4 bytes ayant pour valeur 10 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du channel
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du thread
-    - 956 bytes de padding
-    - 8 bytes qui définit la taille qui stocke le nombre d'arguments
+    - 4 bytes with value 10 (represents the command number)
+    - 4 bytes padding
+    - 36 bytes (for UUID size) corresponding to the team uuid
+    - 36 bytes (for UUID size) corresponding to channel uuid
+    - 36 bytes (for UUID size) corresponding to thread uuid
+    - 956 bytes padding
+    - 8 bytes which defines the size that stores the number of arguments
 
 ### CREATE
 
 **Context value is NO_CONTEXT**
 
 
-    - 4 bytes ayant pour valeur 11 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 32 bytes (pour la taille maximum du nom) qui correspond au nom de la team
-    - 255 bytes (pour la taille maximum de la description) qui correspond à la description de la team
-    - 785 bytes de padding
+    - 4 bytes with value 11 (represents the order number)
+    - 4 bytes padding
+    - 32 bytes (for the maximum size of the name) corresponding to the team name
+    - 255 bytes (for the maximum size of the description) corresponding to the team description
+    - 785 bytes padding
 
 **Context value is IN_TEAM**
 
-    - 4 bytes ayant pour valeur 11 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 32 bytes (pour la taille maximum du nom) qui correspond au nom du channel
-    - 255 bytes (pour la taille maximum de la description) qui correspond à la description de la team
-    - 785 bytes de padding
+    - 4 bytes with value 11 (represents the order number)
+    - 4 bytes padding
+    - 32 bytes (for maximum name size) corresponding to the channel name
+    - 255 bytes (for maximum description size) corresponding to the team description
+    - 785 bytes padding
 
 **Context value is IN_CHANNEL**
 
-    - 4 bytes ayant pour valeur 11 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 32 bytes (pour la taille maximum du nom) qui correspond au nom du thread
-    - 512 bytes (pour la taille maximum du body) qui correspond au corps du message
-    - 528 bytes de padding
+    - 4 bytes with value 11 (represents the order number)
+    - 4 bytes padding
+    - 32 bytes (for maximum name size) corresponding to the thread name
+    - 512 bytes (for the maximum body size) corresponding to the message body
+    - 528 bytes padding
 
 **Context value is IN_THREAD**
 
-    - 4 bytes ayant pour valeur 11 (représente le numéro de la commande)
-    - 4 bytes de padding
-    - 512 bytes (pour la taille maximum du body) qui correspond au corps du commentaire
-    - 560 bytes de padding
+    - 4 bytes with value 11 (represents the command number)
+    - 4 bytes padding
+    - 512 bytes (for the maximum body size) corresponding to the comment body
+    - 560 bytes padding
 
 ### LIST
 
 **Context value is NO_CONTEXT**
 
-    - 4 bytes ayant pour valeur 12 (représente le numéro de la commande)
-    - 1076 bytes de padding
+    - 4 bytes with value 12 (represents command number)
+    - 1076 bytes of padding
 
-    - 4 bytes ayant pour valeur 0 qui correspond à set le context à la valeur NO_CONTEXT
+    - 4 bytes with value 0 corresponding to set context value to NO_CONTEXT
 
 **Context value is IN_TEAM**
 
-    - 4 bytes ayant pour valeur 12 (représente le numéro de la commande)
-    - 1076 bytes de padding
+    - 4 bytes with value 12 (represents command number)
+    - 1076 bytes of padding
 
-    - 4 bytes ayant pour valeur 1 qui correspond à set le context à la valeur IN_TEAM
+    - 4 bytes with a value of 1, which corresponds to setting the context value to IN_TEAM
 
 **Context value is IN_CHANNEL**
 
-    - 4 bytes ayant pour valeur 12 (représente le numéro de la commande)
-    - 1076 bytes de padding
+    - 4 bytes with value 12 (represents command number)
+    - 1076 bytes of padding
 
-    - 4 bytes ayant pour valeur 2 qui correspond à set le context à la valeur IN_CHANNEL
+    - 4 bytes with value 2, which corresponds to setting the context value to IN_CHANNEL
 
 **Context value is IN_THREAD**
 
-    - 4 bytes ayant pour valeur 12 (représente le numéro de la commande)
-    - 1076 bytes de padding
+    - 4 bytes with value 12 (represents command number)
+    - 1076 bytes of padding
 
-    - 4 bytes ayant pour valeur 3 qui correspond à set le context à la valeur IN_THREAD
+    - 4 bytes with value 3 corresponding to set context value IN_THREAD
 
 ### INFO
 
 **Context value is NO_CONTEXT**
 
-    - 4 bytes ayant pour valeur 12 (représente le numéro de la commande)
-    - 1076 bytes de padding
+    - 4 bytes with value 12 (represents the order number)
+    - 1076 bytes of padding
 
 **Context value is IN_TEAM**
 
-    - 4 bytes ayant pour valeur 12 (représente le numéro de la commande)
-    - 1076 bytes de padding
+    - 4 bytes with value 12 (represents order number)
+    - 1076 bytes of padding
 
 **Context value is IN_CHANNEL**
 
-    - 4 bytes ayant pour valeur 12 (représente le numéro de la commande)
-    - 1076 bytes de padding
+    - 4 bytes with value 12 (represents order number)
+    - 1076 bytes of padding
 
 **Context value is IN_THREAD**
 
-    - 4 bytes ayant pour valeur 12 (représente le numéro de la commande)
-    - 1076 bytes de padding
+    - 4 bytes with value 12 (represents order number)
+    - 1076 bytes of padding
 
 
-## Architecture pour envoyer une réponse
+## Architecture to send a response
 
-Une commande simple est composée de cette suite:
+A simple command is composed of this sequence:
 
 ```c++
 reply_data_t -> 2120 bytes
 
 reply_e -> 4 bytes
 
-7 bytes de padding
+7 bytes padding
 
 reply_arg1_u -> 37 bytes
 
@@ -239,281 +239,281 @@ reply_arg4_u -> 513 bytes
 
 reply_arg5_u -> 513 bytes
 
-6 bytes de padding
+6 bytes padding
 ```
 
 ### reply_login
 
-    - 4 bytes ayant pour valeur 0 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 32 bytes (pour la taille maximum du nom) qui correspond au nom de la team
-    - 2041 bytes de padding
+    - 4 bytes with value 0 (represents command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 32 bytes (for maximum name size) which corresponds to the team name
+    - 2041 bytes padding
 
 ### reply_logged_out
 
-    - 4 bytes ayant pour valeur 1 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 32 bytes (pour la taille maximum du nom) qui correspond au nom de la team
-    - 2041 bytes de padding
+    - 4 bytes with value 1 (represents command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 32 bytes (for maximum name size) corresponding to the team name
+    - 2041 bytes padding
 
 ### private_msg_received
 
-    - 4 bytes ayant pour valeur 2 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 512 bytes (pour la taille maximum du corps) qui correspond au corps du message
-    - 1561 bytes de padding
+    - 4 bytes with value 2 (represents the order number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 512 bytes (for maximum body size) corresponding to the message body
+    - 1561 bytes padding
 
 ### thread_reply
 
-    - 4 bytes ayant pour valeur 3 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du thread
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 512 bytes (pour la taille maximum du corps) qui correspond au corps de la réponse
-    - 1525 bytes de padding
+    - 4 bytes with value 3 (represents the command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the team uuid
+    - 36 bytes (for UUID size) corresponding to thread uuid
+    - 36 bytes (for UUID size) corresponding to user uuid
+    - 512 bytes (for maximum body size) corresponding to the response body
+    - 1525 bytes padding
 
 ### new_team_created
 
-    - 4 bytes ayant pour valeur 4 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 32 bytes (pour la taille maximum du nom) qui correspond au nom de la team
-    - 255 bytes (pour la taille maximum du body) qui correspond à la description de la team
-    - 1786 bytes de padding
+    - 4 bytes with value 4 (represents the order number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the team uuid
+    - 32 bytes (for maximum name size) corresponding to the team name
+    - 255 bytes (for the maximum body size) corresponding to the team description
+    - 1786 bytes padding
 
 ### new_channel_created
 
-    - 4 bytes ayant pour valeur 5 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du channel
-    - 32 bytes (pour la taille maximum du nom) qui correspond au nom du channel
-    - 255 bytes (pour la taille maximum du body) qui correspond à la description du channel
-    - 1786 bytes de padding
+    - 4 bytes with value 5 (represents the order number)
+    - 7 bytes of padding
+    - 36 bytes (for UUID size) corresponding to the channel uuid
+    - 32 bytes (for maximum name size) which corresponds to the channel name
+    - 255 bytes (for maximum body size) which corresponds to the channel description
+    - 1786 bytes padding
 
 ### new_thread_created
 
-    - 4 bytes ayant pour valeur 6 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du thread
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 8 bytes (pour la taille du temps)
-    - 32 bytes pour la taille du thread_title
-    - 512 bytes pour la taille du thread_body
-    - 1485 bytes de padding
+    - 4 bytes with value 6 (represents the command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the thread uuid
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 8 bytes (for time size)
+    - 32 bytes for thread_title size
+    - 512 bytes for thread_body size
+    - 1485 bytes padding
 
 ### reply_users
 
-    - 4 bytes ayant pour valeur 7 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 32 bytes pour la taille maximum du nom
-    - 8 bytes pour le status de l'utilisateur
-    - 2033 bytes de padding
+    - 4 bytes with value 7 (represents the order number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 32 bytes for maximum name size
+    - 8 bytes for user status
+    - 2033 bytes padding
 
 ### reply_user
 
-    - 4 bytes ayant pour valeur 8 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 32 bytes pour la taille maximum du nom
-    - 8 bytes pour le status de l'utilisateur
-    - 2033 bytes de padding
+    - 4 bytes with value 8 (represents the command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 32 bytes for maximum name size
+    - 8 bytes for user status
+    - 2033 bytes padding
 
 ### reply_messages
 
-    - 4 bytes ayant pour valeur 9 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du sender
-    - 8 bytes pour la taille du message timestamp
-    - 512 bytes pour la taille maximum du corps
-    - 1553 bytes de padding
+    - 4 bytes with value 9 (represents command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the sender uuid
+    - 8 bytes for message size timestamp
+    - 512 bytes for maximum body size
+    - 1553 bytes padding
 
 ### reply_list_team
 
-    - 4 bytes ayant pour valeur 10 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 32 bytes (pour la taille maximum du nom de la team)
-    - 255 bytes pour la taille maximum de la description de la team
-    - 1786 bytes de padding
+    - 4 bytes with a value of 10 (represents the order number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the team uuid
+    - 32 bytes (for maximum team name size)
+    - 255 bytes for the maximum size of the team description
+    - 1786 bytes padding
 
 ### reply_list_channel
 
-    - 4 bytes ayant pour valeur 11 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du channel
-    - 32 bytes (pour la taille maximum du nom du channel)
-    - 255 bytes pour la taille maximum de la description du channel
-    - 1786 bytes de padding
+    - 4 bytes with value 11 (represents the order number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the channel uuid
+    - 32 bytes (for maximum channel name size)
+    - 255 bytes for maximum channel description size
+    - 1786 bytes padding
 
 ### reply_list_thread
 
-    - 4 bytes ayant pour valeur 12 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du thread
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 8 bytes pour la taille du thread_timestamp
-    - 32 bytes pour la taille du thread title
-    - 512 bytes pour la taille du thread body
-    - 1485 bytes de padding
+    - 4 bytes with value 12 (represents command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the thread uuid
+    - 36 bytes (for UUID size) corresponding to user uuid
+    - 8 bytes for thread_timestamp size
+    - 32 bytes for thread title size
+    - 512 bytes for thread body size
+    - 1485 bytes padding
 
 ### reply_list_reply
 
-    - 4 bytes ayant pour valeur 13 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du thread
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 8 bytes pour la taille du reply_timestamp
-    - 512 bytes pour la taille du reply body
-    - 1517 bytes de padding
+    - 4 bytes with value 13 (represents the order number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the thread uuid
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 8 bytes for reply_timestamp size
+    - 512 bytes for reply body size
+    - 1517 bytes padding
 
 ### error_unknown_team
 
-    - 4 bytes ayant pour valeur 14 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 2073 bytes de padding
+    - 4 bytes with value 14 (represents command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the team uuid
+    - 2073 bytes padding
 
 ### error_unknown_channel
 
-    - 4 bytes ayant pour valeur 15 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du channel
-    - 2073 bytes de padding
+    - 4 bytes with value 15 (represents the command number)
+    - 7 bytes of padding
+    - 36 bytes (for the UUID size) corresponding to the channel uuid
+    - 2073 bytes padding
 
 ### error_unknown_thread
 
-    - 4 bytes ayant pour valeur 16 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du thread
-    - 2073 bytes de padding
+    - 4 bytes with value 16 (represents the command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the thread uuid
+    - 2073 bytes padding
 
 ### error_unknown_user
 
-    - 4 bytes ayant pour valeur 17 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 2073 bytes de padding
+    - 4 bytes with value 17 (represents the command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 2073 bytes padding
 
 ### error_already_exist
 
-    - 4 bytes ayant pour valeur 18 (représente le numéro de la commande)
-    - 2116 bytes de padding
+    - 4 bytes with value 18 (represents the command number)
+    - 2116 bytes of padding
 
 ### reply_subscribe_cmd
 
-    - 4 bytes ayant pour valeur 19 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 2037 bytes de padding
+    - 4 bytes with value 19 (represents order number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 36 bytes (for UUID size) corresponding to team uuid
+    - 2037 bytes padding
 
 ### reply_subscribed_team_cmd
 
-    - 4 bytes ayant pour valeur 20 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 32 bytes pour le nom de la team
-    - 255 bytes pour la description de la team
-    - 1786 bytes de padding
+    - 4 bytes with value 20 (represents the order number)
+    - 7 bytes padding
+    - 36 bytes (for the UUID size) corresponding to the team uuid
+    - 32 bytes for team name
+    - 255 bytes for team description
+    - 1786 bytes padding
 
 ### reply_subscribed_user_cmd
 
-    - 4 bytes ayant pour valeur 21 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 32 bytes pour le nom de l'utilisateur
-    - 8 bytes pour la taille du status de l'utilisateur
-    - 2037 bytes de padding
+    - 4 bytes with value 21 (represents the order number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 32 bytes for user name
+    - 8 bytes for user status size
+    - 2037 bytes padding
 
 ### reply_unsubscribe_cmd
 
-    - 4 bytes ayant pour valeur 22 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 2037 bytes de padding
+    - 4 bytes with value 22 (represents command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 36 bytes (for UUID size) corresponding to team uuid
+    - 2037 bytes padding
 
 ### reply_info_user_cmd
 
-    - 4 bytes ayant pour valeur 23 (représente le numéro de la commande)
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 32 bytes pour le nom de l'utilisateur
-    - 8 bytes pour le status de l'utilisateur
+    - 4 bytes with value 23 (represents the command number)
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 32 bytes for user name
+    - 8 bytes for user status
 
 ### reply_info_team_cmd
 
-    - 4 bytes ayant pour valeur 24 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 32 bytes pour le nom de la team
-    - 255 bytes pour la description de la team
-    - 1786 bytes de padding
+    - 4 bytes with value 24 (represents command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the team uuid
+    - 32 bytes for team name
+    - 255 bytes for team description
+    - 1786 bytes padding
 
 ### reply_info_channel_cmd
 
-    - 4 bytes ayant pour valeur 25 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du channel
-    - 32 bytes pour le nom du channel
-    - 255 bytes pour la description du channel
-    - 1786 bytes de padding
+    - 4 bytes with value 25 (represents command number)
+    - 7 bytes padding
+    - 36 bytes (for the UUID size) corresponding to the channel uuid
+    - 32 bytes for channel name
+    - 255 bytes for channel description
+    - 1786 bytes padding
 
 ### reply_info_thread_cmd
 
-    - 4 bytes ayant pour valeur 26 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du thread
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 8 bytes pour la taille thread_timestamp
-    - 32 bytes pour la taille du thread_title
-    - 512 bytes pour la taille du thread_body
-    - 1485 bytes de padding
+    - 4 bytes with value 26 (represents the command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the thread uuid
+    - 36 bytes (for UUID size) corresponding to user uuid
+    - 8 bytes for thread_timestamp size
+    - 32 bytes for thread_title size
+    - 512 bytes for thread_body size
+    - 1485 bytes padding
 
 ### reply_create_team_cmd
 
-    - 4 bytes ayant pour valeur 27 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de la team
-    - 32 bytes pour le nom de la team
-    - 255 bytes pour la description de la team
-    - 1786 bytes de padding
+    - 4 bytes with value 27 (represents command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the team uuid
+    - 32 bytes for team name
+    - 255 bytes for team description
+    - 1786 bytes padding
 
 ### reply_create_channel_cmd
 
-    - 4 bytes ayant pour valeur 28 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du channel
-    - 32 bytes pour le nom du channel
-    - 255 bytes pour la description du channel
-    - 1786 bytes de padding
+    - 4 bytes with value 28 (represents the order number)
+    - 7 bytes padding
+    - 36 bytes (for the UUID size) corresponding to the channel uuid
+    - 32 bytes for channel name
+    - 255 bytes for channel description
+    - 1786 bytes padding
 
 ### reply_create_thread_cmd
 
-    - 4 bytes ayant pour valeur 29 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du thread
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 8 bytes pour la taille thread_timestamp
-    - 32 bytes pour la taille du thread_title
-    - 512 bytes pour la taille du thread_body
-    - 1485 bytes de padding
+    - 4 bytes with value 29 (represents the order number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the thread uuid
+    - 36 bytes (for UUID size) corresponding to user uuid
+    - 8 bytes for thread_timestamp size
+    - 32 bytes for thread_title size
+    - 512 bytes for thread_body size
+    - 1485 bytes padding
 
 ### reply_create_reply_cmd
 
-    - 4 bytes ayant pour valeur 30 (représente le numéro de la commande)
-    - 7 bytes de padding
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid du thread
-    - 36 bytes (pour la taille de l'UUID) qui correspond à l'uuid de l'utilisateur
-    - 8 bytes pour la taille du reply_timestamp
-    - 512 bytes pour la taille du reply_body
-    - 1517 bytes de padding
+    - 4 bytes with value 30 (represents command number)
+    - 7 bytes padding
+    - 36 bytes (for UUID size) corresponding to the thread uuid
+    - 36 bytes (for UUID size) corresponding to the user's uuid
+    - 8 bytes for reply_timestamp size
+    - 512 bytes for reply_body size
+    - 1517 bytes padding
 
 ### error_unauthorised
 
-    - 4 bytes ayant pour valeur 31 (représente le numéro de la commande)
-    - 2116 bytes de padding
+    - 4 bytes with value 31 (represents command number)
+    - 2116 bytes padding
