@@ -1,143 +1,141 @@
-## Documentation MyTeams
+## MyTeams documentation
 
-## Fonctionnalités
+## Features
 
-Grace à notre myTeams il est possible de:
+With myTeams you can:
 
-- Créer / Rejoindre / Quitter une équipe
-- Créer un nouvel utilisateur
-- Créer un channel dans une équipe
-- Créer un thread dans une équipe
-- Créer un commentaire dans un thread
-- Sauvegarder et récupérer les informations des utilisateurs, des équipes, des channels, des threads ainsi que des commentaires associées meme si on ferme notre programme et on le réouvre
-- Discussions privées entre deux utilisateurs
-- Sauvegarder et récupérer les informations des discussions privées
+- Create / Join / Leave a team
+- Create a new user
+- Create a channel in a team
+- Create a thread in a team
+- Create a comment in a thread
+- Save and retrieve information on users, teams, channels, threads and associated comments even if you close and reopen your program
+- Private discussions between two users
+- Save and retrieve information from private discussions
 
-## Informations générales
+## General information
 
-Toutes les variables des commandes sont envoyées entre guillemets.
-Si un guillement n'est pas fermée alors ceci est considéré comme une erreur.
+All command variables are enclosed in quotation marks.
+If a quotation mark is not closed, this is considered an error.
 
-Tous les noms, les descriptions et les corps de chaque messages ont une taille prédéfinies.
+All message names, descriptions and bodies have a predefined size.
 
-Voici un tableau excel représentant la taille de chaque variable pour chaque commande:
+Here's an excel table showing the size of each variable for each command:
 
-### Pour les différentes commandes :
+### For the various commands :
 
 ![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/370b2190-376a-41d7-a6be-a61050c8c2f1)
 
-### Pour les différentes fonctions de log:
+### For the various log functions:
 
 ![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/32b06268-9987-4d96-afcc-3ea562f937d9)
 
-[Lien du excel](https://docs.google.com/spreadsheets/d/1H2t4_oshqHsgGL587w_E4KzidiC7-bOBTvqxcqb8ihA/edit?usp=sharing)
+[Link of the excel](https://docs.google.com/spreadsheets/d/1H2t4_oshqHsgGL587w_E4KzidiC7-bOBTvqxcqb8ihA/edit?usp=sharing)
 
+### Security:
 
-### Sécurité:
+Throughout the project, we use uuids to identify teams, users and other elements of the architecture.
 
-Tout au long du projet nous utilisons des uuid pour identifier les équipes, les utilisateurs et tout autre éléments de l'architecture.
+- UUID stands for "Universally Unique IDentifier" and designates a globally unique, randomly generated identifier standard.
 
-- UUID signifie "Universally Unique IDentifier" et désigne un standard d'identifiant généré aléatoirement et globalement unique.
-
-- Dans sa représentation textuelle canonique, les 16 octets d'un UUID sont représentés comme 32 chiffres hexadécimaux en minuscules séparés par 4 tirets sous la forme suivante:
+- In its canonical textual representation, the 16 bytes of a UUID are represented as 32 lower-case hexadecimal digits separated by 4 dashes in the following form:
 
 - ![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/c784c68d-3e27-4631-95f5-fb119f7467de)
 
 
 ## Architecture
 
-
-**Voici le diagramme UML de l'architecture :**
+**Here's the UML architecture diagram:**
 
 ![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/b40db3d1-e5c2-4bf2-b08a-b39605dcfe40)
 
 
-[Lien du diagramme UML](https://lucid.app/lucidchart/a8e29117-268b-4242-990c-ea4ac505bb69/edit?viewport_loc=328%2C-140%2C2132%2C1061%2CL.BeP2~polPs&invitationId=inv_ba9770aa-35eb-4e9d-8abd-1a3ca333fedd)
+[Link of the UML Diagram](https://lucid.app/lucidchart/a8e29117-268b-4242-990c-ea4ac505bb69/edit?viewport_loc=328%2C-140%2C2132%2C1061%2CL.BeP2~polPs&invitationId=inv_ba9770aa-35eb-4e9d-8abd-1a3ca333fedd)
 
 
 ## CLI client
 
-Le client gère les commandes suivantes depuis la standard input:
+The client handles the following commands from standard input:
 
-- /help : affiche des informations pour aider l'utilisateur
-- /login ["nom_utilisateur"] : définit le nom d'utilisateur utilisé par le client
-- /logout : déconnecte le client du serveur
-- /users : obtient la liste de tous les utilisateurs qui existent sur le domaine
-- /user ["user_uuid"] : obtenir des détails sur l'utilisateur demandé
-- /send ["user_uuid"] ["message_body"] : envoyer un message à un utilisateur spécifique
-- /messages ["user_uuid"] : liste tous les messages échangés avec l'utilisateur spécifié
-- /subscribe ["team_uuid"] : s'abonner aux événements d'une équipe et de ses sous-répertoires (permet de recevoir tous les événements d'une équipe)
-tous les événements d'une équipe)
-- /subscribed ?["team_uuid"] : liste de toutes les équipes abonnées ou liste de tous les utilisateurs abonnés à une équipe
-- /unsubscribe ["team_uuid"] : se désinscrire d'une équipe
-- /use ?["team_uuid"] ?["channel_uuid"] ?["thread_uuid"] : définit le contexte de la commande à une équipe/un canal/une discussion.
-- /create : en fonction du contexte, crée la sous-ressource (voir ci-dessous)
-- /list : en fonction du contexte, liste toutes les sous-ressources (voir ci-dessous)
-- /info : en fonction du contexte, affiche les détails de la ressource courante (voir ci-dessous)
+- /help : displays information to help the user
+- /login ["username"] : defines the username used by the client
+- /logout : disconnects the client from the server
+- /users : gets a list of all users on the domain
+- /user ["user_uuid"] : obtain details of the requested user
+- /send ["user_uuid"] ["message_body"] : send a message to a specific user
+- /messages ["user_uuid"]: list all messages exchanged with the specified user
+- /subscribe ["team_uuid"]: subscribe to events from a team and its subdirectories (allows you to receive all team events)
+all team events)
+- /subscribed ["team_uuid"]: list of all teams subscribed or list of all users subscribed to a team
+- /unsubscribe ["team_uuid"]: unsubscribe from a team
+- /use ?["team_uuid"] ?["channel_uuid"] ?["thread_uuid"]: defines the context of the command to a team/channel/discussion.
+- /create : depending on the context, creates the sub-resource (see below)
+- /list : depending on the context, lists all sub-resources (see below).
+- /info : depending on the context, displays details of the current resource (see below).
 
 
 
-**Le client se connecte de cette manière au serveur:**
+**This is how the client connects to the server:**
 
 ![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/980f7648-9dce-4e26-824c-e96df78740f9)
 
 
-### Fonctionnement du client
+### Client operation
 
-Le client se connecte au serveur grace à une IP et à un port.
+The client connects to the server via an IP and a port.
 
-L'utilisateur doit d'abord ce login.
+The user must first log in.
 
-Une fois cela fait, il peut ensuite envoyer des commandes.
+Once this is done, the user can send commands.
 
-## Serveur
+## Server
 
-Le serveur est capable de gérer plusieurs clients en même temps en utilisant la fonction select pour la gestion des commandes.
-Lorsque le serveur est arrêté, il sauvegarde ses informations internes dans le dossier en cours.
-Lorsque le serveur démarre, il vérifie si le fichier de sauvegarde existe et le charge si c'est le cas.
+The server is capable of managing several clients at the same time, using the select function to manage commands.
+When the server is stopped, it saves its internal information in the current folder.
+When the server starts, it checks whether the backup file exists and loads it if so.
 
-**Le serveur est initialiser de cette manière:**
+**The server is initialized as follows:**
 
 ![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/79f46fdd-1519-42ac-8d38-b46185c6eea4)
 
-### Fonctionnement du serveur
+### Server operation
 
-Le serveur recoit les commandes du client, il s'occupe d'exécuter les actions nécessaires (si une team est créer, un channel est créer, etc...).
+The server receives commands from the client, and takes care of executing the necessary actions (if a team is created, a channel is created, etc.).
 
-Gérer la **base de données** qui est composée de la liste des équipes, la liste des utilisateurs ainsi que de la list des messages privés.
+Manage the **database**, which is made up of the team list, the user list and the private message list.
 
-La base de données est disposé comme cela:
+The database is laid out like this:
 
 ![image](https://github.com/EpitechPromo2027/B-NWP-400-PAR-4-1-myteams-thibaud.cathala/assets/114945623/03cc2444-25d4-4d82-a169-bfe04859938e)
 
 ## Logger
 
-Les évènements ainsi que les data sont print grace à la lib de log "libmyteams.so".
-Il y a de nombreuses fonctions à appeler pour le serveur ainsi que pour le client.
+Events and data are printed using the "libmyteams.so" log lib.
+There are many functions to call for both the server and the client.
 
-### 1. Pour la partie logger du client :
+### 1. For the client logger :
 
-Les fonctions dont le nom contient **"event"** sont appelées lorsque vous recevez quelque chose du serveur, lorsque ce n'est pas vous qui avez initié l'action.
-Les autres fonctions sont appelées en réponse à l'une de vos actions.
+Functions whose name contains **"event "** are called when you receive something from the server, when it's not you who initiated the action.
+Other functions are called in response to one of your actions.
 
-J'ai reçu un message privé (je n'ai rien fait pour cela) donc la fonction à appeler est celle dont le nom contient "event".
+I received a private message (I didn't do anything about it), so the function to call is the one whose name contains "event".
 
-J'ai demandé au serveur de rejoindre une équipe (j'ai initié cette action). La fonction à appeler est une fonction qui n'a pas event dans son nom.
+I asked the server to join a team (I initiated this action). The function to call is one that doesn't have event in its name.
 
-**Exemple 1:**
-Un utilisateur se connecte au serveur grace à la commande login, j'appelle la fonction **"client_event_logged_in"** avec:
+**Example 1:**
+A user logs on to the server with the login command. I call the function **"client_event_logged_in "** with:
 
-- user_uuid L'identifiant de l'utilisateur qui s'est connecté
-- user_name Le nom de l'utilisateur qui s'est connecté
+- user_uuid The identifier of the user who logged in
+- user_name The name of the user who logged in
 
 ```c++
 int client_event_logged_in(char const *user_uuid, const char *user_name);
 ```
 
-**Exemple 2:**
-Un utilisateur connecté recoit un message privé grace à la commande send, j'appelle la fonction **"client_event_private_message_received"** avec:
-- user_uuid L'identifiant de l'utilisateur qui a envoyé le message privé
-- message_body Le corps du message privé
+**Example 2:**
+A logged-in user receives a private message with the send command, I call the **"client_event_private_message_received "** function with:
+- user_uuid The identifier of the user who sent the private message
+- message_body The body of the private message
 
 ```c++
 int client_event_private_message_received(
@@ -145,16 +143,16 @@ int client_event_private_message_received(
     char const *message_body);
 ```
 
-### 2. Pour la partie logger du serveur :
+### 2. For the server logger :
 
-Comme le serveur n'initialise jamais d'action, toutes les fonctions sont appelées événements.
+Since the server never initializes an action, all functions are called events.
 
-**Exemple 1:**
+**Example 1:**
 
-Le serveur à créer une nouvelle équipe donc j'appelle la fonction **"server_event_team_created"** avec:
-- team_uuid L'identifiant de l'équipe qui a été créée
-- team_name Le nom de l'équipe qui a été créée
-- user_uuid L'identifiant de l'utilisateur qui a créé la nouvelle équipe
+The server has created a new team, so I call the function **"server_event_team_created "** with:
+- team_uuid The identifier of the team that has been created
+- team_name The name of the team that has been created
+- user_uuid The identifier of the user who created the new team
 
 ```c++
 int server_event_team_created(
@@ -163,13 +161,13 @@ int server_event_team_created(
     char const *user_uuid);
 ```
 
-**Exemple 2:**
+**Example 2:**
 
-Le server à créer un nouveau channel donc j'appelle la fonction **"server_event_channel_created"** avec:
+The server has created a new channel, so I call the function **"server_event_channel_created "** with:
 
-- team_uuid L'identifiant de l'équipe dans laquelle se trouve ce canal
-- channel_uuid L'identifiant du canal créé
-- channel_name Le nom du nouveau canal
+- team_uuid The id of the team in which this channel is located
+- channel_uuid The id of the created channel
+- channel_name The name of the new channel
 
 ```c++
 int server_event_channel_created(
