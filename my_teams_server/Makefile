@@ -12,6 +12,10 @@ CFLAGS			=	-Wall -Wextra \
 					-luuid -ldl \
 					$(ADDITIONAL_FLAGS) \
 
+LDLIBS			=	-lmyteams
+
+LDFLAGS			=	-L../libs/myteams/
+
 NAME			=	../myteams_server
 
 LIB_PATH		=	../lib/
@@ -33,7 +37,8 @@ OBJ				=	$(SRC:.c=.o)
 
 $(NAME): $(OBJ)
 	@cd $(LIB_PATH) && $(MAKE) ADDITIONAL_FLAGS="$(ADDITIONAL_FLAGS)"
-	@if gcc -o $(NAME) $(OBJ) $(LIB_NAME) $(CFLAGS); then \
+	@export LD_LIBRARY_PATH=$(realpath ../libs/myteams/):$LD_LIBRARY_PATH
+	@if gcc -o $(NAME) $(OBJ) $(LIB_NAME) $(CFLAGS) $(LDFLAGS) $(LDLIBS); then \
 		printf "[\e[92mCOMPILATION OK\e[0m] "; \
 		printf "gcc -o $(NAME) $(OBJ) $(LIB_NAME) $(CFLAGS)\n"; \
 	else \
