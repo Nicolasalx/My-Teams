@@ -29,6 +29,5 @@ myteams.save
 # ? compilation database
 compile_commands.json
 
-EPITECH-MyFTP-Protocol-(RFC959-Extract).txt
 coding-style-reports.log
-myftp
+cli_out
