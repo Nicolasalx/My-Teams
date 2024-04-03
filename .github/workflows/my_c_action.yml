@@ -37,6 +37,7 @@ jobs:
 
     - name: check lauch server
       run: |
+          export LD_LIBRARY_PATH=$(realpath ./libs/myteams/):$LD_LIBRARY_PATH
           ./myteams_server 7777 &
           server_pid=$!
           sleep 3
@@ -46,8 +47,10 @@ jobs:
       run: |
           {
             set +e
+            export LD_LIBRARY_PATH=$(realpath ./libs/myteams/):$LD_LIBRARY_PATH
             ./myteams_server 7777 &
             server_pid=$!
+            export LD_LIBRARY_PATH=$(realpath ./libs/myteams/):$LD_LIBRARY_PATH
             ./myteams_cli 127.0.0.1 7777 &
             cli_pid=$!
             sleep 3
