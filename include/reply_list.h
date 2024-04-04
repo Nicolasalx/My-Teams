@@ -49,6 +49,8 @@ typedef enum {
     REPLY_CREATE_THREAD_CMD, // client_print_thread_created
     REPLY_CREATE_REPLY_CMD, // client_print_reply_created
 
+    REPLY_STRING,
+
     NUMBER_REPLY
 } reply_e;
 

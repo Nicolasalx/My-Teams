@@ -30,6 +30,7 @@ typedef enum {
     CREATE,
     LIST,
     INFO,
+    TREE,
     NUMBER_CMD // Used to determine the number of command
 } command_e;
 

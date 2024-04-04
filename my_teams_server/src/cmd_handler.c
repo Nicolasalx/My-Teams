@@ -21,5 +21,6 @@ void (*const cmd_handler[])(server_t *, client_t *, cmd_data_t *) = {
     [USE] = cmd_use,
     [CREATE] = cmd_create,
     [LIST] = cmd_list,
-    [INFO] = cmd_info
+    [INFO] = cmd_info,
+    [TREE] = cmd_tree
 };

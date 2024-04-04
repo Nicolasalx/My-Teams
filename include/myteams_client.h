@@ -66,6 +66,8 @@ command_type_e init_create(char **array, int nb_arg, cmd_data_t *cmd_data, comma
 command_type_e init_list(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
 command_type_e init_info(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
 
+command_type_e init_tree(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+
 is_login_e user_is_login(void);
 
 void reply_error_unauthorized(reply_data_t *reply_data);
@@ -100,6 +102,7 @@ void reply_create_team_cmd(reply_data_t *reply_data);
 void reply_create_channel_cmd(reply_data_t *reply_data);
 void reply_create_thread_cmd(reply_data_t *reply_data);
 void reply_create_reply_cmd(reply_data_t *reply_data);
+void reply_string(reply_data_t *reply_data);
 
 void lauch_client(client_t *client);
 void delete_client(client_t *client);

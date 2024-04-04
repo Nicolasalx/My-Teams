@@ -79,7 +79,12 @@ const command_list_t command_list[] = {
         .name = "/info",
         .nb_arg = 0,
         .cmd_function = init_info
-    },
+    }, {
+        .type = TREE,
+        .name = "/tree",
+        .nb_arg = 0,
+        .cmd_function = init_tree
+    }
 };
 
 context_e context;

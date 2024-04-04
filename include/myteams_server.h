@@ -88,6 +88,7 @@ void cmd_create(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_subscribe(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_subscribed(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_unsubscribe(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_tree(server_t *server, client_t *client, cmd_data_t *cmd_data);
 
 void create_new_team(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void create_new_channel(server_t *server, client_t *client, cmd_data_t *cmd_data);
