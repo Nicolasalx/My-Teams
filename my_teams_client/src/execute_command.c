@@ -8,12 +8,30 @@
 #include "myteams_client.h"
 #include "command_list.h"
 
+static command_type_e check_nb_arg_with_one(const char *command)
+{
+    bool has_found_space = false;
+
+    for (size_t i = 0; command[i] != '\0'; ++i) {
+        if (command[i] == ' ') {
+            has_found_space = true;
+        } else if (has_found_space == true) {
+            return COMMAND_FAILED;
+        }
+    }
+    return COMMAND_SUCCEED;
+}
+
 static command_type_e check_nb_arg(int *nb_word, const char *command)
 {
     bool is_in_quotes = false;
     bool has_found_frst_elem = false;
 
     if (*nb_word < 1 || *nb_word > 4) {
+        printf("Command not recognized !\n");
+        return COMMAND_FAILED;
+    }
+    if (*nb_word == 1 && check_nb_arg_with_one(command) == COMMAND_FAILED) {
         printf("Command not recognized !\n");
         return COMMAND_FAILED;
     }
