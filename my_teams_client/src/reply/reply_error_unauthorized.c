@@ -9,5 +9,5 @@
 
 void reply_error_unauthorized(reply_data_t *)
 {
-    CLIENT_ERROR_UNAUTHORIZED();
+    client_error_unauthorized();
 }

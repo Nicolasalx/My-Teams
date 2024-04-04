@@ -9,7 +9,7 @@
 
 void reply_new_thread_created(reply_data_t *reply_data)
 {
-    CLIENT_EVENT_THREAD_CREATED(
+    client_event_thread_created(
         reply_data->arg1.thread_uuid,
         reply_data->arg2.user_uuid,
         reply_data->arg3.thread_timestamp,

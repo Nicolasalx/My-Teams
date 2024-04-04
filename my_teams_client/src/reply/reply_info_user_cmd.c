@@ -9,7 +9,7 @@
 
 void reply_info_user_cmd(reply_data_t *reply_data)
 {
-    CLIENT_PRINT_USER(
+    client_print_user(
         reply_data->arg1.user_uuid,
         reply_data->arg2.user_name,
         reply_data->arg3.user_status

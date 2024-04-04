@@ -16,7 +16,4 @@ void delete_client(client_t *client)
     if (client->fd > 0) {
         close(client->fd);
     }
-    if (client->handle) {
-        dlclose(client->handle);
-    }
 }

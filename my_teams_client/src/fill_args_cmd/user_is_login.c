@@ -10,7 +10,7 @@
 is_login_e user_is_login(void)
 {
     if (isLogin == NOT_LOGGED) {
-        CLIENT_ERROR_UNAUTHORIZED();
+        client_error_unauthorized();
     }
     return isLogin;
 }

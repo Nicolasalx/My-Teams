@@ -9,5 +9,5 @@
 
 void reply_subscribe_cmd(reply_data_t *reply_data)
 {
-    CLIENT_PRINT_SUBSCRIBED(reply_data->arg1.user_uuid, reply_data->arg2.team_uuid);
+    client_print_subscribed(reply_data->arg1.user_uuid, reply_data->arg2.team_uuid);
 }

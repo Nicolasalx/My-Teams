@@ -14,7 +14,6 @@ static void print_reply(int fd, node_t *list)
     reply_data_t reply_data = {0};
     char msg_time[30] = {0};
 
-//    write(fd, &nb_reply, sizeof(size_t));
     for (size_t i = 0; i < nb_reply; ++i) {
         reply_data.type = REPLY_STRING;
         memset(msg_time, 0, 30);

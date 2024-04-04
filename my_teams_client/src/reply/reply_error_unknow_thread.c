@@ -9,5 +9,5 @@
 
 void reply_error_unknow_thread(reply_data_t *reply_data)
 {
-    CLIENT_ERROR_UNKNOWN_THREAD(reply_data->arg1.thread_uuid);
+    client_error_unknown_thread(reply_data->arg1.thread_uuid);
 }

@@ -9,7 +9,7 @@
 
 void reply_list_team_cmd(reply_data_t *reply_data)
 {
-    CLIENT_PRINT_TEAMS(
+    client_print_teams(
         reply_data->arg1.team_uuid,
         reply_data->arg2.team_name,
         reply_data->arg3.team_description

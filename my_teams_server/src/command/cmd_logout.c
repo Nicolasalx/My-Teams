@@ -19,7 +19,7 @@ static void send_logout_reply(client_t *clients, const char *user_uuid, const ch
 
 void cmd_logout(server_t *server, client_t *client, cmd_data_t *)
 {
-    SERVER_EVENT_USER_LOGGED_OUT(client->uuid);
+    server_event_user_logged_out(client->uuid);
     send_logout_reply(server->clients, client->uuid, client->user_name);
     printf(YELLOW("A client as left")"\n");
     remove_client(client);

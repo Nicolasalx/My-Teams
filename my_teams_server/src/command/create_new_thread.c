@@ -53,7 +53,7 @@ void create_new_thread(server_t *server, client_t *client, cmd_data_t *cmd_data)
         new_thread->timestamp = time(NULL);
         append_node(&GET_DATA(client->context.channel_ptr, db_channel_t)->thread_list, create_node(new_thread));
 
-        SERVER_EVENT_THREAD_CREATED(client->context.channel_uuid,
+        server_event_thread_created(client->context.channel_uuid,
             new_thread->uuid, client->uuid, new_thread->name, new_thread->body);
         send_new_thread_created(client, server, GET_DATA(client->context.team_ptr, db_team_t), new_thread);
     }

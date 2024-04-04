@@ -9,7 +9,7 @@
 
 void reply_create_channel_cmd(reply_data_t *reply_data)
 {
-    CLIENT_PRINT_CHANNEL_CREATED(
+    client_print_channel_created(
         reply_data->arg1.channel_uuid,
         reply_data->arg2.channel_name,
         reply_data->arg3.channel_description);

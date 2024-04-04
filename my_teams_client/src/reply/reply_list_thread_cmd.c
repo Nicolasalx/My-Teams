@@ -9,7 +9,7 @@
 
 void reply_list_thread_cmd(reply_data_t *reply_data)
 {
-    CLIENT_CHANNEL_PRINT_THREADS(
+    client_channel_print_threads(
         reply_data->arg1.thread_uuid,
         reply_data->arg2.user_uuid,
         reply_data->arg3.thread_timestamp,

@@ -9,6 +9,6 @@
 
 void reply_logout(reply_data_t *reply_data)
 {
-    CLIENT_EVENT_LOGGED_OUT(reply_data->arg1.user_uuid, reply_data->arg2.user_name);
+    client_event_logged_out(reply_data->arg1.user_uuid, reply_data->arg2.user_name);
 }
 

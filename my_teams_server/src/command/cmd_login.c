@@ -30,10 +30,10 @@ void cmd_login(server_t *server, client_t *client, cmd_data_t *cmd_data)
         uuid_unparse(user_uuid, new_user->uuid);
         append_node(&server->database.user_list, create_node(new_user));
 
-        SERVER_EVENT_USER_CREATED(new_user->uuid, new_user->user_name);
+        server_event_user_created(new_user->uuid, new_user->user_name);
     }
     memcpy(client->user_name, new_user->user_name, MAX_NAME_LENGTH);
     memcpy(client->uuid, new_user->uuid, UUID_LENGTH);
-    SERVER_EVENT_USER_LOGGED_IN(client->uuid);
+    server_event_user_logged_in(client->uuid);
     send_login_reply(server->clients, client->uuid, client->user_name);
 }

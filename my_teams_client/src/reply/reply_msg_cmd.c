@@ -9,7 +9,7 @@
 
 void reply_msg_cmd(reply_data_t *reply_data)
 {
-    CLIENT_PRIVATE_MESSAGE_PRINT_MESSAGES(
+    client_private_message_print_messages(
         reply_data->arg1.sender_uuid,
         reply_data->arg2.message_timestamp,
         reply_data->arg3.message_body

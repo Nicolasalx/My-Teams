@@ -20,6 +20,7 @@
     #include <stdlib.h>
     #include "server_database.h"
     #include "reply_list.h"
+    #include "../libs/myteams/logging_server.h"
 
     #define MAX_CLIENT FD_SETSIZE
     #define MAX_PORT_NB 65535
@@ -51,7 +52,6 @@ typedef struct {
     unsigned short port;
     client_t clients[MAX_CLIENT];
     database_t database;
-    void *handle;
 } server_t;
 
 extern void (*const cmd_handler[])(server_t *, client_t *, cmd_data_t *);
@@ -103,40 +103,5 @@ void send_error_unknown_channel(int fd, const char *channel_uuid);
 void send_error_unknown_team(int fd, const char *team_uuid);
 void send_error_unknown_thread(int fd, const char *thread_uuid);
 void send_error_unknown_user(int fd, const char *user_uuid);
-
-typedef struct {
-    char *name;
-    void *method;
-} server_logging_t;
-
-enum server_logging_e {
-    _server_event_team_created,
-    _server_event_channel_created,
-    _server_event_thread_created,
-    _server_event_reply_created,
-    _server_event_user_subscribed,
-    _server_event_user_unsubscribed,
-    _server_event_user_created,
-    _server_event_user_loaded,
-    _server_event_user_logged_in,
-    _server_event_user_logged_out,
-    _server_event_private_message_sended,
-    _nb_func_server
-};
-
-extern server_logging_t server_logging_func[];
-
-int SERVER_EVENT_TEAM_CREATED(const char *team_uuid, const char *team_name, const char *user_uuid);
-int SERVER_EVENT_CHANNEL_CREATED(const char *team_uuid, const char *channel_uuid, const char *channel_name);
-int SERVER_EVENT_THREAD_CREATED(const char *channel_uuid, const char *thread_uuid,
-    const char *user_uuid, const char *thread_title, const char *thread_body);
-int SERVER_EVENT_REPLY_CREATED(const char *thread_uuid, const char *user_uuid, const char *reply_body);
-int SERVER_EVENT_USER_SUBSCRIBED(const char *team_uuid, const char *user_uuid);
-int SERVER_EVENT_USER_UNSUBSCRIBED(const char *team_uuid, const char *user_uuid);
-int SERVER_EVENT_USER_CREATED(const char *user_uuid, const char *user_name);
-int SERVER_EVENT_USER_LOADED(const char *user_uuid, const char *user_name);
-int SERVER_EVENT_USER_LOGGED_IN(const char *user_uuid);
-int SERVER_EVENT_USER_LOGGED_OUT(const char *user_uuid);
-int SERVER_EVENT_PRIVATE_MESSAGE_SENDED(const char *sender_uuid, const char *receiver_uuid, const char *message_body);
 
 #endif /* !MYTEAMS_SERVER_H_ */

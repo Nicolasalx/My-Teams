@@ -9,5 +9,5 @@
 
 void reply_error_already_exist(reply_data_t *)
 {
-    CLIENT_ERROR_ALREADY_EXIST();
+    client_error_already_exist();
 }

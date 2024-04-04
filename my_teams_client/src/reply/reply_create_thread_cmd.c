@@ -9,7 +9,7 @@
 
 void reply_create_thread_cmd(reply_data_t *reply_data)
 {
-    CLIENT_PRINT_THREAD_CREATED(
+    client_print_thread_created(
         reply_data->arg1.thread_uuid,
         reply_data->arg2.user_uuid,
         reply_data->arg3.thread_timestamp,
