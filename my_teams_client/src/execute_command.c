@@ -126,7 +126,7 @@ static char **my_str_to_word_quotes(int nb_word, int *size_word,
 static char *get_first_command(const char *str, const char *delimiter)
 {
     size_t idx = 0;
-    char *result;
+    char *result = NULL;
 
     for (int i = 0; str[i] != '\0'; ++i) {
         if (is_in_str(str[i], delimiter)) {
@@ -134,7 +134,7 @@ static char *get_first_command(const char *str, const char *delimiter)
         }
         ++idx;
     }
-    result = my_malloc(sizeof(char) * (idx + 1));
+    result = my_calloc(sizeof(char) * (idx + 1));
     memcpy(result, str, idx);
     return result;
 }
@@ -142,7 +142,7 @@ static char *get_first_command(const char *str, const char *delimiter)
 static command_type_e parse_line(int *nb_word, char ***array, char *command)
 {
     int *size_word_quotes = NULL;
-    char **board;
+    char **board = NULL;
     char *frst_command = get_first_command(command, "\" \n\t");
 
     *nb_word = count_nb_word_quotes(command);
@@ -153,7 +153,7 @@ static command_type_e parse_line(int *nb_word, char ***array, char *command)
     size_word_quotes = count_size_word_quotes(*nb_word, "\"\n", command);
     *array = my_str_to_word_quotes(*nb_word, size_word_quotes, "\"\n", command);
     ++*nb_word;
-    board = my_malloc(sizeof(char *) * (*nb_word + 1));
+    board = my_calloc(sizeof(char *) * (*nb_word + 1));
     board[0] = frst_command;
     for (int i = 0; i < *nb_word - 1; i++) {
         board[i + 1] = (*array)[i];
