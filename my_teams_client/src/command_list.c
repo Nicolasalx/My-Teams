@@ -84,8 +84,13 @@ const command_list_t command_list[] = {
         .name = "/tree",
         .nb_arg = 0,
         .cmd_function = init_tree
+    }, {
+        .type = LATENCY,
+        .name = "/latency",
+        .nb_arg = 0,
+        .cmd_function = init_latency
     }
 };
 
-context_e context;
+context_e context = NO_CONTEXT;
 is_login_e isLogin = NOT_LOGGED;

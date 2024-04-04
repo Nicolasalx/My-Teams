@@ -57,7 +57,6 @@ typedef struct {
 extern void (*const cmd_handler[])(server_t *, client_t *, cmd_data_t *);
 
 void check_arg_validity(int argc, const char **argv, server_t *server);
-void init_logging_func(server_t *server);
 void create_server(server_t *server);
 void init_server_set(server_t *server, int *max_fd);
 void monitor_client(server_t *server, int max_fd);
@@ -88,7 +87,9 @@ void cmd_create(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_subscribe(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_subscribed(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_unsubscribe(server_t *server, client_t *client, cmd_data_t *cmd_data);
+
 void cmd_tree(server_t *server, client_t *client, cmd_data_t *cmd_data);
+void cmd_latency(server_t *server, client_t *client, cmd_data_t *cmd_data);
 
 void create_new_team(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void create_new_channel(server_t *server, client_t *client, cmd_data_t *cmd_data);

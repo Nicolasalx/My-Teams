@@ -31,6 +31,7 @@ typedef enum {
     LIST,
     INFO,
     TREE,
+    LATENCY,
     NUMBER_CMD // Used to determine the number of command
 } command_e;
 
@@ -86,11 +87,9 @@ typedef struct {
     cmd_arg4_u arg4;
 } cmd_data_t;
 
-typedef command_type_e (*command_function_ptr)(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-
 typedef struct {
     char *name;
-    command_function_ptr cmd_function;
+    command_type_e (*cmd_function)(char **, int, cmd_data_t *, command_e);
     command_e type;
     int nb_arg;
 } command_list_t;

@@ -19,11 +19,7 @@ static void send_new_team_created(int fd, server_t *server, db_team_t *new_team)
     send(fd, &reply_data, sizeof(reply_data_t), 0);
 
     reply_data.type = NEW_TEAM_CREATED;
-    for (size_t i = 0; i < MAX_CLIENT; ++i) {
-        if (server->clients[i].fd > 0) {
-            send(server->clients[i].fd, &reply_data, sizeof(reply_data_t), 0);
-        }
-    }
+    send_to_logged_user(server->clients, &reply_data);
 }
 
 void create_new_team(server_t *server, client_t *client, cmd_data_t *cmd_data)
