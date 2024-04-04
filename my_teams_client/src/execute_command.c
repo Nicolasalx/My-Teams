@@ -28,11 +28,11 @@ static command_type_e check_nb_arg(int *nb_word, const char *command)
     bool has_found_frst_elem = false;
 
     if (*nb_word < 1 || *nb_word > 4) {
-        printf("Command not recognized !\n");
+        printf("Command not recognized in check ng arg (1)!\n");
         return COMMAND_FAILED;
     }
     if (*nb_word == 1 && check_nb_arg_with_one(command) == COMMAND_FAILED) {
-        printf("Command not recognized !\n");
+        printf("Command not recognized in check nb arg (2)!\n");
         return COMMAND_FAILED;
     }
     for (size_t i = 0; command[i] != '\0'; ++i) {
@@ -40,7 +40,7 @@ static command_type_e check_nb_arg(int *nb_word, const char *command)
             is_in_quotes = !is_in_quotes;
             has_found_frst_elem = true;
         } else if (!is_in_quotes && has_found_frst_elem && !is_in_str(command[i], "\" \t\n")) {
-            printf("Command not recognized !\n");
+            printf("Command not recognized in check nb arg (3)!\n");
             return COMMAND_FAILED;
         }
     }
@@ -147,7 +147,7 @@ static command_type_e parse_line(int *nb_word, char ***array, char *command)
 
     *nb_word = count_nb_word_quotes(command);
     if (*nb_word == -1) {
-        printf("Command not recognized !\n");
+        printf("Command not recognized in parse line !\n");
         return COMMAND_FAILED;
     }
     size_word_quotes = count_size_word_quotes(*nb_word, "\"\n", command);
@@ -166,7 +166,7 @@ static command_type_e parse_line(int *nb_word, char ***array, char *command)
 static command_type_e check_error_cmd(bool is_a_command, command_type_e command_type)
 {
     if (is_a_command == false) {
-        printf("Command not recognized !\n");
+        printf("Command not recognized in check error cmd!\n");
         return COMMAND_FAILED;
     }
     if (command_type == COMMAND_FAILED) {
