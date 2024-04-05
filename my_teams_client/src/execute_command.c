@@ -22,7 +22,7 @@ static command_type_e check_nb_arg_with_one(const char *command)
     return COMMAND_SUCCEED;
 }
 
-static command_type_e check_nb_arg(int *nb_word, const char *command)
+static command_type_e check_nb_arg(const int *nb_word, const char *command)
 {
     bool is_in_quotes = false;
     bool has_found_frst_elem = false;
