@@ -44,7 +44,7 @@ void handle_new_input(client_t *client)
     char command[BUFFER_SIZE + 1] = {0};
     ssize_t nb_byte = 0;
 
-    if (FD_ISSET(STDIN_FILENO, &client->set)) {
+    if (FD_ISSET(STDIN_FILENO, &client->read_set)) {
         nb_byte = read(STDIN_FILENO, command, BUFFER_SIZE);
         handle_ctrl_d(client, nb_byte);
         buffering_input(client, command, nb_byte);

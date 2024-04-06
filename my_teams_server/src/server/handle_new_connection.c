@@ -13,7 +13,7 @@ void handle_new_connection(server_t *server)
     int new_client = 0;
     client_t client = {0};
 
-    if (FD_ISSET(server->fd, &server->set)) {
+    if (FD_ISSET(server->fd, &server->read_set)) {
         new_client = accept(server->fd, (struct sockaddr *) &server->address, &addr_len);
         if (new_client == -1) {
             delete_server(server);

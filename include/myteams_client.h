@@ -28,7 +28,7 @@
 
 typedef struct {
     int fd;
-    fd_set set;
+    fd_set read_set;
     unsigned short port;
     struct sockaddr_in server_address;
     char *cmd_buffer;
