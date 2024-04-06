@@ -32,7 +32,7 @@ static void handle_ctrl_d(client_t *client, ssize_t nb_byte)
     if (nb_byte == 0) {
         if (isLogin == LOGGED_IN) {
             cmd_data.type = LOGOUT;
-            send(client->fd, &cmd_data, sizeof(cmd_data_t), 0);
+            send_cmd_to_server(client, &cmd_data);
         } else {
             exit_client(0, NULL);
         }

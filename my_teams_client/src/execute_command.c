@@ -181,9 +181,7 @@ static void send_cmd(client_t *client, bool is_a_command,
     if (check_error_cmd(is_a_command, command_type) == COMMAND_FAILED) {
         return;
     }
-    if (send(client->fd, cmd_data, sizeof(cmd_data_t), 0) == -1) {
-        exit_client(84, RED("Fail to send message to server.\n"));
-    }
+    send_cmd_to_server(client, cmd_data);
 }
 
 void execute_command(client_t *client, char *command)
