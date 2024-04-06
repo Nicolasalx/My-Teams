@@ -49,6 +49,7 @@ typedef struct {
     int fd;
     struct sockaddr_in address;
     fd_set read_set;
+    fd_set write_set;
     unsigned short port;
     client_t clients[MAX_CLIENT];
     database_t database;

@@ -9,7 +9,7 @@
 
 void monitor_client(server_t *server, int max_fd)
 {
-    int nb_fd = select(max_fd + 1, &server->read_set, NULL, NULL, NULL);
+    int nb_fd = select(max_fd + 1, &server->read_set, &server->write_set, NULL, NULL);
 
     if (nb_fd == -1) {
         printf("Select fail\n");
