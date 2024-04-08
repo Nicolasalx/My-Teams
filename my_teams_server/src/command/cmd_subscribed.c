@@ -16,7 +16,7 @@ static void send_subed_team(int fd, const char *team_uuid,
     memcpy(reply_data.arg1.team_uuid, team_uuid, UUID_LENGTH);
     memcpy(reply_data.arg2.team_name, team_name, MAX_NAME_LENGTH);
     memcpy(reply_data.arg3.team_description, team_description, MAX_DESCRIPTION_LENGTH);
-    send(fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(fd, &reply_data);
 }
 
 static void list_subed_team(server_t *server, client_t *client)
@@ -46,7 +46,7 @@ static void send_subed_user(int fd, const char *user_uuid,
     memcpy(reply_data.arg1.user_uuid, user_uuid, UUID_LENGTH);
     memcpy(reply_data.arg2.user_name, user_name, MAX_NAME_LENGTH);
     memcpy(&reply_data.arg3.user_status, &user_status, sizeof(int));
-    send(fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(fd, &reply_data);
 }
 
 static void list_user_team_sub(server_t *server, db_team_t *team,

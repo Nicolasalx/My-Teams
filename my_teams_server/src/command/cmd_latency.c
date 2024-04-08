@@ -19,5 +19,5 @@ void cmd_latency(server_t *, client_t *client, cmd_data_t *cmd_data)
     gettimeofday(&current_time, NULL);
     server_time = 1000000 * current_time.tv_sec + current_time.tv_usec;
     memcpy(&reply_data.arg1 + sizeof(size_t), &server_time, sizeof(size_t));
-    send(client->fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(client->fd, &reply_data);
 }

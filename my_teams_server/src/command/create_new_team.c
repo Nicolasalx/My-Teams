@@ -16,7 +16,7 @@ static void send_new_team_created(int fd, server_t *server, db_team_t *new_team)
     memcpy(reply_data.arg2.team_name, new_team->name, MAX_NAME_LENGTH);
     memcpy(reply_data.arg3.team_description, new_team->description, MAX_DESCRIPTION_LENGTH);
     reply_data.type = REPLY_CREATE_TEAM_CMD;
-    send(fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(fd, &reply_data);
 
     reply_data.type = NEW_TEAM_CREATED;
     send_to_logged_user(server->clients, &reply_data);

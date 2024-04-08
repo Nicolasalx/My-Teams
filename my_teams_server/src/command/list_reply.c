@@ -25,7 +25,7 @@ void list_reply(client_t *client)
         memcpy(reply_data.arg2.user_uuid, GET_DATA(current, db_reply_t)->creator_uuid, UUID_LENGTH);
         memcpy(&reply_data.arg3.reply_timestamp, &GET_DATA(current, db_reply_t)->timestamp, sizeof(time_t));
         memcpy(reply_data.arg4.reply_body, GET_DATA(current, db_reply_t)->body, MAX_BODY_LENGTH);
-        send(client->fd, &reply_data, sizeof(reply_data_t), 0);
+        send_reply_to_client(client->fd, &reply_data);
         current = current->next;
     } while (current != GET_DATA(client->context.thread_ptr, db_thread_t)->reply_list);
 }

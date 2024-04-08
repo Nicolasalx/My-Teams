@@ -14,7 +14,7 @@ static void send_subscribe_reply(int fd, const char *user_uuid, const char *team
     reply_data.type = REPLY_SUBSCRIBE_CMD;
     memcpy(reply_data.arg1.user_uuid, user_uuid, UUID_LENGTH);
     memcpy(reply_data.arg2.team_uuid, team_uuid, UUID_LENGTH);
-    send(fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(fd, &reply_data);
 }
 
 void cmd_subscribe(server_t *server, client_t *client, cmd_data_t *cmd_data)

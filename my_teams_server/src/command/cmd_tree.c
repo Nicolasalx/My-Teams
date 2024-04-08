@@ -27,7 +27,7 @@ static void print_reply(int fd, node_t *list)
                 "\e[94m│ \e[93m│ \e[95m│ \e[0m├─ \"%s\" - %s",
                 GET_DATA(current, db_reply_t)->body, msg_time);
         }
-        send(fd, &reply_data, sizeof(reply_data_t), 0);
+        send_reply_to_client(fd, &reply_data);
         memset(&reply_data, 0, sizeof(reply_data_t));
 
         current = current->next;
@@ -51,7 +51,7 @@ static void print_thread(int fd, node_t *thread_list)
                 "\e[94m│ \e[93m│ \e[95m├─\e[0m \"%s\" - \"%s\"",
                 GET_DATA(current, db_thread_t)->name, GET_DATA(current, db_thread_t)->uuid);
         }
-        send(fd, &reply_data, sizeof(reply_data_t), 0);
+        send_reply_to_client(fd, &reply_data);
         memset(&reply_data, 0, sizeof(reply_data_t));
 
         print_reply(fd, GET_DATA(current, db_thread_t)->reply_list);
@@ -76,7 +76,7 @@ static void print_channel(int fd, node_t *channel_list)
                 "\e[94m│ \e[93m├─\e[0m \"%s\" - \"%s\"",
                 GET_DATA(current, db_channel_t)->name, GET_DATA(current, db_channel_t)->uuid);
         }
-        send(fd, &reply_data, sizeof(reply_data_t), 0);
+        send_reply_to_client(fd, &reply_data);
         memset(&reply_data, 0, sizeof(reply_data_t));
 
         print_thread(fd, GET_DATA(current, db_channel_t)->thread_list);
@@ -103,7 +103,7 @@ static void print_team(int fd, node_t *team_list)
                 "\e[94m├─\e[0m \"%s\" - \"%s\"",
                 GET_DATA(current, db_team_t)->name, GET_DATA(current, db_team_t)->uuid);
         }
-        send(fd, &reply_data, sizeof(reply_data_t), 0);
+        send_reply_to_client(fd, &reply_data);
         memset(&reply_data, 0, sizeof(reply_data_t));
 
         print_channel(fd, GET_DATA(current, db_team_t)->channel_list);

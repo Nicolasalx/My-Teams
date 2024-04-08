@@ -13,5 +13,5 @@ void send_error_unknown_user(int fd, const char *user_uuid)
 
     reply_data.type = ERROR_UNKNOWN_USER;
     memcpy(reply_data.arg1.user_uuid, user_uuid, UUID_LENGTH);
-    send(fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(fd, &reply_data);
 }

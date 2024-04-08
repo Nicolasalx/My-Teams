@@ -12,5 +12,5 @@ void send_error_unauthorized(int fd)
     reply_data_t reply_data = {0};
 
     reply_data.type = ERROR_UNAUTHORIZED;
-    send(fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(fd, &reply_data);
 }

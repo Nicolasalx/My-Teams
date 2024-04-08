@@ -7,7 +7,7 @@
 
 SRC				:=	$(shell find src/ -name "*.c")
 
-CFLAGS			=	-Wall -Wextra -g3 \
+CFLAGS			=	-Wall -Wextra \
 					-I../include/ -I../include/lib \
 					$(ADDITIONAL_FLAGS)
 

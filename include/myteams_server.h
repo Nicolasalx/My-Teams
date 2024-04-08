@@ -74,6 +74,7 @@ bool is_user_connected(server_t *server, const char *user_uuid);
 client_t *get_client_by_uuid(server_t *server, const char *uuid);
 void send_to_logged_user(client_t *clients, reply_data_t *reply_data);
 bool is_valid_context(client_t *client);
+void send_reply_to_client(int fd, reply_data_t *reply_data);
 
 void cmd_login(server_t *server, client_t *client, cmd_data_t *cmd_data);
 void cmd_logout(server_t *server, client_t *client, cmd_data_t *cmd_data);

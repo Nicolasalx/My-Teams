@@ -13,5 +13,5 @@ void send_error_unknown_team(int fd, const char *team_uuid)
 
     reply_data.type = ERROR_UNKNOWN_TEAM;
     memcpy(reply_data.arg1.team_uuid, team_uuid, UUID_LENGTH);
-    send(fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(fd, &reply_data);
 }
