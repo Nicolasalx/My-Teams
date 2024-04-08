@@ -51,7 +51,6 @@ void execute_command(client_t *client, char *command);
 void handle_new_input(client_t *client);
 void handle_new_message(client_t *client);
 void handle_server_reply(reply_data_t *reply_data);
-void try_send_prev_cmd(client_t *client);
 void send_cmd_to_server(client_t *client, cmd_data_t *cmd_data);
 
 command_type_e init_user(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);

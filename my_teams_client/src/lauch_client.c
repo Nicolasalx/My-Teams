@@ -21,7 +21,6 @@ void lauch_client(client_t *client)
     while (true) {
         init_client_set(client, &max_fd);
         monitor_input(client, max_fd);
-        try_send_prev_cmd(client);
         handle_new_input(client);
         handle_new_message(client);
     }
