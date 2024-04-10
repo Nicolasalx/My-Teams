@@ -5,7 +5,8 @@
 ## Makefile
 ##
 
-SRC				:=	$(shell find src/ -name "*.c")
+SRC				:=	$(shell find src/ -name "*.c") \
+					$(shell find ../bonus/ -name "*.c")
 
 CFLAGS			=	-Wall -Wextra \
 					-I../include/ -I../include/lib \

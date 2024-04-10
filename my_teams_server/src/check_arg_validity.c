@@ -20,7 +20,7 @@ void check_arg_validity(int argc, const char **argv, server_t *server)
     }
     if (!my_str_only_cont(argv[1], "0123456789")
     || strlen(argv[1]) > 5 || atoi(argv[1]) > MAX_PORT_NB) {
-        printf("Invalid port: \e[91m%s\e[0m\n", argv[1]);
+        printf("Invalid port: "RED("%s")"\n", argv[1]);
         my_exit(84);
     }
     server->port = atoi(argv[1]);
