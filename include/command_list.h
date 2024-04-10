@@ -86,7 +86,8 @@ typedef struct {
     cmd_arg4_u arg4;
 } cmd_data_t;
 
-typedef command_type_e (*command_function_ptr)(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+typedef command_type_e (*command_function_ptr)(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
 
 typedef struct {
     char *name;

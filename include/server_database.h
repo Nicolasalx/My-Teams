@@ -68,7 +68,9 @@ db_user_t *db_contain_user_uuid(database_t *database, const char *user_uuid);
 db_team_t *db_contain_team(database_t *database, const char *team_uuid);
 db_team_t *db_contain_team_name(database_t *database, const char *team_name);
 db_user_t *db_contain_team_sub(db_team_t *team, const char *user_uuid);
-db_channel_t *db_contain_channel_name(db_team_t *db_team, const char *channel_name);
-db_thread_t *db_contain_thread_name(db_channel_t *db_channel, const char *thread_name);
+db_channel_t *db_contain_channel_name(db_team_t *db_team,
+    const char *channel_name);
+db_thread_t *db_contain_thread_name(db_channel_t *db_channel,
+    const char *thread_name);
 
 #endif /* !SERVER_DATABASE_H_ */

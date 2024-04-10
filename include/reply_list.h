@@ -20,12 +20,12 @@ typedef enum {
     NEW_THREAD_CREATED, // client_event_thread_created
     REPLY_USERS_CMD, // client_print_users -> cmd "/users"
     REPLY_USER_CMD, // client_print_user -> cmd "/user"
-    REPLY_MESSAGES_CMD, // client_private_message_print_messages -> cmd "/messages"
+    REPLY_MESSAGES_CMD, // client_private_message_print_messages
 
-    REPLY_LIST_TEAM_CMD, // client_print_teams -> cmd "/list" -> NO_CONTEXT
-    REPLY_LIST_CHANNEL_CMD, // client_team_print_channels -> cmd "/list" -> IN_TEAM         | client_error_unknown_team
-    REPLY_LIST_THREAD_CMD, // client_channel_print_threads -> cmd "/list" -> IN_CHANNEL     | client_error_unknown_channel
-    REPLY_LIST_REPLY_CMD, // client_thread_print_replies -> cmd "/list" -> IN_THREAD        | client_error_unknown_thread
+    REPLY_LIST_TEAM_CMD, // client_print_teams -> cmd "/list"
+    REPLY_LIST_CHANNEL_CMD, // client_team_print_channels
+    REPLY_LIST_THREAD_CMD, // client_channel_print_threads
+    REPLY_LIST_REPLY_CMD, // client_thread_print_replies
 
     ERROR_UNKNOWN_TEAM, // !client_error_unknown_team
     ERROR_UNKNOWN_CHANNEL, // !client_error_unknown_channel

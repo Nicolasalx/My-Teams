@@ -51,22 +51,37 @@ void handle_new_input(client_t *client);
 void handle_new_message(client_t *client);
 void handle_server_reply(reply_data_t *reply_data);
 
-command_type_e init_user(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_help(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_login(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_logout(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_users(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_send(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_messages(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_subscribe(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_subscribed(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_unsubscribe(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_use(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_create(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_list(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_info(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+command_type_e init_user(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
+command_type_e init_help(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
+command_type_e init_login(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
+command_type_e init_logout(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
+command_type_e init_users(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
+command_type_e init_send(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
+command_type_e init_messages(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
+command_type_e init_subscribe(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
+command_type_e init_subscribed(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
+command_type_e init_unsubscribe(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
+command_type_e init_use(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
+command_type_e init_create(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
+command_type_e init_list(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
+command_type_e init_info(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
 
-command_type_e init_tree(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+command_type_e init_tree(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_e command);
 
 is_login_e user_is_login(void);
 

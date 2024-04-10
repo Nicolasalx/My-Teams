@@ -15,7 +15,8 @@ static node_t *move_to_team_context(server_t *server, client_t *client)
         return NULL;
     }
     do {
-        if (memcmp(GET_DATA(current, db_team_t)->uuid, client->context.team_uuid, UUID_LENGTH) == 0) {
+        if (memcmp(GET_DATA(current, db_team_t)->uuid,
+            client->context.team_uuid, UUID_LENGTH) == 0) {
             return current;
         }
         current = current->next;
@@ -27,12 +28,14 @@ static node_t *move_to_channel_context(client_t *client, node_t *current_team)
 {
     node_t *current = NULL;
 
-    if (!current_team || GET_DATA(current_team, db_team_t)->channel_list == NULL) {
+    if (!current_team ||
+        GET_DATA(current_team, db_team_t)->channel_list == NULL) {
         return NULL;
     }
     current = GET_DATA(current_team, db_team_t)->channel_list;
     do {
-        if (memcmp(GET_DATA(current, db_channel_t)->uuid, client->context.channel_uuid, UUID_LENGTH) == 0) {
+        if (memcmp(GET_DATA(current, db_channel_t)->uuid,
+            client->context.channel_uuid, UUID_LENGTH) == 0) {
             return current;
         }
         current = current->next;
@@ -40,16 +43,19 @@ static node_t *move_to_channel_context(client_t *client, node_t *current_team)
     return NULL;
 }
 
-static node_t *move_to_thread_context(client_t *client, node_t *current_channel)
+static node_t *move_to_thread_context(client_t *client,
+    node_t *current_channel)
 {
     node_t *current = NULL;
 
-    if (!current_channel || GET_DATA(current_channel, db_channel_t)->thread_list == NULL) {
+    if (!current_channel ||
+        GET_DATA(current_channel, db_channel_t)->thread_list == NULL) {
         return NULL;
     }
     current = GET_DATA(current_channel, db_channel_t)->thread_list;
     do {
-        if (memcmp(GET_DATA(current, db_thread_t)->uuid, client->context.thread_uuid, UUID_LENGTH) == 0) {
+        if (memcmp(GET_DATA(current, db_thread_t)->uuid,
+            client->context.thread_uuid, UUID_LENGTH) == 0) {
             return current;
         }
         current = current->next;
@@ -60,8 +66,10 @@ static node_t *move_to_thread_context(client_t *client, node_t *current_channel)
 void cmd_use(server_t *server, client_t *client, cmd_data_t *cmd_data)
 {
     memcpy(client->context.team_uuid, cmd_data->arg1.team_uuid, UUID_LENGTH);
-    memcpy(client->context.channel_uuid, cmd_data->arg2.channel_uuid, UUID_LENGTH);
-    memcpy(client->context.thread_uuid, cmd_data->arg3.thread_uuid, UUID_LENGTH);
+    memcpy(client->context.channel_uuid,
+        cmd_data->arg2.channel_uuid, UUID_LENGTH);
+    memcpy(client->context.thread_uuid,
+        cmd_data->arg3.thread_uuid, UUID_LENGTH);
     client->context.type = cmd_data->arg4.nb_arg;
     switch (client->context.type) {
     case IN_TEAM:
@@ -69,7 +77,8 @@ void cmd_use(server_t *server, client_t *client, cmd_data_t *cmd_data)
         break;
     case IN_CHANNEL:
         client->context.team_ptr = move_to_team_context(server, client);
-        client->context.channel_ptr = move_to_channel_context(client, client->context.team_ptr);
+        client->context.channel_ptr =
+            move_to_channel_context(client, client->context.team_ptr);
         break;
     case IN_THREAD:
         client->context.team_ptr = move_to_team_context(server, client);
