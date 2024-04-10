@@ -15,9 +15,24 @@ static command_type_t check_nb_arg_with_one(const char *command)
     for (size_t i = 0; command[i] != '\0'; ++i) {
         if (command[i] == ' ') {
             has_found_space = true;
-        } else if (has_found_space == true) {
+            continue;
+        }
+        if (has_found_space == true) {
             return COMMAND_FAILED;
         }
+    }
+    return COMMAND_SUCCEED;
+}
+
+static command_type_t check_nb_arg_opt(const int *nb_word, const char *command)
+{
+    if (*nb_word < 1 || *nb_word > 4) {
+        printf("Command not recognized in check ng arg (1)!\n");
+        return COMMAND_FAILED;
+    }
+    if (*nb_word == 1 && check_nb_arg_with_one(command) == COMMAND_FAILED) {
+        printf("Command not recognized in check nb arg (2)!\n");
+        return COMMAND_FAILED;
     }
     return COMMAND_SUCCEED;
 }
@@ -27,100 +42,22 @@ static command_type_t check_nb_arg(const int *nb_word, const char *command)
     bool is_in_quotes = false;
     bool has_found_frst_elem = false;
 
-    if (*nb_word < 1 || *nb_word > 4) {
-        printf("Command not recognized in check ng arg (1)!\n");
-        return COMMAND_FAILED;
-    }
-    if (*nb_word == 1 && check_nb_arg_with_one(command) == COMMAND_FAILED) {
-        printf("Command not recognized in check nb arg (2)!\n");
+    if (check_nb_arg_opt(nb_word, command) == COMMAND_FAILED) {
         return COMMAND_FAILED;
     }
     for (size_t i = 0; command[i] != '\0'; ++i) {
         if (command[i] == '\"') {
             is_in_quotes = !is_in_quotes;
             has_found_frst_elem = true;
-        } else if (!is_in_quotes && has_found_frst_elem && !is_in_str(command[i], "\" \t\n")) {
+            continue;
+        }
+        if (!is_in_quotes && has_found_frst_elem
+            && !is_in_str(command[i], "\" \t\n")) {
             printf("Command not recognized in check nb arg (3)!\n");
             return COMMAND_FAILED;
         }
     }
     return COMMAND_SUCCEED;
-}
-
-static int count_nb_word_quotes(const char *str)
-{
-    int result = 0;
-    bool is_in_quote = false;
-
-    for (size_t i = 0; str[i] != '\0'; ++i) {
-        if (str[i] == '\"') {
-            is_in_quote = !is_in_quote;
-            ++result;
-        }
-    }
-    if (result % 2 != 0) {
-        return -1;
-    }
-    return result / 2;
-}
-
-static void count_size_word_opt(bool *is_in_quotes, int **size_word, int *index, int *count_size_word)
-{
-    if (*is_in_quotes) {
-        (*size_word)[*index] = *count_size_word;
-        *is_in_quotes = false;
-        ++*index;
-        *count_size_word = 0;
-    } else {
-        *is_in_quotes = true;
-    }
-}
-
-static int *count_size_word_quotes(int nb_word, char *delimiter, const char *str)
-{
-    int *size_word = malloc_array(nb_word);
-    int count_size_word = 0;
-    int index = 0;
-    bool is_in_quotes = false;
-
-    for (size_t i = 0; str[i] != '\0'; ++i) {
-        if (is_in_str(str[i], delimiter)) {
-            count_size_word_opt(&is_in_quotes, &size_word, &index, &count_size_word);
-        } else if (is_in_quotes) {
-            ++count_size_word;
-        }
-    }
-    return size_word;
-}
-
-static void my_str_to_word_opt(bool *is_in_quotes, int *i_index, int *j_index)
-{
-    if (*is_in_quotes) {
-        ++*i_index;
-        *j_index = 0;
-        *is_in_quotes = false;
-    } else {
-        *is_in_quotes = true;
-    }
-}
-
-static char **my_str_to_word_quotes(int nb_word, int *size_word,
-    char *delimiter, const char *str)
-{
-    char **word = malloc_adv_board(nb_word, size_word);
-    int i_index = 0;
-    int j_index = 0;
-    bool is_in_quotes = false;
-
-    for (size_t i = 0; str[i] != '\0'; ++i) {
-        if (is_in_str(str[i], delimiter)) {
-            my_str_to_word_opt(&is_in_quotes, &i_index, &j_index);
-        } else if (is_in_quotes) {
-            word[i_index][j_index] = str[i];
-            ++j_index;
-        }
-    }
-    return word;
 }
 
 static char *get_first_command(const char *str, const char *delimiter)
@@ -139,7 +76,7 @@ static char *get_first_command(const char *str, const char *delimiter)
     return result;
 }
 
-static command_type_t parse_line(int *nb_word, char ***array, char *command)
+command_type_t parse_line(int *nb_word, char ***array, char *command)
 {
     int *size_word_quotes = NULL;
     char **board = NULL;
@@ -151,19 +88,20 @@ static command_type_t parse_line(int *nb_word, char ***array, char *command)
         return COMMAND_FAILED;
     }
     size_word_quotes = count_size_word_quotes(*nb_word, "\"\n", command);
-    *array = my_str_to_word_quotes(*nb_word, size_word_quotes, "\"\n", command);
+    *array = my_str_to_word_quotes(*nb_word,
+        size_word_quotes, "\"\n", command);
     ++*nb_word;
     board = my_calloc(sizeof(char *) * (*nb_word + 1));
     board[0] = frst_command;
-    for (int i = 0; i < *nb_word - 1; i++) {
+    for (int i = 0; i < *nb_word - 1; i++)
         board[i + 1] = (*array)[i];
-    }
     board[*nb_word] = NULL;
     *array = board;
     return check_nb_arg(nb_word, command);
 }
 
-static command_type_t check_error_cmd(bool is_a_command, command_type_t command_type)
+command_type_t check_error_cmd(bool is_a_command,
+    command_type_t command_type)
 {
     if (is_a_command == false) {
         printf("Command not recognized in check error cmd!\n");
@@ -175,7 +113,7 @@ static command_type_t check_error_cmd(bool is_a_command, command_type_t command_
     return COMMAND_SUCCEED;
 }
 
-static void send_cmd(client_t *client, bool is_a_command,
+void send_cmd(client_t *client, bool is_a_command,
     command_type_t command_type, cmd_data_t *cmd_data)
 {
     if (check_error_cmd(is_a_command, command_type) == COMMAND_FAILED) {

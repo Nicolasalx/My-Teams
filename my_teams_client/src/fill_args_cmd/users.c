@@ -8,7 +8,8 @@
 #include "myteams_client.h"
 #include "command_list.h"
 
-command_type_t init_users(char **, int nb_arg, cmd_data_t *cmd_data, command_t command)
+command_type_t init_users(char **, int nb_arg,
+    cmd_data_t *cmd_data, command_t command)
 {
     if (user_is_login() == NOT_LOGGED) {
         return COMMAND_FAILED;

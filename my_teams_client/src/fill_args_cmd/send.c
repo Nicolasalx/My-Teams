@@ -8,7 +8,8 @@
 #include "myteams_client.h"
 #include "command_list.h"
 
-command_type_t init_send(char **array, int nb_arg, cmd_data_t *cmd_data, command_t command)
+command_type_t init_send(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command)
 {
     if (user_is_login() == NOT_LOGGED) {
         return COMMAND_FAILED;
@@ -17,7 +18,8 @@ command_type_t init_send(char **array, int nb_arg, cmd_data_t *cmd_data, command
         printf("Invalid arg in the send\n");
         return COMMAND_FAILED;
     }
-    if (strlen(array[1]) != UUID_LENGTH || strlen(array[2]) > MAX_BODY_LENGTH) {
+    if (strlen(array[1]) != UUID_LENGTH ||
+        strlen(array[2]) > MAX_BODY_LENGTH) {
         printf("Bad length of the uuid or the message body\n");
         return COMMAND_FAILED;
     }

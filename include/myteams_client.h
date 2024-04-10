@@ -128,4 +128,18 @@ void lauch_client(client_t *client);
 void delete_client(client_t *client);
 void exit_client(int exit_value, const char *message);
 
+command_type_t parse_line(int *nb_word, char ***array, char *command);
+command_type_t check_error_cmd(bool is_a_command,
+    command_type_t command_type);
+void send_cmd(client_t *client, bool is_a_command,
+    command_type_t command_type, cmd_data_t *cmd_data);
+int count_nb_word_quotes(const char *str);
+void count_size_word_opt(bool *is_in_quotes,
+    int **size_word, int *index, int *count_size_word);
+int *count_size_word_quotes(int nb_word,
+    char *delimiter, const char *str);
+void my_str_to_word_opt(bool *is_in_quotes, int *i_index, int *j_index);
+char **my_str_to_word_quotes(int nb_word, int *size_word,
+    char *delimiter, const char *str);
+
 #endif /* !MYTEAMS_CLIENT_H_ */
