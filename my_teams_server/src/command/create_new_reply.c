@@ -18,7 +18,7 @@ static void send_new_reply_created(client_t *client, server_t *server, db_team_t
     memcpy(reply_data.arg2.user_uuid, client->uuid, UUID_LENGTH);
     memcpy(&reply_data.arg3.reply_timestamp, &new_reply->timestamp, sizeof(time_t));
     memcpy(reply_data.arg4.reply_body, new_reply->body, MAX_BODY_LENGTH);
-    send(client->fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(client->fd, &reply_data);
 
     memset(&reply_data, 0, sizeof(reply_data));
     reply_data.type = NEW_THREAD_REPLY;
@@ -28,7 +28,7 @@ static void send_new_reply_created(client_t *client, server_t *server, db_team_t
     memcpy(reply_data.arg4.reply_body, new_reply->body, MAX_BODY_LENGTH);
     for (size_t i = 0; i < MAX_CLIENT; ++i) {
         if (server->clients[i].fd > 0 && db_contain_team_sub(team, server->clients[i].uuid)) {
-            send(server->clients[i].fd, &reply_data, sizeof(reply_data_t), 0);
+            send_reply_to_client(server->clients[i].fd, &reply_data);
         }
     }
 }

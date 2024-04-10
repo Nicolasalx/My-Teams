@@ -22,7 +22,7 @@ static command_type_e check_nb_arg_with_one(const char *command)
     return COMMAND_SUCCEED;
 }
 
-static command_type_e check_nb_arg(int *nb_word, const char *command)
+static command_type_e check_nb_arg(const int *nb_word, const char *command)
 {
     bool is_in_quotes = false;
     bool has_found_frst_elem = false;
@@ -181,9 +181,7 @@ static void send_cmd(client_t *client, bool is_a_command,
     if (check_error_cmd(is_a_command, command_type) == COMMAND_FAILED) {
         return;
     }
-    if (send(client->fd, cmd_data, sizeof(cmd_data_t), 0) == -1) {
-        exit_client(84, RED("Fail to send message to server.\n"));
-    }
+    send_cmd_to_server(client, cmd_data);
 }
 
 void execute_command(client_t *client, char *command)

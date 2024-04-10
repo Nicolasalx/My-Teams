@@ -18,12 +18,12 @@ static void send_new_thread_created(client_t *client, server_t *server, db_team_
     memcpy(reply_data.arg4.thread_title, new_thread->name, MAX_NAME_LENGTH);
     memcpy(reply_data.arg5.thread_body, new_thread->body, MAX_BODY_LENGTH);
     reply_data.type = REPLY_CREATE_THREAD_CMD;
-    send(client->fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(client->fd, &reply_data);
 
     reply_data.type = NEW_THREAD_CREATED;
     for (size_t i = 0; i < MAX_CLIENT; ++i) {
         if (server->clients[i].fd > 0 && db_contain_team_sub(team, server->clients[i].uuid)) {
-            send(server->clients[i].fd, &reply_data, sizeof(reply_data_t), 0);
+            send_reply_to_client(server->clients[i].fd, &reply_data);
         }
     }
 }

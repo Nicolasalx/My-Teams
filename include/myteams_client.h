@@ -28,10 +28,12 @@
 
 typedef struct {
     int fd;
-    fd_set set;
+    fd_set read_set;
+    fd_set write_set;
     unsigned short port;
     struct sockaddr_in server_address;
     char *cmd_buffer;
+    node_t *cmd_to_send;
 } client_t;
 
 extern void (*const reply_handler[])(reply_data_t *);
@@ -40,7 +42,6 @@ extern context_e context;
 extern is_login_e isLogin;
 
 void check_arg_validity(int argc, const char **argv, client_t *client);
-void init_logging_func(client_t *client);
 void create_client(client_t *client);
 client_t *get_client(client_t *client);
 void init_client_set(client_t *client, int *max_fd);
@@ -50,6 +51,7 @@ void execute_command(client_t *client, char *command);
 void handle_new_input(client_t *client);
 void handle_new_message(client_t *client);
 void handle_server_reply(reply_data_t *reply_data);
+void send_cmd_to_server(client_t *client, cmd_data_t *cmd_data);
 
 command_type_e init_user(char **array, int nb_arg,
     cmd_data_t *cmd_data, command_e command);
@@ -80,8 +82,8 @@ command_type_e init_list(char **array, int nb_arg,
 command_type_e init_info(char **array, int nb_arg,
     cmd_data_t *cmd_data, command_e command);
 
-command_type_e init_tree(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
+command_type_e init_tree(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+command_type_e init_latency(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
 
 is_login_e user_is_login(void);
 
@@ -118,6 +120,7 @@ void reply_create_channel_cmd(reply_data_t *reply_data);
 void reply_create_thread_cmd(reply_data_t *reply_data);
 void reply_create_reply_cmd(reply_data_t *reply_data);
 void reply_string(reply_data_t *reply_data);
+void reply_latency(reply_data_t *reply_data);
 
 void lauch_client(client_t *client);
 void delete_client(client_t *client);

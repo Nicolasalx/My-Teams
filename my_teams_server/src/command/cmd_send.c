@@ -14,7 +14,7 @@ static void send_send_reply(int fd, const char *user_uuid, const char *message_b
     reply_data.type = PRIVATE_MSG_RECEIVED;
     memcpy(reply_data.arg1.user_uuid, user_uuid, UUID_LENGTH);
     memcpy(reply_data.arg2.message_body, message_body, MAX_BODY_LENGTH);
-    send(fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(fd, &reply_data);
 }
 
 void cmd_send(server_t *server, client_t *client, cmd_data_t *cmd_data)

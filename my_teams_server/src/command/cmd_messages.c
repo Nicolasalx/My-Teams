@@ -16,7 +16,7 @@ static void send_messages_reply(int fd, const char *sender_uuid,
     memcpy(reply_data.arg1.sender_uuid, sender_uuid, UUID_LENGTH);
     memcpy(&reply_data.arg2.message_timestamp, &message_timestamp, sizeof(time_t));
     memcpy(reply_data.arg3.message_body, message_body, MAX_BODY_LENGTH);
-    send(fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(fd, &reply_data);
 }
 
 void cmd_messages(server_t *server, client_t *client, cmd_data_t *cmd_data)

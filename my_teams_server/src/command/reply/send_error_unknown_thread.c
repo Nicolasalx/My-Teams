@@ -13,5 +13,5 @@ void send_error_unknown_thread(int fd, const char *thread_uuid)
 
     reply_data.type = ERROR_UNKNOWN_THREAD;
     memcpy(reply_data.arg1.thread_uuid, thread_uuid, UUID_LENGTH);
-    send(fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(fd, &reply_data);
 }

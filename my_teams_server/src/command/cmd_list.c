@@ -20,7 +20,7 @@ static void list_team(server_t *server, client_t *client)
         memcpy(reply_data.arg1.team_uuid, GET_DATA(current, db_team_t)->uuid, UUID_LENGTH);
         memcpy(reply_data.arg2.team_name, GET_DATA(current, db_team_t)->name, MAX_NAME_LENGTH);
         memcpy(reply_data.arg3.team_description, GET_DATA(current, db_team_t)->description, MAX_DESCRIPTION_LENGTH);
-        send(client->fd, &reply_data, sizeof(reply_data_t), 0);
+        send_reply_to_client(client->fd, &reply_data);
         current = current->next;
     } while (current != server->database.team_list);
 }
@@ -42,7 +42,7 @@ static void list_channel(client_t *client)
         memcpy(reply_data.arg1.channel_uuid, GET_DATA(current, db_channel_t)->uuid, UUID_LENGTH);
         memcpy(reply_data.arg2.channel_name, GET_DATA(current, db_channel_t)->name, MAX_NAME_LENGTH);
         memcpy(reply_data.arg3.channel_description, GET_DATA(current, db_channel_t)->description, MAX_DESCRIPTION_LENGTH);
-        send(client->fd, &reply_data, sizeof(reply_data_t), 0);
+        send_reply_to_client(client->fd, &reply_data);
         current = current->next;
     } while (current != GET_DATA(client->context.team_ptr, db_team_t)->channel_list);
 }
@@ -66,7 +66,7 @@ static void list_thread(client_t *client)
         memcpy(&reply_data.arg3.thread_timestamp, &GET_DATA(current, db_thread_t)->timestamp, sizeof(time_t));
         memcpy(reply_data.arg4.thread_title, GET_DATA(current, db_thread_t)->name, MAX_NAME_LENGTH);
         memcpy(reply_data.arg5.thread_body, GET_DATA(current, db_thread_t)->body, MAX_BODY_LENGTH);
-        send(client->fd, &reply_data, sizeof(reply_data_t), 0);
+        send_reply_to_client(client->fd, &reply_data);
         current = current->next;
     } while (current != GET_DATA(client->context.channel_ptr, db_channel_t)->thread_list);
 }

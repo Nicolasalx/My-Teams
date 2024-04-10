@@ -11,7 +11,7 @@
 void handle_active_client(server_t *server)
 {
     for (size_t i = 0; i < MAX_CLIENT; ++i) {
-        if (FD_ISSET(server->clients[i].fd, &server->set)) {
+        if (FD_ISSET(server->clients[i].fd, &server->read_set)) {
             get_client_input(server, &server->clients[i]);
         }
     }

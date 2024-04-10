@@ -13,7 +13,7 @@ void handle_new_message(client_t *client)
     reply_data_t reply_data = {0};
     ssize_t size = 0;
 
-    if (FD_ISSET(client->fd, &client->set)) {
+    if (FD_ISSET(client->fd, &client->read_set)) {
         size = read(client->fd, &reply_data, sizeof(reply_data_t));
         if (size == 0) {
             exit_client(0, "Server closed the connection.\n");

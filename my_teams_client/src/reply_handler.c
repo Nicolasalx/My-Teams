@@ -47,5 +47,6 @@ void (*const reply_handler[])(reply_data_t *) = {
     [REPLY_CREATE_CHANNEL_CMD] = reply_create_channel_cmd,
     [REPLY_CREATE_THREAD_CMD] = reply_create_thread_cmd,
     [REPLY_CREATE_REPLY_CMD] = reply_create_reply_cmd,
-    [REPLY_STRING] = reply_string
+    [REPLY_STRING] = reply_string,
+    [REPLY_LATENCY] = reply_latency
 };

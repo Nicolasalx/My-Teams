@@ -31,7 +31,7 @@ static void send_unsubscribe_reply(int fd, const char *user_uuid, const char *te
     reply_data.type = REPLY_UNSUBSCRIBE_CMD;
     memcpy(reply_data.arg1.user_uuid, user_uuid, UUID_LENGTH);
     memcpy(reply_data.arg2.team_uuid, team_uuid, UUID_LENGTH);
-    send(fd, &reply_data, sizeof(reply_data_t), 0);
+    send_reply_to_client(fd, &reply_data);
 }
 
 void cmd_unsubscribe(server_t *server, client_t *client, cmd_data_t *cmd_data)
