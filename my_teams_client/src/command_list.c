@@ -92,5 +92,5 @@ const command_list_t command_list[] = {
     }
 };
 
-context_e context = NO_CONTEXT;
-is_login_e isLogin = NOT_LOGGED;
+context_enum_t context = NO_CONTEXT;
+is_login_t isLogin = NOT_LOGGED;

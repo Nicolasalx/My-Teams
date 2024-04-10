@@ -16,7 +16,7 @@ typedef enum error_code_enum {
     MALLOC_FAIL,
     STAT_FAIL,
     READ_FAIL
-} error_code_enum;
+} error_code_enum_t;
 
 typedef struct error_t {
     int code;

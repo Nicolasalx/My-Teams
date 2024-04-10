@@ -8,7 +8,7 @@
 #include "myteams_client.h"
 #include "command_list.h"
 
-static command_type_e create_new_team(char **array, int nb_arg, cmd_data_t *cmd_data)
+static command_type_t create_new_team(char **array, int nb_arg, cmd_data_t *cmd_data)
 {
     if (nb_arg != 3) {
         printf("Invalid number of arguments create (new team)\n");
@@ -24,7 +24,7 @@ static command_type_e create_new_team(char **array, int nb_arg, cmd_data_t *cmd_
     return COMMAND_SUCCEED;
 }
 
-static command_type_e create_new_channel(char **array, int nb_arg, cmd_data_t *cmd_data)
+static command_type_t create_new_channel(char **array, int nb_arg, cmd_data_t *cmd_data)
 {
     if (nb_arg != 3) {
         printf("Invalid number of arguments create (new team)\n");
@@ -40,7 +40,7 @@ static command_type_e create_new_channel(char **array, int nb_arg, cmd_data_t *c
     return COMMAND_SUCCEED;
 }
 
-static command_type_e create_new_thread(char **array, int nb_arg, cmd_data_t *cmd_data)
+static command_type_t create_new_thread(char **array, int nb_arg, cmd_data_t *cmd_data)
 {
     if (nb_arg != 3) {
         printf("Invalid number of arguments create (new team)\n");
@@ -56,7 +56,7 @@ static command_type_e create_new_thread(char **array, int nb_arg, cmd_data_t *cm
     return COMMAND_SUCCEED;
 }
 
-static command_type_e create_new_reply(char **array, int nb_arg, cmd_data_t *cmd_data)
+static command_type_t create_new_reply(char **array, int nb_arg, cmd_data_t *cmd_data)
 {
     if (nb_arg != 2) {
         printf("Invalid number of arguments create (new team)\n");
@@ -70,8 +70,8 @@ static command_type_e create_new_reply(char **array, int nb_arg, cmd_data_t *cmd
     return COMMAND_SUCCEED;
 }
 
-command_type_e init_create(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e)
+command_type_t init_create(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t)
 {
     if (user_is_login() == NOT_LOGGED || !(nb_arg >= 1 && nb_arg <= 3)) {
         printf("Invalid number of arguments in the command\n");

@@ -9,7 +9,7 @@
 #include "command_list.h"
 #include <sys/time.h>
 
-command_type_e init_latency(char **, int nb_arg, cmd_data_t *cmd_data, command_e command)
+command_type_t init_latency(char **, int nb_arg, cmd_data_t *cmd_data, command_t command)
 {
     struct timeval current_time = {0};
     size_t c_time = 0;

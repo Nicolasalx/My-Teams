@@ -23,7 +23,7 @@ void *my_malloc(size_t size)
         free_all_alloc();
         print_fatal_error_and_exit(MALLOC_FAIL);
     }
-    my_memcpy(data, &(void * const) {register_alloc(data)}, sizeof(void *));
+    my_memcpy(data, &(const void *) {register_alloc(data)}, sizeof(void *));
     data += sizeof(void *);
     return data;
 }

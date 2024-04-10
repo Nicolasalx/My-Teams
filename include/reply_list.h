@@ -53,7 +53,7 @@ typedef enum {
     REPLY_LATENCY,
 
     NUMBER_REPLY
-} reply_e;
+} reply_enum_t;
 
 typedef union {
     char sender_uuid[UUID_LENGTH + 1];
@@ -61,7 +61,7 @@ typedef union {
     char team_uuid[UUID_LENGTH + 1];
     char channel_uuid[UUID_LENGTH + 1];
     char thread_uuid[UUID_LENGTH + 1];
-} reply_arg1_u;
+} reply_arg1_t;
 
 typedef union {
     time_t message_timestamp;
@@ -72,7 +72,7 @@ typedef union {
     char team_name[MAX_NAME_LENGTH + 1];
     char channel_name[MAX_NAME_LENGTH + 1];
     char user_uuid[UUID_LENGTH + 1];
-} reply_arg2_u;
+} reply_arg2_t;
 
 typedef union {
     char message_body[MAX_BODY_LENGTH + 1];
@@ -82,24 +82,24 @@ typedef union {
     char channel_description[MAX_DESCRIPTION_LENGTH + 1];
     time_t thread_timestamp;
     int user_status;
-} reply_arg3_u;
+} reply_arg3_t;
 
 typedef union {
     char reply_body[MAX_BODY_LENGTH + 1];
     char thread_title[MAX_NAME_LENGTH + 1];
-} reply_arg4_u;
+} reply_arg4_t;
 
 typedef union {
     char thread_body[MAX_BODY_LENGTH + 1];
-} reply_arg5_u;
+} reply_arg5_t;
 
 typedef struct {
-    reply_e type;
-    reply_arg1_u arg1;
-    reply_arg2_u arg2;
-    reply_arg3_u arg3;
-    reply_arg4_u arg4;
-    reply_arg5_u arg5;
+    reply_enum_t type;
+    reply_arg1_t arg1;
+    reply_arg2_t arg2;
+    reply_arg3_t arg3;
+    reply_arg4_t arg4;
+    reply_arg5_t arg5;
 } reply_data_t;
 
 #endif /* !REPLY_LIST_H_ */

@@ -7,7 +7,7 @@ A simple command is composed of this sequence:
 ```c++
 cmd_data_t -> 1080 bytes
 
-command_e type -> 4 bytes
+command_t type -> 4 bytes
 
 padding byte -> 4;
 
@@ -225,7 +225,7 @@ A simple command is composed of this sequence:
 ```c++
 reply_data_t -> 2120 bytes
 
-reply_e -> 4 bytes
+reply_enum_t -> 4 bytes
 
 7 bytes padding
 

@@ -7,7 +7,7 @@
 
 #include "myteams_client.h"
 
-is_login_e user_is_login(void)
+is_login_t user_is_login(void)
 {
     if (isLogin == NOT_LOGGED) {
         client_error_unauthorized();

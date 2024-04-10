@@ -8,7 +8,7 @@
 #include "myteams_client.h"
 #include "command_list.h"
 
-command_type_e init_login(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command)
+command_type_t init_login(char **array, int nb_arg, cmd_data_t *cmd_data, command_t command)
 {
     if (nb_arg - 1 != command_list[command].nb_arg) {
         printf("Bad number of arguments in login\n");

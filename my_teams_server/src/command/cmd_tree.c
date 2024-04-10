@@ -19,11 +19,11 @@ static void print_reply(int fd, node_t *list)
         memset(msg_time, 0, 30);
         strftime(msg_time, 30, "%H:%M:%S %d-%m-%Y", localtime(&GET_DATA(current, db_reply_t)->timestamp));
         if (i == nb_reply - 1) {
-            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_e),
+            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_enum_t),
                 "\e[94m│ \e[93m│ \e[95m│ \e[0m└─ \"%s\" - %s",
                 GET_DATA(current, db_reply_t)->body, msg_time);
         } else {
-            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_e),
+            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_enum_t),
                 "\e[94m│ \e[93m│ \e[95m│ \e[0m├─ \"%s\" - %s",
                 GET_DATA(current, db_reply_t)->body, msg_time);
         }
@@ -43,11 +43,11 @@ static void print_thread(int fd, node_t *thread_list)
     for (size_t i = 0; i < nb_thread; ++i) {
         reply_data.type = REPLY_STRING;
         if (i == nb_thread - 1) {
-            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_e),
+            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_enum_t),
                 "\e[94m│ \e[93m│ \e[95m└─\e[0m \"%s\" - \"%s\"",
                 GET_DATA(current, db_thread_t)->name, GET_DATA(current, db_thread_t)->uuid);
         } else {
-            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_e),
+            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_enum_t),
                 "\e[94m│ \e[93m│ \e[95m├─\e[0m \"%s\" - \"%s\"",
                 GET_DATA(current, db_thread_t)->name, GET_DATA(current, db_thread_t)->uuid);
         }
@@ -68,11 +68,11 @@ static void print_channel(int fd, node_t *channel_list)
     for (size_t i = 0; i < nb_channel; ++i) {
         reply_data.type = REPLY_STRING;
         if (i == nb_channel - 1) {
-            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_e),
+            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_enum_t),
                 "\e[94m│ \e[93m└─\e[0m \"%s\" - \"%s\"",
                 GET_DATA(current, db_channel_t)->name, GET_DATA(current, db_channel_t)->uuid);
         } else {
-            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_e),
+            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_enum_t),
                 "\e[94m│ \e[93m├─\e[0m \"%s\" - \"%s\"",
                 GET_DATA(current, db_channel_t)->name, GET_DATA(current, db_channel_t)->uuid);
         }
@@ -95,11 +95,11 @@ static void print_team(int fd, node_t *team_list)
     for (size_t i = 0; i < nb_team; ++i) {
         reply_data.type = REPLY_STRING;
         if (i == nb_team - 1) {
-            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_e),
+            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_enum_t),
                 "\e[94m└─\e[0m \"%s\" - \"%s\"",
                 GET_DATA(current, db_team_t)->name, GET_DATA(current, db_team_t)->uuid);
         } else {
-            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_e),
+            snprintf((char *) &reply_data.arg1, sizeof(reply_data_t) - sizeof(reply_enum_t),
                 "\e[94m├─\e[0m \"%s\" - \"%s\"",
                 GET_DATA(current, db_team_t)->name, GET_DATA(current, db_team_t)->uuid);
         }

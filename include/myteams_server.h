@@ -29,7 +29,7 @@
     #define CWD_SIZE 4096
 
 typedef struct {
-    context_e type;
+    context_enum_t type;
     char team_uuid[UUID_LENGTH + 1];
     char channel_uuid[UUID_LENGTH + 1];
     char thread_uuid[UUID_LENGTH + 1];

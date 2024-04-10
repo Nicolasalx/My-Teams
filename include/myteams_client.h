@@ -38,8 +38,8 @@ typedef struct {
 
 extern void (*const reply_handler[])(reply_data_t *);
 
-extern context_e context;
-extern is_login_e isLogin;
+extern context_enum_t context;
+extern is_login_t isLogin;
 
 void check_arg_validity(int argc, const char **argv, client_t *client);
 void create_client(client_t *client);
@@ -53,39 +53,41 @@ void handle_new_message(client_t *client);
 void handle_server_reply(reply_data_t *reply_data);
 void send_cmd_to_server(client_t *client, cmd_data_t *cmd_data);
 
-command_type_e init_user(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
-command_type_e init_help(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
-command_type_e init_login(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
-command_type_e init_logout(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
-command_type_e init_users(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
-command_type_e init_send(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
-command_type_e init_messages(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
-command_type_e init_subscribe(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
-command_type_e init_subscribed(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
-command_type_e init_unsubscribe(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
-command_type_e init_use(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
-command_type_e init_create(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
-command_type_e init_list(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
-command_type_e init_info(char **array, int nb_arg,
-    cmd_data_t *cmd_data, command_e command);
+command_type_t init_user(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_help(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_login(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_logout(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_users(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_send(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_messages(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_subscribe(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_subscribed(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_unsubscribe(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_use(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_create(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_list(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_info(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
 
-command_type_e init_tree(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
-command_type_e init_latency(char **array, int nb_arg, cmd_data_t *cmd_data, command_e command);
+command_type_t init_tree(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
+command_type_t init_latency(char **array, int nb_arg,
+    cmd_data_t *cmd_data, command_t command);
 
-is_login_e user_is_login(void);
+is_login_t user_is_login(void);
 
 void reply_error_unauthorized(reply_data_t *reply_data);
 void reply_error_already_exist(reply_data_t *reply_data);

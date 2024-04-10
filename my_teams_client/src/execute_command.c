@@ -8,7 +8,7 @@
 #include "myteams_client.h"
 #include "command_list.h"
 
-static command_type_e check_nb_arg_with_one(const char *command)
+static command_type_t check_nb_arg_with_one(const char *command)
 {
     bool has_found_space = false;
 
@@ -22,7 +22,7 @@ static command_type_e check_nb_arg_with_one(const char *command)
     return COMMAND_SUCCEED;
 }
 
-static command_type_e check_nb_arg(const int *nb_word, const char *command)
+static command_type_t check_nb_arg(const int *nb_word, const char *command)
 {
     bool is_in_quotes = false;
     bool has_found_frst_elem = false;
@@ -139,7 +139,7 @@ static char *get_first_command(const char *str, const char *delimiter)
     return result;
 }
 
-static command_type_e parse_line(int *nb_word, char ***array, char *command)
+static command_type_t parse_line(int *nb_word, char ***array, char *command)
 {
     int *size_word_quotes = NULL;
     char **board = NULL;
@@ -163,7 +163,7 @@ static command_type_e parse_line(int *nb_word, char ***array, char *command)
     return check_nb_arg(nb_word, command);
 }
 
-static command_type_e check_error_cmd(bool is_a_command, command_type_e command_type)
+static command_type_t check_error_cmd(bool is_a_command, command_type_t command_type)
 {
     if (is_a_command == false) {
         printf("Command not recognized in check error cmd!\n");
@@ -176,7 +176,7 @@ static command_type_e check_error_cmd(bool is_a_command, command_type_e command_
 }
 
 static void send_cmd(client_t *client, bool is_a_command,
-    command_type_e command_type, cmd_data_t *cmd_data)
+    command_type_t command_type, cmd_data_t *cmd_data)
 {
     if (check_error_cmd(is_a_command, command_type) == COMMAND_FAILED) {
         return;
@@ -190,7 +190,7 @@ void execute_command(client_t *client, char *command)
     int nb_word = 0;
     char **array = NULL;
     bool is_a_command = false;
-    command_type_e command_type = NO_COMMAND;
+    command_type_t command_type = NO_COMMAND;
 
     if (parse_line(&nb_word, &array, command) == COMMAND_FAILED) {
         return;
