@@ -15,7 +15,8 @@ db_user_t *db_contain_user(database_t *database, const char *name)
         return NULL;
     }
     do {
-        if (memcmp(GET_DATA(current, db_user_t)->user_name, name, MAX_NAME_LENGTH) == 0) {
+        if (memcmp(GET_DATA(current, db_user_t)->user_name,
+            name, MAX_NAME_LENGTH) == 0) {
             return current->data;
         }
         current = current->next;

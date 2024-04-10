@@ -7,7 +7,8 @@
 
 #include "myteams_server.h"
 
-void execute_client_input(server_t *server, client_t *client, cmd_data_t *cmd_data)
+void execute_client_input(server_t *server,
+    client_t *client, cmd_data_t *cmd_data)
 {
     for (size_t i = 0; i < NUMBER_CMD; ++i) {
         if (cmd_data->type == i && cmd_handler[i]) {

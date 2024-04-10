@@ -10,7 +10,8 @@
 client_t *get_client_by_uuid(server_t *server, const char *uuid)
 {
     for (size_t i = 0; i < MAX_CLIENT; ++i) {
-        if (server->clients[i].fd > 0 && memcmp(server->clients[i].uuid, uuid, UUID_LENGTH) == 0) {
+        if (server->clients[i].fd > 0
+        && memcmp(server->clients[i].uuid, uuid, UUID_LENGTH) == 0) {
             return &server->clients[i];
         }
     }

@@ -7,7 +7,8 @@
 
 #include "myteams_server.h"
 
-static void send_users_reply(int fd, const char *user_uuid, const char *user_name, int status)
+static void send_users_reply(int fd,
+    const char *user_uuid, const char *user_name, int status)
 {
     reply_data_t reply_data = {0};
 

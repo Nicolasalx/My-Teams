@@ -14,7 +14,8 @@ static void send_messages_reply(int fd, const char *sender_uuid,
 
     reply_data.type = REPLY_MESSAGES_CMD;
     memcpy(reply_data.arg1.sender_uuid, sender_uuid, UUID_LENGTH);
-    memcpy(&reply_data.arg2.message_timestamp, &message_timestamp, sizeof(time_t));
+    memcpy(&reply_data.arg2.message_timestamp,
+        &message_timestamp, sizeof(time_t));
     memcpy(reply_data.arg3.message_body, message_body, MAX_BODY_LENGTH);
     send_reply_to_client(fd, &reply_data);
 }
@@ -27,12 +28,13 @@ void cmd_messages(server_t *server, client_t *client, cmd_data_t *cmd_data)
         send_error_unknown_user(client->fd, cmd_data->arg1.user_uuid);
         return;
     }
-    if (server->database.private_msg_list == NULL) {
+    if (server->database.private_msg_list == NULL)
         return;
-    }
     do {
-        if (memcmp(GET_DATA(current, db_private_msg_t)->receiver_uuid, client->uuid, UUID_LENGTH) == 0
-        || memcmp(GET_DATA(current, db_private_msg_t)->sender_uuid, client->uuid, UUID_LENGTH) == 0) {
+        if (memcmp(GET_DATA(current, db_private_msg_t)->receiver_uuid,
+            client->uuid, UUID_LENGTH) == 0
+        || memcmp(GET_DATA(current, db_private_msg_t)->sender_uuid,
+            client->uuid, UUID_LENGTH) == 0) {
             send_messages_reply(client->fd,
                 GET_DATA(current, db_private_msg_t)->sender_uuid,
                 GET_DATA(current, db_private_msg_t)->timestamp,

@@ -60,7 +60,8 @@ static bool load_thread(int fd, node_t **thread_list)
         }
         db_thread->reply_list = NULL;
         append_node(thread_list, create_node(db_thread));
-        if (load_linked_list(fd, &GET_DATA((*thread_list)->prev, db_thread_t)->reply_list, sizeof(db_reply_t))) {
+        if (load_linked_list(fd, &GET_DATA((*thread_list)->prev,
+            db_thread_t)->reply_list, sizeof(db_reply_t))) {
             return true;
         }
     }
@@ -77,12 +78,14 @@ static bool load_channel(int fd, node_t **channel_list)
     }
     for (size_t i = 0; i < nb_channel; ++i) {
         db_channel = my_calloc(sizeof(db_channel_t));
-        if (read(fd, db_channel, sizeof(db_channel_t)) != sizeof(db_channel_t)) {
+        if (read(fd, db_channel, sizeof(db_channel_t))
+            != sizeof(db_channel_t)) {
             return true;
         }
         db_channel->thread_list = NULL;
         append_node(channel_list, create_node(db_channel));
-        if (load_thread(fd, &GET_DATA((*channel_list)->prev, db_channel_t)->thread_list)) {
+        if (load_thread(fd, &GET_DATA((*channel_list)->prev,
+            db_channel_t)->thread_list)) {
             return true;
         }
     }
@@ -94,23 +97,21 @@ static bool load_team(int fd, node_t **team_list)
     size_t nb_team = 0;
     db_team_t *db_team = NULL;
 
-    if (read(fd, &nb_team, sizeof(size_t)) != sizeof(size_t)) {
+    if (read(fd, &nb_team, sizeof(size_t)) != sizeof(size_t))
         return true;
-    }
     for (size_t i = 0; i < nb_team; ++i) {
         db_team = my_calloc(sizeof(db_team_t));
-        if (read(fd, db_team, sizeof(db_team_t)) != sizeof(db_team_t)) {
+        if (read(fd, db_team, sizeof(db_team_t)) != sizeof(db_team_t))
             return true;
-        }
         db_team->channel_list = NULL;
         db_team->subscribed_user_list = NULL;
         append_node(team_list, create_node(db_team));
-        if (load_linked_list(fd, &GET_DATA((*team_list)->prev, db_team_t)->subscribed_user_list, sizeof(db_user_t))) {
+        if (load_linked_list(fd, &GET_DATA((*team_list)->prev,
+            db_team_t)->subscribed_user_list, sizeof(db_user_t)))
             return true;
-        }
-        if (load_channel(fd, &GET_DATA((*team_list)->prev, db_team_t)->channel_list)) {
+        if (load_channel(fd,
+            &GET_DATA((*team_list)->prev, db_team_t)->channel_list))
             return true;
-        }
     }
     return false;
 }
@@ -123,7 +124,8 @@ void load_database(database_t *database)
         return;
     }
     if (load_user_list(fd, &database->user_list)
-    || load_linked_list(fd, &database->private_msg_list, sizeof(db_private_msg_t))
+    || load_linked_list(fd, &database->private_msg_list,
+        sizeof(db_private_msg_t))
     || load_team(fd, &database->team_list)) {
         printf(MAGENTA("Warning: Corrupted database")"\n");
         memset(database, 0, sizeof(database_t));

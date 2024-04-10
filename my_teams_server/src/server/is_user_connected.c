@@ -10,7 +10,8 @@
 bool is_user_connected(server_t *server, const char *user_uuid)
 {
     for (size_t i = 0; i < MAX_CLIENT; ++i) {
-        if (server->clients[i].fd > 0 && memcmp(server->clients[i].uuid, user_uuid, UUID_LENGTH) == 0) {
+        if (server->clients[i].fd > 0
+        && memcmp(server->clients[i].uuid, user_uuid, UUID_LENGTH) == 0) {
             return true;
         }
     }

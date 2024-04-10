@@ -7,7 +7,8 @@
 
 #include "myteams_server.h"
 
-static void send_subscribe_reply(int fd, const char *user_uuid, const char *team_uuid)
+static void send_subscribe_reply(int fd,
+    const char *user_uuid, const char *team_uuid)
 {
     reply_data_t reply_data = {0};
 
@@ -19,17 +20,21 @@ static void send_subscribe_reply(int fd, const char *user_uuid, const char *team
 
 void cmd_subscribe(server_t *server, client_t *client, cmd_data_t *cmd_data)
 {
-    db_team_t *team_to_sub = db_contain_team(&server->database, cmd_data->arg1.team_uuid);
+    db_team_t *team_to_sub =
+        db_contain_team(&server->database, cmd_data->arg1.team_uuid);
+    db_user_t *sub_user = NULL;
 
     if (team_to_sub) {
         if (db_contain_team_sub(team_to_sub, client->uuid) == NULL) {
-            db_user_t *sub_user = my_calloc(sizeof(db_user_t));
+            sub_user = my_calloc(sizeof(db_user_t));
             memcpy(sub_user->user_name, client->user_name, MAX_NAME_LENGTH);
             memcpy(sub_user->uuid, client->uuid, UUID_LENGTH);
-            append_node(&team_to_sub->subscribed_user_list, create_node(sub_user));
+            append_node(&team_to_sub->subscribed_user_list,
+            create_node(sub_user));
         }
         server_event_user_subscribed(cmd_data->arg1.team_uuid, client->uuid);
-        send_subscribe_reply(client->fd, client->uuid, cmd_data->arg1.team_uuid);
+        send_subscribe_reply(client->fd, client->uuid,
+            cmd_data->arg1.team_uuid);
     } else {
         send_error_unknown_team(client->fd, cmd_data->arg1.team_uuid);
     }

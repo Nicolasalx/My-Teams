@@ -15,7 +15,8 @@ db_team_t *db_contain_team(database_t *database, const char *team_uuid)
         return NULL;
     }
     do {
-        if (memcmp(GET_DATA(current, db_team_t)->uuid, team_uuid, UUID_LENGTH) == 0) {
+        if (memcmp(GET_DATA(current, db_team_t)->uuid,
+            team_uuid, UUID_LENGTH) == 0) {
             return current->data;
         }
         current = current->next;
@@ -31,7 +32,8 @@ db_team_t *db_contain_team_name(database_t *database, const char *team_name)
         return NULL;
     }
     do {
-        if (memcmp(GET_DATA(current, db_team_t)->name, team_name, MAX_NAME_LENGTH) == 0) {
+        if (memcmp(GET_DATA(current, db_team_t)->name,
+            team_name, MAX_NAME_LENGTH) == 0) {
             return current->data;
         }
         current = current->next;

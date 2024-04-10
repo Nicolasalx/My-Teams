@@ -7,7 +7,8 @@
 
 #include "server_database.h"
 
-db_user_t *db_contain_team_sub(db_team_t *team, const char *user_uuid)
+db_user_t *db_contain_team_sub(
+    db_team_t *team, const char *user_uuid)
 {
     node_t *current = team->subscribed_user_list;
 
@@ -15,7 +16,8 @@ db_user_t *db_contain_team_sub(db_team_t *team, const char *user_uuid)
         return NULL;
     }
     do {
-        if (memcmp(GET_DATA(current, db_user_t)->uuid, user_uuid, UUID_LENGTH) == 0) {
+        if (memcmp(GET_DATA(current, db_user_t)->uuid,
+        user_uuid, UUID_LENGTH) == 0) {
             return current->data;
         }
         current = current->next;

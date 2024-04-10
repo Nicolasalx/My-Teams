@@ -7,7 +7,8 @@
 
 #include "server_database.h"
 
-db_thread_t *db_contain_thread_name(db_channel_t *db_channel, const char *thread_name)
+db_thread_t *db_contain_thread_name(
+    db_channel_t *db_channel, const char *thread_name)
 {
     node_t *current = db_channel->thread_list;
 
@@ -15,7 +16,8 @@ db_thread_t *db_contain_thread_name(db_channel_t *db_channel, const char *thread
         return NULL;
     }
     do {
-        if (memcmp(GET_DATA(current, db_thread_t)->name, thread_name, MAX_NAME_LENGTH) == 0) {
+        if (memcmp(GET_DATA(current, db_thread_t)->name,
+            thread_name, MAX_NAME_LENGTH) == 0) {
             return current->data;
         }
         current = current->next;

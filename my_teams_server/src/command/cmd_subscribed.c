@@ -15,7 +15,8 @@ static void send_subed_team(int fd, const char *team_uuid,
     reply_data.type = REPLY_SUBSCRIBED_TEAM_CMD;
     memcpy(reply_data.arg1.team_uuid, team_uuid, UUID_LENGTH);
     memcpy(reply_data.arg2.team_name, team_name, MAX_NAME_LENGTH);
-    memcpy(reply_data.arg3.team_description, team_description, MAX_DESCRIPTION_LENGTH);
+    memcpy(reply_data.arg3.team_description,
+        team_description, MAX_DESCRIPTION_LENGTH);
     send_reply_to_client(fd, &reply_data);
 }
 

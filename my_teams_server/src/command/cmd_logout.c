@@ -7,7 +7,8 @@
 
 #include "myteams_server.h"
 
-static void send_logout_reply(client_t *clients, const char *user_uuid, const char *user_name)
+static void send_logout_reply(client_t *clients,
+    const char *user_uuid, const char *user_name)
 {
     reply_data_t reply_data = {0};
 

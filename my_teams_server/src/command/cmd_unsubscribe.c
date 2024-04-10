@@ -16,7 +16,8 @@ static void remove_subed_user(client_t *client, db_team_t *team_to_unsub)
         return;
     }
     do {
-        if (memcmp(GET_DATA(current, db_user_t)->uuid, client->uuid, UUID_LENGTH) == 0) {
+        if (memcmp(GET_DATA(current, db_user_t)->uuid,
+            client->uuid, UUID_LENGTH) == 0) {
             delete_node(&team_to_unsub->subscribed_user_list, current);
             return;
         }
@@ -24,7 +25,8 @@ static void remove_subed_user(client_t *client, db_team_t *team_to_unsub)
     } while (current != team_to_unsub->subscribed_user_list);
 }
 
-static void send_unsubscribe_reply(int fd, const char *user_uuid, const char *team_uuid)
+static void send_unsubscribe_reply(int fd,
+    const char *user_uuid, const char *team_uuid)
 {
     reply_data_t reply_data = {0};
 
@@ -36,7 +38,8 @@ static void send_unsubscribe_reply(int fd, const char *user_uuid, const char *te
 
 void cmd_unsubscribe(server_t *server, client_t *client, cmd_data_t *cmd_data)
 {
-    db_team_t *team_to_unsub = db_contain_team(&server->database, cmd_data->arg1.team_uuid);
+    db_team_t *team_to_unsub =
+        db_contain_team(&server->database, cmd_data->arg1.team_uuid);
 
     if (!team_to_unsub) {
         send_error_unknown_team(client->fd, cmd_data->arg1.team_uuid);

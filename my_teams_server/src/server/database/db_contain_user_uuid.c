@@ -7,7 +7,8 @@
 
 #include "server_database.h"
 
-db_user_t *db_contain_user_uuid(database_t *database, const char *user_uuid)
+db_user_t *db_contain_user_uuid(
+    database_t *database, const char *user_uuid)
 {
     node_t *current = database->user_list;
 
@@ -15,7 +16,8 @@ db_user_t *db_contain_user_uuid(database_t *database, const char *user_uuid)
         return NULL;
     }
     do {
-        if (memcmp(GET_DATA(current, db_user_t)->uuid, user_uuid, MAX_NAME_LENGTH) == 0) {
+        if (memcmp(GET_DATA(current, db_user_t)->uuid,
+            user_uuid, MAX_NAME_LENGTH) == 0) {
             return current->data;
         }
         current = current->next;

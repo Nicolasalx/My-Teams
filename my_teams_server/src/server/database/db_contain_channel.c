@@ -7,7 +7,8 @@
 
 #include "server_database.h"
 
-db_channel_t *db_contain_channel_name(db_team_t *db_team, const char *channel_name)
+db_channel_t *db_contain_channel_name(
+    db_team_t *db_team, const char *channel_name)
 {
     node_t *current = db_team->channel_list;
 
@@ -15,7 +16,8 @@ db_channel_t *db_contain_channel_name(db_team_t *db_team, const char *channel_na
         return NULL;
     }
     do {
-        if (memcmp(GET_DATA(current, db_channel_t)->name, channel_name, MAX_NAME_LENGTH) == 0) {
+        if (memcmp(GET_DATA(current, db_channel_t)->name,
+        channel_name, MAX_NAME_LENGTH) == 0) {
             return current->data;
         }
         current = current->next;

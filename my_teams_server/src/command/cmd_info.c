@@ -27,9 +27,13 @@ static void info_current_team(client_t *client)
         return;
     }
     reply_data.type = REPLY_INFO_TEAM_CMD;
-    memcpy(reply_data.arg1.team_uuid, GET_DATA(client->context.team_ptr, db_team_t)->uuid, UUID_LENGTH);
-    memcpy(reply_data.arg2.team_name, GET_DATA(client->context.team_ptr, db_team_t)->name, MAX_NAME_LENGTH);
-    memcpy(reply_data.arg3.team_description, GET_DATA(client->context.team_ptr, db_team_t)->description, MAX_DESCRIPTION_LENGTH);
+    memcpy(reply_data.arg1.team_uuid,
+        GET_DATA(client->context.team_ptr, db_team_t)->uuid, UUID_LENGTH);
+    memcpy(reply_data.arg2.team_name,
+        GET_DATA(client->context.team_ptr, db_team_t)->name, MAX_NAME_LENGTH);
+    memcpy(reply_data.arg3.team_description,
+        GET_DATA(client->context.team_ptr, db_team_t)->description,
+        MAX_DESCRIPTION_LENGTH);
     send_reply_to_client(client->fd, &reply_data);
 }
 
@@ -41,9 +45,15 @@ static void info_current_channel(client_t *client)
         return;
     }
     reply_data.type = REPLY_INFO_CHANNEL_CMD;
-    memcpy(reply_data.arg1.channel_uuid, GET_DATA(client->context.channel_ptr, db_channel_t)->uuid, UUID_LENGTH);
-    memcpy(reply_data.arg2.channel_name, GET_DATA(client->context.channel_ptr, db_channel_t)->name, MAX_NAME_LENGTH);
-    memcpy(reply_data.arg3.channel_description, GET_DATA(client->context.channel_ptr, db_channel_t)->description, MAX_DESCRIPTION_LENGTH);
+    memcpy(reply_data.arg1.channel_uuid,
+        GET_DATA(client->context.channel_ptr, db_channel_t)->uuid,
+        UUID_LENGTH);
+    memcpy(reply_data.arg2.channel_name,
+        GET_DATA(client->context.channel_ptr, db_channel_t)->name,
+        MAX_NAME_LENGTH);
+    memcpy(reply_data.arg3.channel_description,
+        GET_DATA(client->context.channel_ptr, db_channel_t)->description,
+        MAX_DESCRIPTION_LENGTH);
     send_reply_to_client(client->fd, &reply_data);
 }
 
@@ -55,11 +65,17 @@ static void info_current_thread(client_t *client)
         return;
     }
     reply_data.type = REPLY_INFO_THREAD_CMD;
-    memcpy(reply_data.arg1.thread_uuid, GET_DATA(client->context.thread_ptr, db_thread_t)->uuid, UUID_LENGTH);
-    memcpy(reply_data.arg2.user_uuid, GET_DATA(client->context.thread_ptr, db_thread_t)->creator_uuid, UUID_LENGTH);
-    memcpy(&reply_data.arg3.thread_timestamp, &GET_DATA(client->context.thread_ptr, db_thread_t)->timestamp, sizeof(time_t));
-    memcpy(reply_data.arg4.thread_title, GET_DATA(client->context.thread_ptr, db_thread_t)->name, MAX_NAME_LENGTH);
-    memcpy(reply_data.arg5.thread_body, GET_DATA(client->context.thread_ptr, db_thread_t)->body, MAX_BODY_LENGTH);
+    memcpy(reply_data.arg1.thread_uuid, GET_DATA(client->context.thread_ptr,
+        db_thread_t)->uuid, UUID_LENGTH);
+    memcpy(reply_data.arg2.user_uuid, GET_DATA(client->context.thread_ptr,
+        db_thread_t)->creator_uuid, UUID_LENGTH);
+    memcpy(&reply_data.arg3.thread_timestamp,
+        &GET_DATA(client->context.thread_ptr,
+        db_thread_t)->timestamp, sizeof(time_t));
+    memcpy(reply_data.arg4.thread_title, GET_DATA(client->context.thread_ptr,
+        db_thread_t)->name, MAX_NAME_LENGTH);
+    memcpy(reply_data.arg5.thread_body, GET_DATA(client->context.thread_ptr,
+        db_thread_t)->body, MAX_BODY_LENGTH);
     send_reply_to_client(client->fd, &reply_data);
 }
 

@@ -5,7 +5,8 @@
 ## Makefile
 ##
 
-SRC				:=	$(shell find src/ -name "*.c")
+SRC				:=	$(shell find src/ -name "*.c") \
+					$(shell find ../bonus/my_teams_server -name "*.c")
 
 CFLAGS			=	-Wall -Wextra \
 					-I../include/ -I../include/lib/ -I../libs/myteams/ \

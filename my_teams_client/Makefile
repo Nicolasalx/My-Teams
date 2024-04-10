@@ -6,7 +6,7 @@
 ##
 
 SRC				:=	$(shell find src/ -name "*.c") \
-					$(shell find ../bonus/ -name "*.c")
+					$(shell find ../bonus/my_teams_cli -name "*.c")
 
 CFLAGS			=	-Wall -Wextra \
 					-I../include/ -I../include/lib \
